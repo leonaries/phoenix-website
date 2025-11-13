@@ -7,7 +7,8 @@ import RoadmapSection from '@/components/sections/RoadmapSection';
 import GovernanceSection from '@/components/sections/GovernanceSection';
 import PartnersSection from '@/components/sections/PartnersSection';
 import CTASection from '@/components/sections/CTASection';
-import { Header,Footer } from "@/components";
+import { Header, Footer } from "@/components";
+import { StarField3D } from "@/components/animations";
 
 interface HomePageProps {
   params: Promise<{
@@ -28,6 +29,10 @@ export default async function HomePage({ params }: HomePageProps) {
     >
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* 3D 星空粒子效果 - 最底层 */}
+        <StarField3D />
+
+        {/* 现有背景装饰元素 */}
         <img
           className="absolute top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1463px] h-[1463px] opacity-20"
           alt="Ellipse"
