@@ -1,0 +1,239 @@
+{
+  "nav": {
+    "overview": "概要",
+    "features": "機能",
+    "roadmap": "ロードマップ",
+    "governance": "ガバナンス",
+    "partners": "パートナー"
+  },
+  "buttons": {
+    "launchApp": "アプリを起動",
+    "exploreFeatures": "機能を探る",
+    "phoenixCoreFeatures": "Phoenix コア機能",
+    "learnMore": "詳細を見る", 
+    "getStarted": "始める",
+    "readyToUnlock": "イールドポテンシャルを解放する準備はできていますか？",
+    "joinOurJourney": "我々の旅に参加",
+    "bePartOfRevolution": "DeFi革命の一部となり、オンチェーン銀行の未来を共に形作りましょう"
+  },
+  "hero": {
+    "badge": "🔥 次世代DeFi",
+    "title": {
+      "holdTo": "ホールドして ",
+      "earn": "稼ぐ",
+      "makeDeFiStable": "DeFiを安定させる"
+    },
+    "description": "安定性から無限大へ、Phoenixは資産を利回りに変えます",
+    "stats": {
+      "targetTVL": "ターゲットTVL",
+      "stableYield": "安定した利回り",
+      "multiChain": "マルチチェーン"
+    }
+  },
+  "vision": {
+    "badge": "私たちのビジョン",
+    "title": "Phoenix — 灰から蘇るオンチェーン銀行",
+    "description": "PUSD rPUSDモデルによって駆動されるPhoenixは、ミント、借入、ステーキング、流動性マイニング、クロスチェーンを一つの流動性レイヤーに統合します。資産とエコシステム間のシームレスな価値の流れを可能にし、次の100億ドルのオンチェーン銀行への道を開きます。"
+  },
+  "features": {
+    "title": "利回りを解放するために構築された機能",
+    "subtitle": "Phoenixエコシステムを支えるコア機能を発見",
+    "mint": {
+      "title": "ミント",
+      "subtitle": "Phoenixの旅の第一歩",
+      "description": "資産を即座にPUSDにミントし、Phoenixイールドエコシステムでの持続的な成長のための安定した基盤を構築します。"
+    },
+    "borrow": {
+      "title": "借入",
+      "subtitle": "資産流動性の解放",
+      "description": "資産を過剰担保してPUSDを借入し、保有資産を売却することなく、ステーキング、マイニング、クロスチェーンイールドを解放して即座に流動性を得ます。"
+    },
+    "stake": {
+      "title": "ステーキング",
+      "subtitle": "着実な成長、持続的な報酬",
+      "description": "PhoenixプールでPUSDをステーキングして安定したリターンと追加報酬を獲得し、ロックアップと長期イールドを通じて資産を成長させます。"
+    },
+    "quest": {
+      "title": "クエスト",
+      "subtitle": "Phoenixポイントの獲得開始",
+      "description": "Phoenixでアクティビティやソーシャルを完了してPhoenixポイントを獲得し、トークンや長期報酬と交換できます。"
+    },
+    "community": {
+      "title": "コミュニティ",
+      "subtitle": "共同構築と共同統治",
+      "description": "Phoenixはコミュニティを中心に置きます。ガバナンス、提案、成長はメンバーが一緒に主導します。"
+    }
+  },
+  "roadmap": {
+    "title": "ロードマップ",
+    "subtitle": "DeFi革新への我々の旅路",
+    "phases": {
+      "phase1": {
+        "phase": "フェーズ1",
+        "quarter": "2025年第4四半期",
+        "title": "プロトコル開始",
+        "description": "Phoenixプロトコルがライブになり、ミント、借入、変換、ステーキング、流動性マイニング、クロスチェーンイールド、コミュニティクエストポイントを含むコア機能を段階的に展開"
+      },
+      "phase2": {
+        "phase": "フェーズ2",
+        "quarter": "2026年第1四半期",
+        "title": "ガバナンストークン発売",
+        "description": "$FIREガバナンストークンが主要DEXとCEXで発売され、Phoenixステーブルコインの採用とエコシステム参加を促進し、ガバナンスと成長を推進"
+      },
+      "phase3": {
+        "phase": "フェーズ3",
+        "quarter": "2026年第2四半期",
+        "title": "マルチチェーン拡張",
+        "description": "マルチチェーン拡張により、ネットワーク間でより多くのRWA資産を統合し、利回り付きPUSDと$FIREのユースケースを拡張し、100億ドルのオンチェーン銀行に向けてエコシステムの成長を推進"
+      }
+    }
+  },
+  "governance": {
+    "badge": "ガバナンス＆コミュニティ",
+    "title": "ガバナンス＆コミュニティ",
+    "subtitle": "Phoenixはコミュニティを核とし、分散ガバナンスと協力的成長を通じてメンバーが未来を形作ることを可能にします",
+    "features": {
+      "dao": {
+        "title": "DAOガバナンス",
+        "description": "コミュニティ主導の意思決定とプロトコル進化を段階的に実現する、プログレッシブ分散自律組織"
+      },
+      "fire": {
+        "title": "$FIREトークン",
+        "description": "投票権を提供し、エコシステムの価値を捉えるガバナンストークンで、保有者にPhoenix開発への影響力を与えます"
+      },
+      "badge": {
+        "title": "バッジ + ポイント",
+        "description": "貢献ベースの投票システムで、アクティブメンバーがバッジとポイントを獲得し、より大きなガバナンス影響力と報酬を得ます"
+      }
+    },
+    "community": {
+      "title": "コミュニティが核",
+      "subtitle": "Phoenixはメンバーが以下を通じて参加、貢献、DeFiの未来を共同構築することを可能にします：",
+      "imageAlt": "コミュニティ参加の可視化",
+      "engagement": {
+        "proposals": {
+          "title": "提案と投票",
+          "description": "ガバナンス提案を提出し、コミュニティ投票に参加してPhoenixエコシステムとプロトコルの方向性を形作ります"
+        },
+        "quests": {
+          "title": "クエストとポイント",
+          "description": "コミュニティクエストとアクティビティを完了してPhoenixポイントを獲得し、トークンと専用エコシステム報酬と交換できます"
+        },
+        "incentives": {
+          "title": "インセンティブと認知",
+          "description": "Phoenixコミュニティへの意義ある貢献に対してバッジを獲得し、リーダーボードに登り、報酬を受け取ります"
+        },
+        "cobuilding": {
+          "title": "共同構築と成長",
+          "description": "Phoenixをグローバルに拡張し、エコシステム採用を推進する協働イベント、パートナーシップ、イニシアティブに参加します"
+        }
+      }
+    },
+    "cta": {
+      "title": "未来を形作る準備はできていますか？",
+      "description": "Phoenixコミュニティに参加し、次世代分散金融を一緒に構築しましょう"
+    }
+  },
+  "partners": {
+    "badge": "戦略的パートナー",
+    "title": "業界リーダーから信頼",
+    "subtitle": "PhoenixはDeFiインフラストラクチャの未来を構築するため、最も革新的なプロトコルとプラットフォームと協力しています",
+    "descriptions": {
+      "listadao": "分散化リスティングプロトコル",
+      "uniswap": "主要DEXプロトコル",
+      "pancakeswap": "BSCプレミアDEX",
+      "layerzero": "オムニチェーン相互運用性",
+      "base": "Coinbase L2ソリューション",
+      "bnb": "高性能ブロックチェーン",
+      "chainlink": "分散化オラクルネットワーク",
+      "arbitrum": "Ethereum L2スケーリング"
+    },
+    "categories": {
+      "defi": "DeFi",
+      "blockchain": "ブロックチェーン",
+      "infrastructure": "インフラ"
+    },
+    "stats": {
+      "protocols": "パートナープロトコル",
+      "blockchains": "サポートチェーン",
+      "tvl": "合計TVL",
+      "possibilities": "可能性"
+    },
+    "cta": {
+      "title": "私たちとパートナーシップを？",
+      "description": "Phoenixの成長するエコシステムに参加し、分散金融の未来を共に形作りましょう",
+      "partnerButton": "パートナーになる"
+    }
+  },
+  "cta": {
+    "badge": "今すぐ始める",
+    "title": "Phoenixの旅を始める準備はできていますか？",
+    "subtitle": "すでにPhoenixで収益を得ている数千人のユーザーに参加しましょう。数クリックでDeFiの旅を今すぐ始めましょう。",
+    "backgroundAlt": "Phoenix CTA背景パターン",
+    "workflow": {
+      "mint": "ミント",
+      "borrow": "借入",
+      "stake": "ステーキング",
+      "earn": "獲得"
+    },
+    "exploreFeatures": "機能を探る",
+    "community": {
+      "title": "繁栄するコミュニティに参加",
+      "description": "世界中のPhoenixユーザーとつながり、最新情報を入手し、DeFi革命の一部になりましょう"
+    },
+    "social": {
+      "twitter": "Twitterでフォロー",
+      "telegram": "Telegramに参加",
+      "discord": "Discordでチャット"
+    },
+    "stats": {
+      "users": "アクティブユーザー",
+      "volume": "取引量",
+      "support": "コミュニティサポート",
+      "uptime": "プラットフォーム稼働時間"
+    }
+  },
+  "footer": {
+    "description": "Phoenixは、革新的な安定化メカニズムとクロスチェーン互換性を通じて資産を利回りに変える次世代DeFiプロトコルです。",
+    "copyright": "全著作権所有。",
+    "poweredBy": "コミュニティイノベーションによって駆動",
+    "sections": {
+      "resources": "リソース",
+      "security": "セキュリティ",
+      "community": "コミュニティ"
+    },
+    "links": {
+      "docs": "ドキュメント",
+      "blog": "ブログ",
+      "whitepaper": "ホワイトペーパー",
+      "github": "GitHub",
+      "contracts": "コントラクト",
+      "audits": "セキュリティ監査",
+      "bugBounty": "バグバウンティ",
+      "privacy": "プライバシーポリシー",
+      "terms": "利用規約",
+      "governance": "ガバナンス",
+      "forum": "コミュニティフォーラム",
+      "newsletter": "ニュースレター",
+      "support": "サポートセンター"
+    },
+    "social": {
+      "title": "フォローする",
+      "twitter": "Twitterでフォロー",
+      "telegram": "Telegramに参加",
+      "discord": "Discordでチャット",
+      "medium": "Mediumを読む"
+    },
+    "newsletter": {
+      "title": "最新情報を受け取る",
+      "description": "最新のPhoenixアップデート、ニュース、独占的な洞察をメールで受け取りましょう",
+      "placeholder": "メールアドレスを入力",
+      "subscribe": "購読"
+    },
+    "legal": {
+      "privacy": "プライバシー",
+      "terms": "利用規約",
+      "cookies": "クッキー"
+    }
+  }
+}

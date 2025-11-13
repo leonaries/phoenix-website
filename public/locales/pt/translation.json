@@ -1,0 +1,239 @@
+{
+  "nav": {
+    "overview": "Visão geral",
+    "features": "Características",
+    "roadmap": "Roteiro",
+    "governance": "Governança",
+    "partners": "Parceiros"
+  },
+  "buttons": {
+    "launchApp": "Iniciar Aplicação",
+    "exploreFeatures": "Explorar características",
+    "phoenixCoreFeatures": "Características principais do Phoenix",
+    "learnMore": "Saber mais",
+    "getStarted": "Começar",
+    "readyToUnlock": "Pronto para desbloquear o seu potencial de rendimento?",
+    "joinOurJourney": "Junte-se à nossa jornada",
+    "bePartOfRevolution": "Faça parte da revolução DeFi e ajude a moldar o futuro da banca on-chain"
+  },
+  "hero": {
+    "badge": "🔥 DeFi de próxima geração",
+    "title": {
+      "holdTo": "Manter para ",
+      "earn": "Ganhar",
+      "makeDeFiStable": "Tornar DeFi estável"
+    },
+    "description": "Da estabilidade ao infinito, Phoenix transforma ativos em rendimento",
+    "stats": {
+      "targetTVL": "TVL alvo",
+      "stableYield": "Rendimento estável",
+      "multiChain": "Multi-cadeia"
+    }
+  },
+  "vision": {
+    "badge": "A NOSSA VISÃO",
+    "title": "Phoenix — O banco on-chain que renasce das cinzas",
+    "description": "Impulsionado pelo modelo PUSD rPUSD, Phoenix unifica mint, empréstimo, staking, mineração de liquidez e cross-chain numa camada de liquidez. Permite um fluxo de valor contínuo entre ativos e ecossistemas, abrindo caminho para o próximo banco on-chain de $10B."
+  },
+  "features": {
+    "title": "Características construídas para desbloquear rendimento",
+    "subtitle": "Descubra as características principais que impulsionam o ecossistema Phoenix",
+    "mint": {
+      "title": "Cunhar",
+      "subtitle": "O primeiro passo da sua jornada Phoenix",
+      "description": "Cunhe ativos instantaneamente em PUSD, construindo uma base estável para crescimento sustentado no ecossistema de rendimento Phoenix."
+    },
+    "borrow": {
+      "title": "Pedir emprestado",
+      "subtitle": "Desbloquear liquidez de ativos",
+      "description": "Super-colateralize ativos para pedir emprestado PUSD para liquidez instantânea, desbloqueando rendimentos de staking, mineração e cross-chain sem vender as suas participações."
+    },
+    "stake": {
+      "title": "Stake",
+      "subtitle": "Crescimento constante, recompensas duradouras",
+      "description": "Faça stake de PUSD em pools Phoenix para obter retornos estáveis e recompensas extra, fazendo crescer ativos através de bloqueio e rendimento de longo prazo."
+    },
+    "quest": {
+      "title": "Missão",
+      "subtitle": "Comece a ganhar pontos Phoenix",
+      "description": "Complete atividades ou tarefas sociais no Phoenix para ganhar pontos Phoenix, resgatáveis por tokens e recompensas de longo prazo."
+    },
+    "community": {
+      "title": "Comunidade",
+      "subtitle": "Co-construir e co-governar",
+      "description": "Phoenix coloca a comunidade no centro. Governança, propostas e crescimento são liderados pelos membros em conjunto."
+    }
+  },
+  "roadmap": {
+    "title": "Roteiro",
+    "subtitle": "A nossa jornada para revolucionar DeFi",
+    "phases": {
+      "phase1": {
+        "phase": "Fase 1",
+        "quarter": "Q4 2025",
+        "title": "Lançamento do protocolo",
+        "description": "O protocolo Phoenix entra em funcionamento, implementando gradualmente características principais incluindo Mint, Borrow, Convert, Staking, Liquidity Mining, Cross-Chain Yield e Community Quest Points"
+      },
+      "phase2": {
+        "phase": "Fase 2",
+        "quarter": "Q1 2026",
+        "title": "Lançamento do token de governança",
+        "description": "O token de governança $FIRE é lançado nas principais DEXs e CEXs, impulsionando a adoção das stablecoins Phoenix e participação no ecossistema, alimentando governança e crescimento"
+      },
+      "phase3": {
+        "phase": "Fase 3",
+        "quarter": "Q2 2026",
+        "title": "Expansão multi-cadeia",
+        "description": "Expansão multi-cadeia, integrando mais ativos RWA através de redes enquanto estende casos de uso de PUSD com rendimento e $FIRE, impulsionando o crescimento do ecossistema em direção a um banco on-chain de $10B"
+      }
+    }
+  },
+  "governance": {
+    "badge": "GOVERNANÇA E COMUNIDADE",
+    "title": "Governança e comunidade",
+    "subtitle": "Phoenix coloca a comunidade no seu núcleo, capacitando membros a moldar o futuro através de governança descentralizada e crescimento colaborativo",
+    "features": {
+      "dao": {
+        "title": "Governança DAO",
+        "description": "Organização autónoma descentralizada progressiva para alcançar gradualmente tomada de decisões impulsionada pela comunidade e evolução do protocolo"
+      },
+      "fire": {
+        "title": "Token $FIRE",
+        "description": "Token de governança que fornece direitos de voto e captura valor do ecossistema, capacitando detentores a influenciar o desenvolvimento do Phoenix"
+      },
+      "badge": {
+        "title": "Distintivo + Pontos",
+        "description": "Sistema de votação baseado em contribuição onde membros ativos ganham distintivos e pontos para maior influência na governança e recompensas"
+      }
+    },
+    "community": {
+      "title": "Comunidade no núcleo",
+      "subtitle": "Phoenix capacita membros a envolver-se, contribuir e co-construir o futuro de DeFi através de:",
+      "imageAlt": "Visualização de envolvimento comunitário",
+      "engagement": {
+        "proposals": {
+          "title": "Propostas e votação",
+          "description": "Envie propostas de governança e participe da votação comunitária para moldar o ecossistema Phoenix e a direção do protocolo"
+        },
+        "quests": {
+          "title": "Missões e pontos",
+          "description": "Complete missões e atividades comunitárias para ganhar pontos Phoenix, resgatáveis por tokens e recompensas exclusivas do ecossistema"
+        },
+        "incentives": {
+          "title": "Incentivos e reconhecimento",
+          "description": "Ganhe distintivos, suba nos rankings e receba recompensas por contribuições significativas para a comunidade Phoenix"
+        },
+        "cobuilding": {
+          "title": "Co-construção e crescimento",
+          "description": "Participe em eventos colaborativos, parcerias e iniciativas que expandem o Phoenix globalmente e impulsionam a adoção do ecossistema"
+        }
+      }
+    },
+    "cta": {
+      "title": "Pronto para moldar o futuro?",
+      "description": "Junte-se à comunidade Phoenix e ajude a construir a próxima geração de finanças descentralizadas em conjunto"
+    }
+  },
+  "partners": {
+    "badge": "PARCEIROS ESTRATÉGICOS",
+    "title": "Confiável por líderes da indústria",
+    "subtitle": "Phoenix colabora com os protocolos e plataformas mais inovadores para construir o futuro da infraestrutura DeFi",
+    "descriptions": {
+      "listadao": "Protocolo de listagem descentralizado",
+      "uniswap": "Protocolo DEX líder",
+      "pancakeswap": "DEX principal da BSC",
+      "layerzero": "Interoperabilidade omnichain",
+      "base": "Solução L2 da Coinbase",
+      "bnb": "Blockchain de alto desempenho",
+      "chainlink": "Rede de oracle descentralizada",
+      "arbitrum": "Escalabilidade L2 do Ethereum"
+    },
+    "categories": {
+      "defi": "DeFi",
+      "blockchain": "Blockchain",
+      "infrastructure": "Infraestrutura"
+    },
+    "stats": {
+      "protocols": "Protocolos parceiros",
+      "blockchains": "Cadeias suportadas",
+      "tvl": "TVL combinado",
+      "possibilities": "Possibilidades"
+    },
+    "cta": {
+      "title": "Quer fazer parceria connosco?",
+      "description": "Junte-se ao ecossistema crescente do Phoenix e ajude a moldar o futuro das finanças descentralizadas",
+      "partnerButton": "Tornar-se parceiro"
+    }
+  },
+  "cta": {
+    "badge": "COMECE HOJE",
+    "title": "Pronto para começar a sua jornada Phoenix?",
+    "subtitle": "Junte-se a milhares de utilizadores que já estão a ganhar com o Phoenix. Comece a sua jornada DeFi hoje com apenas alguns cliques.",
+    "backgroundAlt": "Padrão de fundo Phoenix CTA",
+    "workflow": {
+      "mint": "Cunhar",
+      "borrow": "Pedir emprestado",
+      "stake": "Stake",
+      "earn": "Ganhar"
+    },
+    "exploreFeatures": "Explorar características",
+    "community": {
+      "title": "Junte-se à nossa comunidade próspera",
+      "description": "Conecte-se com utilizadores do Phoenix em todo o mundo, obtenha as últimas atualizações e faça parte da revolução DeFi"
+    },
+    "social": {
+      "twitter": "Siga-nos no Twitter",
+      "telegram": "Junte-se ao nosso Telegram",
+      "discord": "Converse no Discord"
+    },
+    "stats": {
+      "users": "Utilizadores ativos",
+      "volume": "Volume de negociação",
+      "support": "Suporte comunitário",
+      "uptime": "Tempo de atividade da plataforma"
+    }
+  },
+  "footer": {
+    "description": "Phoenix é o protocolo DeFi de próxima geração que transforma os seus ativos em rendimento através de mecanismos de estabilidade inovadores e compatibilidade cross-chain.",
+    "copyright": "Todos os direitos reservados.",
+    "poweredBy": "Impulsionado pela inovação comunitária",
+    "sections": {
+      "resources": "Recursos",
+      "security": "Segurança",
+      "community": "Comunidade"
+    },
+    "links": {
+      "docs": "Documentação",
+      "blog": "Blog",
+      "whitepaper": "Whitepaper",
+      "github": "GitHub",
+      "contracts": "Contratos",
+      "audits": "Auditorias de segurança",
+      "bugBounty": "Recompensa por bugs",
+      "privacy": "Política de privacidade",
+      "terms": "Termos de serviço",
+      "governance": "Governança",
+      "forum": "Fórum comunitário",
+      "newsletter": "Newsletter",
+      "support": "Centro de suporte"
+    },
+    "social": {
+      "title": "Siga-nos",
+      "twitter": "Siga-nos no Twitter",
+      "telegram": "Junte-se ao nosso Telegram",
+      "discord": "Converse no Discord",
+      "medium": "Leia o nosso Medium"
+    },
+    "newsletter": {
+      "title": "Mantenha-se atualizado",
+      "description": "Receba as últimas atualizações do Phoenix, notícias e insights exclusivos na sua caixa de entrada",
+      "placeholder": "Digite o seu e-mail",
+      "subscribe": "Subscrever"
+    },
+    "legal": {
+      "privacy": "Privacidade",
+      "terms": "Termos",
+      "cookies": "Cookies"
+    }
+  }
+}

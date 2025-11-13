@@ -1,0 +1,14 @@
+# Phoenix Finance - Robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin or private paths (if any)
+# Disallow: /admin/
+# Disallow: /api/
+
+# Sitemap
+Sitemap: https://phnx.finance/sitemap.xml
+
+# Crawl-delay for bots
+Crawl-delay: 1

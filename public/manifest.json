@@ -1,0 +1,27 @@
+{
+  "name": "Phoenix Finance",
+  "short_name": "Phoenix",
+  "description": "The On-Chain Bank Rising from the Ashes - From Stability to Infinity, Phoenix Turns Assets into Yield",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#081122",
+  "theme_color": "#fc9e01",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/img/logo_footer.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/img/logo_footer.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "defi", "cryptocurrency"],
+  "lang": "en",
+  "dir": "ltr"
+}

@@ -1,0 +1,239 @@
+{
+  "nav": {
+    "overview": "Overview",
+    "features": "Features", 
+    "roadmap": "Roadmap",
+    "governance": "Governance",
+    "partners": "Partners"
+  },
+  "buttons": {
+    "launchApp": "Launch App",
+    "exploreFeatures": "Explore Features", 
+    "phoenixCoreFeatures": "Phoenix Core Features",
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "readyToUnlock": "Ready to unlock your yield potential?",
+    "joinOurJourney": "Join Our Journey",
+    "bePartOfRevolution": "Be part of the DeFi revolution and help shape the future of on-chain banking"
+  },
+  "hero": {
+    "badge": "🔥 Next Generation DeFi",
+    "title": {
+      "holdTo": "Hold to ",
+      "earn": "Earn",
+      "makeDeFiStable": "Make DeFi Stable"
+    },
+    "description": "From Stability to Infinity, Phoenix Turns Assets into Yield",
+    "stats": {
+      "targetTVL": "Target TVL",
+      "stableYield": "Stable Yield",
+      "multiChain": "Chain"
+    }
+  },
+  "vision": {
+    "badge": "OUR VISION",
+    "title": "Phoenix — The On-Chain Bank Rising from the Ashes",
+    "description": "Powered by the PUSD rPUSD model, Phoenix unifies mint, borrow, staking, liquidity mining, and cross-chain into one liquidity layer. It enables seamless value flow across assets and ecosystems, paving the way for the next $10B on-chain bank."
+  },
+  "features": {
+    "title": "Features Built to Unlock Yield",
+    "subtitle": "Discover the Core Features That Power the Phoenix Ecosystem",
+    "mint": {
+      "title": "Mint",
+      "subtitle": "The First Step of Your Phoenix Journey",
+      "description": "Instantly mint assets into PUSD, building a stable foundation for sustained growth in the Phoenix yield ecosystem."
+    },
+    "borrow": {
+      "title": "Borrow",
+      "subtitle": "Unlock Asset Liquidity",
+      "description": "Over-collateralize assets to borrow PUSD for instant liquidity, unlocking staking, mining, and cross-chain yields without selling holdings."
+    },
+    "stake": {
+      "title": "Stake",
+      "subtitle": "Steady Growth, Lasting Rewards",
+      "description": "Stake PUSD in Phoenix pools to earn stable returns and extra rewards, growing assets through lock-up and long-term yield."
+    },
+    "quest": {
+      "title": "Quest",
+      "subtitle": "Start Earning Phoenix Points",
+      "description": "Complete activities or socials in Phoenix to earn Phoenix Points, redeemable for tokens and long-term rewards."
+    },
+    "community": {
+      "title": "Community",
+      "subtitle": "Co-Build and Co-Govern",
+      "description": "Phoenix puts community at the center. Governance, proposals, and growth are led by members together."
+    }
+  },
+  "roadmap": {
+    "title": "Roadmap",
+    "subtitle": "Our Journey to Revolutionize DeFi",
+    "phases": {
+      "phase1": {
+        "phase": "Phase 1",
+        "quarter": "Q4 2025",
+        "title": "Protocol Launch",
+        "description": "Phoenix Protocol goes live, gradually rolling out core features including Mint, Borrow, Convert, Staking, Liquidity Mining, Cross-Chain Yield, and Community Quest Points"
+      },
+      "phase2": {
+        "phase": "Phase 2", 
+        "quarter": "Q1 2026",
+        "title": "Governance Token Launch",
+        "description": "$FIRE governance token launches on major DEXs and CEXs, driving adoption of Phoenix stablecoins and ecosystem participation, fueling governance and growth"
+      },
+      "phase3": {
+        "phase": "Phase 3",
+        "quarter": "Q2 2026", 
+        "title": "Multi-Chain Expansion",
+        "description": "Multi-chain expansion, integrating more RWA assets across networks while extending yield-bearing PUSD and $FIRE use cases, driving ecosystem growth toward a $10B on-chain bank"
+      }
+    }
+  },
+  "governance": {
+    "badge": "GOVERNANCE & COMMUNITY",
+    "title": "Governance & Community",
+    "subtitle": "Phoenix puts community at its core, empowering members to shape the future through decentralized governance and collaborative growth",
+    "features": {
+      "dao": {
+        "title": "DAO Governance",
+        "description": "Progressive decentralized autonomous organization to gradually achieve community-driven decision-making and protocol evolution"
+      },
+      "fire": {
+        "title": "$FIRE Token",
+        "description": "Governance token that provides voting rights and captures ecosystem value, empowering holders to influence Phoenix development"
+      },
+      "badge": {
+        "title": "Badge + Points",
+        "description": "Contribution-based voting system where active members earn badges and points for greater governance influence and rewards"
+      }
+    },
+    "community": {
+      "title": "Community at the Core",
+      "subtitle": "Phoenix empowers members to engage, contribute, and co-build the future of DeFi through:",
+      "imageAlt": "Community engagement visualization",
+      "engagement": {
+        "proposals": {
+          "title": "Proposals & Voting",
+          "description": "Submit governance proposals and participate in community voting to shape the Phoenix ecosystem and protocol direction"
+        },
+        "quests": {
+          "title": "Quests & Points",
+          "description": "Complete community quests and activities to earn Phoenix Points, redeemable for tokens and exclusive ecosystem rewards"
+        },
+        "incentives": {
+          "title": "Incentives & Recognition", 
+          "description": "Earn badges, climb leaderboards, and receive rewards for meaningful contributions to the Phoenix community"
+        },
+        "cobuilding": {
+          "title": "Co-Building & Growth",
+          "description": "Join collaborative events, partnerships, and initiatives that expand Phoenix globally and drive ecosystem adoption"
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to Shape the Future?",
+      "description": "Join the Phoenix community and help build the next generation of decentralized finance together"
+    }
+  },
+  "partners": {
+    "badge": "STRATEGIC PARTNERS",
+    "title": "Trusted by Industry Leaders",
+    "subtitle": "Phoenix collaborates with the most innovative protocols and platforms to build the future of DeFi infrastructure",
+    "descriptions": {
+      "listadao": "Decentralized listing protocol",
+      "uniswap": "Leading DEX protocol",
+      "pancakeswap": "BSC's premier DEX",
+      "layerzero": "Omnichain interoperability",
+      "base": "Coinbase L2 solution",
+      "bnb": "High-performance blockchain",
+      "chainlink": "Decentralized oracle network",
+      "arbitrum": "Ethereum L2 scaling"
+    },
+    "categories": {
+      "defi": "DeFi",
+      "blockchain": "Blockchain",
+      "infrastructure": "Infrastructure"
+    },
+    "stats": {
+      "protocols": "Partner Protocols",
+      "blockchains": "Supported Chains",
+      "tvl": "Combined TVL",
+      "possibilities": "Possibilities"
+    },
+    "cta": {
+      "title": "Want to Partner With Us?",
+      "description": "Join Phoenix's growing ecosystem and help shape the future of decentralized finance",
+      "partnerButton": "Become a Partner"
+    }
+  },
+  "cta": {
+    "badge": "GET STARTED TODAY",
+    "title": "Ready to Start Your Phoenix Journey?",
+    "subtitle": "Join thousands of users already earning with Phoenix. Start your DeFi journey today with just a few clicks.",
+    "backgroundAlt": "Phoenix CTA background pattern",
+    "workflow": {
+      "mint": "Mint",
+      "borrow": "Borrow", 
+      "stake": "Stake",
+      "earn": "Earn"
+    },
+    "exploreFeatures": "Explore Features",
+    "community": {
+      "title": "Join Our Thriving Community",
+      "description": "Connect with Phoenix users worldwide, get the latest updates, and be part of the DeFi revolution"
+    },
+    "social": {
+      "twitter": "Follow us on Twitter",
+      "telegram": "Join our Telegram",
+      "discord": "Chat on Discord"
+    },
+    "stats": {
+      "users": "Active Users",
+      "volume": "Trading Volume",
+      "support": "Community Support", 
+      "uptime": "Platform Uptime"
+    }
+  },
+  "footer": {
+    "description": "Phoenix is the next-generation DeFi protocol that turns your assets into yield through innovative stability mechanisms and cross-chain compatibility.",
+    "copyright": "All rights reserved.",
+    "poweredBy": "Powered by community innovation",
+    "sections": {
+      "resources": "Resources",
+      "security": "Security",
+      "community": "Community"
+    },
+    "links": {
+      "docs": "Documentation",
+      "blog": "Blog",
+      "whitepaper": "Whitepaper",
+      "github": "GitHub",
+      "contracts": "Contracts",
+      "audits": "Security Audits",
+      "bugBounty": "Bug Bounty",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "governance": "Governance",
+      "forum": "Community Forum",
+      "newsletter": "Newsletter",
+      "support": "Support Center"
+    },
+    "social": {
+      "title": "Follow Us",
+      "twitter": "Follow us on Twitter",
+      "telegram": "Join our Telegram",
+      "discord": "Chat on Discord",
+      "medium": "Read our Medium"
+    },
+    "newsletter": {
+      "title": "Stay Updated",
+      "description": "Get the latest Phoenix updates, news, and exclusive insights delivered to your inbox",
+      "placeholder": "Enter your email",
+      "subscribe": "Subscribe"
+    },
+    "legal": {
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "cookies": "Cookies"
+    }
+  }
+}

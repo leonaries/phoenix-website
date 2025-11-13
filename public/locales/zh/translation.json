@@ -1,0 +1,239 @@
+{
+  "nav": {
+    "overview": "概览",
+    "features": "功能",
+    "roadmap": "路线图",
+    "governance": "治理",
+    "partners": "合作伙伴"
+  },
+  "buttons": {
+    "launchApp": "启动应用",
+    "exploreFeatures": "探索功能",
+    "phoenixCoreFeatures": "Phoenix 核心功能", 
+    "learnMore": "了解更多",
+    "getStarted": "开始使用",
+    "readyToUnlock": "准备释放您的收益潜力了吗？",
+    "joinOurJourney": "加入我们的征程",
+    "bePartOfRevolution": "成为 DeFi 革命的一部分，帮助塑造链上银行的未来"
+  },
+  "hero": {
+    "badge": "🔥 下一代 DeFi",
+    "title": {
+      "holdTo": "持有即 ",
+      "earn": "赚取",
+      "makeDeFiStable": "让 DeFi 更稳定"
+    },
+    "description": "从稳定到无限，Phoenix 将资产转化为收益",
+    "stats": {
+      "targetTVL": "目标锁仓量",
+      "stableYield": "稳定收益",
+      "multiChain": "多链"
+    }
+  },
+  "vision": {
+    "badge": "我们的愿景",
+    "title": "Phoenix — 从灰烬中重生的链上银行",
+    "description": "由 PUSD rPUSD 模型驱动，Phoenix 将铸造、借贷、质押、流动性挖矿和跨链统一到一个流动性层中。它实现了资产和生态系统间的无缝价值流动，为下一个 100 亿美元的链上银行铺平道路。"
+  },
+  "features": {
+    "title": "专为释放收益而构建的功能",
+    "subtitle": "探索驱动 Phoenix 生态系统的核心功能",
+    "mint": {
+      "title": "铸造",
+      "subtitle": "Phoenix 之旅的第一步",
+      "description": "即时将资产铸造为 PUSD，为 Phoenix 收益生态系统中的持续增长建立稳定基础。"
+    },
+    "borrow": {
+      "title": "借贷",
+      "subtitle": "释放资产流动性",
+      "description": "超额抵押资产借贷 PUSD 获得即时流动性，在不出售持有资产的情况下解锁质押、挖矿和跨链收益。"
+    },
+    "stake": {
+      "title": "质押",
+      "subtitle": "稳定增长，持久奖励",
+      "description": "在 Phoenix 池中质押 PUSD 以获得稳定回报和额外奖励，通过锁定和长期收益增长资产。"
+    },
+    "quest": {
+      "title": "任务",
+      "subtitle": "开始赚取 Phoenix 积分",
+      "description": "在 Phoenix 中完成活动或社交任务以赚取 Phoenix 积分，可兑换代币和长期奖励。"
+    },
+    "community": {
+      "title": "社区",
+      "subtitle": "共建共治",
+      "description": "Phoenix 将社区置于中心。治理、提案和增长由成员共同主导。"
+    }
+  },
+  "roadmap": {
+    "title": "路线图",
+    "subtitle": "我们革新 DeFi 的征程",
+    "phases": {
+      "phase1": {
+        "phase": "第一阶段",
+        "quarter": "2025年第四季度",
+        "title": "协议启动",
+        "description": "Phoenix 协议正式上线，逐步推出包括铸造、借贷、转换、质押、流动性挖矿、跨链收益和社区任务积分在内的核心功能"
+      },
+      "phase2": {
+        "phase": "第二阶段",
+        "quarter": "2026年第一季度",
+        "title": "治理代币发布",
+        "description": "$FIRE 治理代币在主要 DEX 和 CEX 上发布，推动 Phoenix 稳定币采用和生态系统参与，促进治理和增长"
+      },
+      "phase3": {
+        "phase": "第三阶段",
+        "quarter": "2026年第二季度",
+        "title": "多链扩展",
+        "description": "多链扩展，跨网络整合更多 RWA 资产，同时扩展收益型 PUSD 和 $FIRE 用例，推动生态系统向 100 亿美元链上银行发展"
+      }
+    }
+  },
+  "governance": {
+    "badge": "治理与社区",
+    "title": "治理与社区",
+    "subtitle": "Phoenix 将社区置于核心，通过去中心化治理和协作增长，赋能成员共同塑造未来",
+    "features": {
+      "dao": {
+        "title": "DAO 治理",
+        "description": "渐进式去中心化自治组织，逐步实现社区驱动的决策制定和协议演进"
+      },
+      "fire": {
+        "title": "$FIRE 代币",
+        "description": "提供投票权并捕获生态系统价值的治理代币，赋能持有者影响 Phoenix 发展"
+      },
+      "badge": {
+        "title": "徽章 + 积分",
+        "description": "基于贡献的投票系统，活跃成员通过赚取徽章和积分获得更大的治理影响力和奖励"
+      }
+    },
+    "community": {
+      "title": "社区为核心",
+      "subtitle": "Phoenix 赋能成员通过以下方式参与、贡献并共建 DeFi 的未来：",
+      "imageAlt": "社区参与可视化",
+      "engagement": {
+        "proposals": {
+          "title": "提案与投票",
+          "description": "提交治理提案并参与社区投票，共同塑造 Phoenix 生态系统和协议方向"
+        },
+        "quests": {
+          "title": "任务与积分",
+          "description": "完成社区任务和活动赚取 Phoenix 积分，可兑换代币和专属生态奖励"
+        },
+        "incentives": {
+          "title": "激励与认可",
+          "description": "通过对 Phoenix 社区的有意义贡献赚取徽章、登上排行榜并获得奖励"
+        },
+        "cobuilding": {
+          "title": "共建与增长",
+          "description": "参与协作活动、合作伙伴关系和倡议，推动 Phoenix 全球扩展和生态采用"
+        }
+      }
+    },
+    "cta": {
+      "title": "准备好塑造未来了吗？",
+      "description": "加入 Phoenix 社区，共同构建下一代去中心化金融"
+    }
+  },
+  "partners": {
+    "badge": "战略合作伙伴",
+    "title": "受到行业领袖信赖",
+    "subtitle": "Phoenix 与最具创新性的协议和平台合作，共同构建 DeFi 基础设施的未来",
+    "descriptions": {
+      "listadao": "去中心化上币协议",
+      "uniswap": "领先的 DEX 协议",
+      "pancakeswap": "BSC 顶级 DEX",
+      "layerzero": "全链互操作性",
+      "base": "Coinbase L2 解决方案",
+      "bnb": "高性能区块链",
+      "chainlink": "去中心化预言机网络",
+      "arbitrum": "以太坊 L2 扩容"
+    },
+    "categories": {
+      "defi": "DeFi",
+      "blockchain": "区块链",
+      "infrastructure": "基础设施"
+    },
+    "stats": {
+      "protocols": "合作协议",
+      "blockchains": "支持链数",
+      "tvl": "总锁仓量",
+      "possibilities": "无限可能"
+    },
+    "cta": {
+      "title": "想与我们合作吗？",
+      "description": "加入 Phoenix 不断增长的生态系统，帮助塑造去中心化金融的未来",
+      "partnerButton": "成为合作伙伴"
+    }
+  },
+  "cta": {
+    "badge": "立即开始",
+    "title": "准备开始您的 Phoenix 之旅了吗？",
+    "subtitle": "加入已有数千名用户通过 Phoenix 获得收益的行列。只需几次点击即可开始您的 DeFi 之旅。",
+    "backgroundAlt": "Phoenix CTA 背景图案",
+    "workflow": {
+      "mint": "铸造",
+      "borrow": "借贷",
+      "stake": "质押", 
+      "earn": "赚取"
+    },
+    "exploreFeatures": "探索功能",
+    "community": {
+      "title": "加入我们繁荣的社区",
+      "description": "与全球 Phoenix 用户建立联系，获取最新更新，成为 DeFi 革命的一部分"
+    },
+    "social": {
+      "twitter": "在 Twitter 上关注我们",
+      "telegram": "加入我们的 Telegram",
+      "discord": "在 Discord 上聊天"
+    },
+    "stats": {
+      "users": "活跃用户",
+      "volume": "交易量",
+      "support": "社区支持",
+      "uptime": "平台正常运行时间"
+    }
+  },
+  "footer": {
+    "description": "Phoenix 是下一代 DeFi 协议，通过创新的稳定机制和跨链兼容性将您的资产转化为收益。",
+    "copyright": "版权所有。",
+    "poweredBy": "由社区创新驱动",
+    "sections": {
+      "resources": "资源",
+      "security": "安全",
+      "community": "社区"
+    },
+    "links": {
+      "docs": "文档",
+      "blog": "博客",
+      "whitepaper": "白皮书",
+      "github": "GitHub",
+      "contracts": "合约地址",
+      "audits": "安全审计",
+      "bugBounty": "漏洞赏金",
+      "privacy": "隐私政策",
+      "terms": "服务条款",
+      "governance": "治理",
+      "forum": "社区论坛",
+      "newsletter": "新闻通讯",
+      "support": "支持中心"
+    },
+    "social": {
+      "title": "关注我们",
+      "twitter": "在 Twitter 上关注我们",
+      "telegram": "加入我们的 Telegram",
+      "discord": "在 Discord 上聊天",
+      "medium": "阅读我们的 Medium"
+    },
+    "newsletter": {
+      "title": "保持更新",
+      "description": "获取最新的 Phoenix 更新、新闻和独家见解，直接发送到您的邮箱",
+      "placeholder": "输入您的邮箱",
+      "subscribe": "订阅"
+    },
+    "legal": {
+      "privacy": "隐私",
+      "terms": "条款",
+      "cookies": "Cookie"
+    }
+  }
+}

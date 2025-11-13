@@ -1,0 +1,141 @@
+'use client';
+
+import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+
+interface PhoenixCompleteAnimationProps {
+  onComplete?: () => void;
+}
+
+/**
+ * 凤凰完整视频动画
+ * 
+ * 使用 WebM 视频文件（火焰 + Logo 已合成）
+ * 文件：public/animations/total.webm
+ */
+export default function PhoenixCompleteAnimation({ onComplete }: PhoenixCompleteAnimationProps) {
+  const [mounted, setMounted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLooping, setIsLooping] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // 视频加载完成
+  const handleVideoLoaded = () => {
+    setIsLoaded(true);
+    // 自动播放
+    if (videoRef.current) {
+      videoRef.current.play().catch(err => {
+        console.log('Play interrupted:', err);
+      });
+    }
+  };
+
+  // 监听视频时间更新，在最后一帧时触发
+  const handleTimeUpdate = () => {
+    const video = videoRef.current;
+    if (!video || isLooping) return;
+
+    const duration = video.duration;
+    const currentTime = video.currentTime;
+
+    // 当播放到最后0.1秒时（接近最后一帧），通知 Logo 开始播放
+    if (duration - currentTime <= 0.1) {
+      setIsLooping(true);
+      onComplete?.(); // 通知完成（Hero Logo 立即开始播放）
+    }
+  };
+
+  // 视频播放完成时，直接开始淡出（不再循环）
+  const handleVideoEnded = () => {
+    setIsLooping(true);
+    onComplete?.();
+  };
+
+  // 组件卸载时清理
+  useEffect(() => {
+    return () => {
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+    };
+  }, []);
+
+  if (!mounted) return null;
+
+  // 循环一段时间后淡出，让 Hero Logo 接管
+  if (!isPlaying) return null;
+
+  return (
+    <div className="absolute top-0 left-0 w-full h-full lg:h-screen z-50 pointer-events-none">
+      {/* 加载提示（视频加载时显示） */}
+      {!isLoaded && (
+        <div className="absolute inset-0 bg-[#081122] flex items-center justify-center">
+          <div className="text-center">
+            <div className="text-[#fc9e01] text-2xl font-bold mb-4">Loading...</div>
+            <div className="w-64 h-2 bg-white/10 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-gradient-to-r from-[#ffa700] to-[#d03d0a]"
+                animate={{ width: ['0%', '100%'] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 黑色背景（视频开始时淡出） */}
+      <motion.div
+        className="absolute inset-0 bg-[#081122]"
+        initial={{ opacity: 1 }}
+        animate={{ opacity: isLoaded ? 0 : 1 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
+      />
+
+      {/* 视频动画（全屏播放 + 循环最后1秒后淡出） */}
+      <motion.div 
+        className="absolute inset-0 flex items-center justify-center"
+        initial={{ opacity: 1 }}
+        animate={{ opacity: isLooping ? 0 : 1 }}
+        transition={{ 
+          duration: 1.5, 
+          delay: isLooping ? 1.5 : 0 // 循环1.5秒（约1-2次）后开始淡出
+        }}
+        onAnimationComplete={() => {
+          if (isLooping) {
+            setIsPlaying(false);
+          }
+        }}
+      >
+        <video
+          ref={videoRef}
+          className="w-full h-full object-contain"
+          onLoadedData={handleVideoLoaded}
+          onTimeUpdate={handleTimeUpdate}
+          onEnded={handleVideoEnded}
+          muted
+          playsInline
+        >
+          <source src="/animations/total.webm" type="video/webm" />
+        </video>
+      </motion.div>
+
+      {/* 调试信息（开发时可见） */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="fixed bottom-4 right-4 bg-black/70 text-white px-4 py-2 rounded text-sm font-mono z-[60]">
+          Status: {isLoaded ? (isLooping ? 'Looping Last 1s' : isPlaying ? 'Playing' : 'Complete') : 'Loading'}
+          <br />
+          {videoRef.current && (
+            <>
+              Time: {videoRef.current.currentTime.toFixed(2)}s / {videoRef.current.duration.toFixed(2)}s
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
