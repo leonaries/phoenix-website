@@ -11,9 +11,10 @@ interface PhoenixCompleteAnimationProps {
 /**
  * 凤凰完整动画
  *
- * 使用 PNG 序列帧（火焰 + Logo 已合成）
- * 文件夹：public/frames/total_webp_frames（135帧，30fps）
- * 命名格式：1_6000.png 到 1_6134.png
+ * 使用 WebP 序列帧（火焰 + Logo 已合成）
+ * 文件夹：public/frames/total_webp_frames_webp（135帧，30fps，WebP优化版）
+ * 命名格式：1_6000.webp 到 1_6134.webp
+ * 优化：从PNG（196MB）转换为WebP（34MB），节省162MB（83%）
  */
 export default function PhoenixCompleteAnimation({ onComplete }: PhoenixCompleteAnimationProps) {
   const [mounted, setMounted] = useState(false);
@@ -109,10 +110,10 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
       >
         <FrameSequencePlayer
           ref={playerRef}
-          frameFolder="/frames/total_webp_frames"
+          frameFolder="/frames/total_webp_frames_webp"
           totalFrames={135}
           fps={30}
-          format="png"
+          format="webp"
           startFrameNumber={6000}
           frameNamePattern={(index, fmt) => `1_${index}.${fmt}`}
           onLoaded={handleAnimationLoaded}
