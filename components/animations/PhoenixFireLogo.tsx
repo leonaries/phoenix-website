@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import FrameSequencePlayer, { FrameSequencePlayerRef } from './FrameSequencePlayer';
+import { getPreferredAnimationFormat } from '@/utils/browserDetect';
 
 interface PhoenixFireLogoProps {
   show: boolean;
@@ -12,28 +13,66 @@ interface PhoenixFireLogoProps {
 /**
  * 燃烧的凤凰 Logo（无缝循环播放）
  * 全屏显示，覆盖整个屏幕，保持与动画相同的位置和大小
- * 使用专门设计的首尾相接循环序列帧
- * 文件夹：public/frames/last_webp_frames_webp（228帧，30fps，WebP优化版）
- * 命名格式：cy000.webp 到 cy227.webp
- * 优化：从PNG（214MB）转换为WebP（42MB），节省172MB（80%）
- * 循环时长：7.6秒，流畅的动画效果
+ *
+ * 浏览器兼容性处理：
+ * - Safari浏览器：使用WebP帧序列（42MB，228帧）
+ * - 其他浏览器：使用WebM视频（更小的文件大小）
+ *
+ * WebP帧序列版本：
+ * - 文件夹：public/frames/last_webp_frames_webp（228帧，30fps）
+ * - 命名格式：cy000.webp 到 cy227.webp
+ * - 优化：从PNG（214MB）转换为WebP（42MB），节省172MB（80%）
+ * - 循环时长：7.6秒，流畅的动画效果
  */
 export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLogoProps) {
   const playerRef = useRef<FrameSequencePlayerRef>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [animationType, setAnimationType] = useState<'frames' | 'webm'>('frames');
+  const [mounted, setMounted] = useState(false);
+
+  // 客户端挂载后检测浏览器类型
+  useEffect(() => {
+    setAnimationType(getPreferredAnimationFormat());
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
-    if (!playerRef.current) return;
+    if (!mounted) return;
 
-    if (show) {
-      // 设置起始帧并开始播放
-      playerRef.current.setCurrentFrame(startFrame);
-      playerRef.current.play();
+    if (animationType === 'frames') {
+      // 帧序列动画控制
+      if (!playerRef.current) return;
+
+      if (show) {
+        playerRef.current.setCurrentFrame(startFrame);
+        playerRef.current.play();
+      } else {
+        playerRef.current.pause();
+      }
     } else {
-      playerRef.current.pause();
-    }
-  }, [show, startFrame]);
+      // WebM视频控制
+      if (!videoRef.current) return;
 
-  // 始终渲染播放器（隐藏状态），确保提前加载
+      if (show) {
+        videoRef.current.currentTime = startFrame / 30; // 30fps
+        videoRef.current.play().catch(console.error);
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [show, startFrame, animationType, mounted]);
+
+  // 防止SSR/客户端不一致，等待挂载完成
+  if (!mounted) {
+    return (
+      <motion.div
+        className="absolute top-0 left-0 w-full h-full lg:h-screen z-10 pointer-events-none flex items-center justify-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0 }}
+      />
+    );
+  }
+
   return (
     <motion.div
       className="absolute top-0 left-0 w-full h-full lg:h-screen z-10 pointer-events-none flex items-center justify-center"
@@ -41,16 +80,36 @@ export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLog
       animate={{ opacity: show ? 1 : 0 }}
       transition={{ duration: 0.5 }}
     >
-      <FrameSequencePlayer
-        ref={playerRef}
-        frameFolder="/frames/last_webp_frames_webp"
-        totalFrames={228}
-        fps={30}
-        loop={true}
-        format="webp"
-        startFrameNumber={0}
-        frameNamePattern={(index, fmt) => `cy${String(index).padStart(3, '0')}.${fmt}`}
-      />
+      {animationType === 'frames' ? (
+        // Safari或不支持WebM的浏览器：使用帧序列
+        <FrameSequencePlayer
+          ref={playerRef}
+          frameFolder="/frames/last_webp_frames_webp"
+          totalFrames={228}
+          fps={30}
+          loop={true}
+          format="webp"
+          startFrameNumber={0}
+          frameNamePattern={(index, fmt) => `cy${String(index).padStart(3, '0')}.${fmt}`}
+        />
+      ) : (
+        // 其他浏览器：使用WebM视频
+        <video
+          ref={videoRef}
+          className="w-full h-full object-cover"
+          loop
+          muted
+          playsInline
+          preload="auto"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        >
+          <source src="/animations/last.webm" type="video/webm" />
+        </video>
+      )}
     </motion.div>
   );
 }

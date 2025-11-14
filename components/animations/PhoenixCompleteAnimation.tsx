@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import FrameSequencePlayer, { FrameSequencePlayerRef } from './FrameSequencePlayer';
+import { getPreferredAnimationFormat } from '@/utils/browserDetect';
 
 interface PhoenixCompleteAnimationProps {
   onComplete?: () => void;
@@ -11,19 +12,26 @@ interface PhoenixCompleteAnimationProps {
 /**
  * 凤凰完整动画
  *
- * 使用 WebP 序列帧（火焰 + Logo 已合成）
- * 文件夹：public/frames/total_webp_frames_webp（135帧，30fps，WebP优化版）
- * 命名格式：1_6000.webp 到 1_6134.webp
- * 优化：从PNG（196MB）转换为WebP（34MB），节省162MB（83%）
+ * 浏览器兼容性处理：
+ * - Safari浏览器：使用WebP帧序列（34MB，135帧）
+ * - 其他浏览器：使用WebM视频（更小的文件大小）
+ *
+ * WebP帧序列版本：
+ * - 文件夹：public/frames/total_webp_frames_webp（135帧，30fps，WebP优化版）
+ * - 命名格式：1_6000.webp 到 1_6134.webp
+ * - 优化：从PNG（196MB）转换为WebP（34MB），节省162MB（83%）
  */
 export default function PhoenixCompleteAnimation({ onComplete }: PhoenixCompleteAnimationProps) {
   const [mounted, setMounted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isLooping, setIsLooping] = useState(false);
+  const [animationType, setAnimationType] = useState<'frames' | 'webm'>('frames');
   const playerRef = useRef<FrameSequencePlayerRef>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    setAnimationType(getPreferredAnimationFormat());
     setMounted(true);
   }, []);
 
@@ -31,9 +39,37 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
   const handleAnimationLoaded = () => {
     setIsLoaded(true);
     // 自动播放
-    if (playerRef.current) {
+    if (animationType === 'frames' && playerRef.current) {
       playerRef.current.play();
+    } else if (animationType === 'webm' && videoRef.current) {
+      videoRef.current.play().catch(console.error);
     }
+  };
+
+  // WebM视频加载完成事件
+  const handleVideoLoaded = () => {
+    setIsLoaded(true);
+    if (videoRef.current) {
+      videoRef.current.play().catch(console.error);
+    }
+  };
+
+  // WebM视频时间更新事件
+  const handleVideoTimeUpdate = () => {
+    if (!videoRef.current || isLooping || animationType !== 'webm') return;
+
+    const { currentTime, duration } = videoRef.current;
+    // 当播放到接近结尾时触发完成事件
+    if (duration - currentTime <= 0.1) {
+      setIsLooping(true);
+      onComplete?.();
+    }
+  };
+
+  // WebM视频播放结束事件
+  const handleVideoEnded = () => {
+    setIsLooping(true);
+    onComplete?.();
   };
 
   // 监听动画时间更新，在最后一帧时触发
@@ -58,6 +94,9 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
     return () => {
       if (playerRef.current) {
         playerRef.current.pause();
+      }
+      if (videoRef.current) {
+        videoRef.current.pause();
       }
     };
   }, []);
@@ -93,7 +132,7 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
         transition={{ duration: 0.5, delay: 0.5 }}
       />
 
-      {/* 序列帧动画（全屏播放 + 循环最后1秒后淡出） */}
+      {/* 序列帧动画或WebM视频（全屏播放 + 循环最后1秒后淡出） */}
       <motion.div
         className="absolute inset-0 flex items-center justify-center"
         initial={{ opacity: 1 }}
@@ -108,26 +147,55 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
           }
         }}
       >
-        <FrameSequencePlayer
-          ref={playerRef}
-          frameFolder="/frames/total_webp_frames_webp"
-          totalFrames={135}
-          fps={30}
-          format="webp"
-          startFrameNumber={6000}
-          frameNamePattern={(index, fmt) => `1_${index}.${fmt}`}
-          onLoaded={handleAnimationLoaded}
-          onTimeUpdate={handleTimeUpdate}
-          onEnded={handleAnimationEnded}
-        />
+        {animationType === 'frames' ? (
+          // Safari或不支持WebM的浏览器：使用帧序列
+          <FrameSequencePlayer
+            ref={playerRef}
+            frameFolder="/frames/total_webp_frames_webp"
+            totalFrames={135}
+            fps={30}
+            format="webp"
+            startFrameNumber={6000}
+            frameNamePattern={(index, fmt) => `1_${index}.${fmt}`}
+            onLoaded={handleAnimationLoaded}
+            onTimeUpdate={handleTimeUpdate}
+            onEnded={handleAnimationEnded}
+          />
+        ) : (
+          // 其他浏览器：使用WebM视频
+          <video
+            ref={videoRef}
+            className="w-full h-full object-cover"
+            muted
+            playsInline
+            preload="auto"
+            onLoadedData={handleVideoLoaded}
+            onTimeUpdate={handleVideoTimeUpdate}
+            onEnded={handleVideoEnded}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          >
+            <source src="/animations/total.webm" type="video/webm" />
+          </video>
+        )}
       </motion.div>
 
       {/* 调试信息（开发时可见） */}
-      {process.env.NODE_ENV === 'development' && playerRef.current && (
+      {process.env.NODE_ENV === 'development' && (
         <div className="fixed bottom-4 right-4 bg-black/70 text-white px-4 py-2 rounded text-sm font-mono z-[60]">
+          Type: {animationType}
+          <br />
           Status: {isLoaded ? (isLooping ? 'Looping Last 1s' : isPlaying ? 'Playing' : 'Complete') : 'Loading'}
           <br />
-          Frame: {playerRef.current.getCurrentFrame()} / 135
+          {animationType === 'frames' && playerRef.current && (
+            <>Frame: {playerRef.current.getCurrentFrame()} / 135</>
+          )}
+          {animationType === 'webm' && videoRef.current && (
+            <>Time: {videoRef.current.currentTime.toFixed(1)}s / {videoRef.current.duration?.toFixed(1)}s</>
+          )}
         </div>
       )}
     </div>
