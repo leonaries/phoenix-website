@@ -1,13 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git init:*)",
-      "Bash(git remote add:*)",
-      "Bash(git add:*)",
-      "Bash(pnpm dev)",
-      "Bash(lsof:*)",
-      "Bash(xargs kill -9)",
-      "Bash(pnpm add:*)"
+      "Bash(cwebp:*)",
+      "Bash(for num in {0..227})",
+      "Bash(chmod:*)",
+      "Bash(/Users/leon/Desktop/phoenix/phoenix_website/convert_to_webp.sh)"
     ],
     "deny": [],
     "ask": []
