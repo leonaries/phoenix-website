@@ -54,6 +54,17 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
     }
   };
 
+  // 视频挂载后立即加载（仅WebM模式）
+  useEffect(() => {
+    if (!mounted || animationType !== 'webm' || !videoRef.current) return;
+
+    // 手动触发视频加载
+    const video = videoRef.current;
+    if (video.readyState === 0) {
+      video.load();
+    }
+  }, [mounted, animationType]);
+
   // WebM视频时间更新事件
   const handleVideoTimeUpdate = () => {
     if (!videoRef.current || isLooping || animationType !== 'webm') return;
@@ -165,10 +176,11 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
           // 其他浏览器：使用WebM视频
           <video
             ref={videoRef}
+            key="phoenix-complete-animation-video"
             className="w-full h-full object-cover"
             muted
             playsInline
-            preload="auto"
+            preload="none"
             onLoadedData={handleVideoLoaded}
             onTimeUpdate={handleVideoTimeUpdate}
             onEnded={handleVideoEnded}

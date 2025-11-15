@@ -54,8 +54,14 @@ export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLog
       if (!videoRef.current) return;
 
       if (show) {
-        videoRef.current.currentTime = startFrame / 30; // 30fps
-        videoRef.current.play().catch(console.error);
+        // 手动加载并播放，避免预加载导致的多次请求
+        const video = videoRef.current;
+        if (video.readyState === 0) {
+          // 视频未加载，先加载
+          video.load();
+        }
+        video.currentTime = startFrame / 30; // 30fps
+        video.play().catch(console.error);
       } else {
         videoRef.current.pause();
       }
@@ -96,11 +102,12 @@ export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLog
         // 其他浏览器：使用WebM视频
         <video
           ref={videoRef}
+          key="phoenix-fire-logo-video"
           className="w-full h-full object-cover"
           loop
           muted
           playsInline
-          preload="auto"
+          preload="none"
           style={{
             width: '100%',
             height: '100%',

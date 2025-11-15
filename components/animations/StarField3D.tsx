@@ -313,7 +313,7 @@ export default function StarField3D({ className }: StarField3DProps) {
   return (
     <div
       ref={mountRef}
-      className={`fixed inset-0 pointer-events-none ${className || ''}`}
+      className={`absolute inset-0 pointer-events-none ${className || ''}`}
       style={{
         zIndex: 1
       }}

@@ -3,6 +3,7 @@ import { initI18nServer } from '@/lib/i18nserver';
 import HeroAnimationWrapper from './HeroAnimationWrapper';
 import ServerHeroSectionClient from './ServerHeroSectionClient';
 import HeroFireLogoContainer from './HeroFireLogoContainer';
+import { StarField3D } from '@/components/animations';
 import { DAPP_URL } from '@/data/siteData';
 
 interface ServerHeroSectionProps {
@@ -14,12 +15,10 @@ export default async function ServerHeroSection({ lang }: ServerHeroSectionProps
 
   return (
     <section className="w-full px-8 py-24 lg:py-32 relative overflow-hidden">
+      {/* 3D 星空粒子效果 - 限制在Hero Section内 */}
+      <StarField3D />
+
       <HeroAnimationWrapper>
-      {/* 燃烧 Logo - 桌面端全屏居中 */}
-      <div className="hidden lg:block">
-        <HeroFireLogoContainer />
-      </div>
-      
       {/* 页面内容 - 1.5秒后淡入 */}
       <ServerHeroSectionClient>
         {/* Background decorative elements */}
