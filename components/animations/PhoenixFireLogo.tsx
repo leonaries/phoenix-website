@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import FrameSequencePlayer, { FrameSequencePlayerRef } from './FrameSequencePlayer';
 import { getPreferredAnimationFormat } from '@/utils/browserDetect';
+import { VERSIONED_ASSETS } from '@/utils/assetVersion';
 
 interface PhoenixFireLogoProps {
   show: boolean;
@@ -19,7 +20,7 @@ interface PhoenixFireLogoProps {
  * - 其他浏览器：使用WebM视频（更小的文件大小）
  *
  * WebP帧序列版本：
- * - 文件夹：public/frames/last_webp_frames_webp（228帧，30fps）
+ * - 文件夹：public/frames/last_webp_frames（228帧，30fps）
  * - 命名格式：cy000.webp 到 cy227.webp
  * - 优化：从PNG（214MB）转换为WebP（42MB），节省172MB（80%）
  * - 循环时长：7.6秒，流畅的动画效果
@@ -90,7 +91,7 @@ export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLog
         // Safari或不支持WebM的浏览器：使用帧序列
         <FrameSequencePlayer
           ref={playerRef}
-          frameFolder="/frames/last_webp_frames_webp"
+          frameFolder={VERSIONED_ASSETS.FRAMES_LAST}
           totalFrames={228}
           fps={30}
           loop={true}
@@ -114,7 +115,7 @@ export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLog
             objectFit: 'cover',
           }}
         >
-          <source src="/animations/last.webm" type="video/webm" />
+          <source src={VERSIONED_ASSETS.VIDEO_LAST} type="video/webm" />
         </video>
       )}
     </motion.div>

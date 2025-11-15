@@ -17,7 +17,10 @@
     "build-and-start": "npm run build && npm run start",
     "build-and-start:3000": "npm run build:3000 && npm run start:3000",
     "build-and-start:8080": "npm run build:8080 && npm run start:8080",
-    "lint": "next lint"
+    "lint": "next lint",
+    "version:patch": "node scripts/update-version.js patch",
+    "version:minor": "node scripts/update-version.js minor",
+    "version:major": "node scripts/update-version.js major"
   },
   "dependencies": {
     "@types/three": "^0.181.0",

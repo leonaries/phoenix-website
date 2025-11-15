@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import FrameSequencePlayer, { FrameSequencePlayerRef } from './FrameSequencePlayer';
 import { getPreferredAnimationFormat } from '@/utils/browserDetect';
+import { VERSIONED_ASSETS } from '@/utils/assetVersion';
 
 interface PhoenixCompleteAnimationProps {
   onComplete?: () => void;
@@ -17,7 +18,7 @@ interface PhoenixCompleteAnimationProps {
  * - 其他浏览器：使用WebM视频（更小的文件大小）
  *
  * WebP帧序列版本：
- * - 文件夹：public/frames/total_webp_frames_webp（135帧，30fps，WebP优化版）
+ * - 文件夹：public/frames/total_webp_frames（135帧，30fps，WebP优化版）
  * - 命名格式：1_6000.webp 到 1_6134.webp
  * - 优化：从PNG（196MB）转换为WebP（34MB），节省162MB（83%）
  */
@@ -162,7 +163,7 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
           // Safari或不支持WebM的浏览器：使用帧序列
           <FrameSequencePlayer
             ref={playerRef}
-            frameFolder="/frames/total_webp_frames_webp"
+            frameFolder={VERSIONED_ASSETS.FRAMES_TOTAL}
             totalFrames={135}
             fps={30}
             format="webp"
@@ -190,7 +191,7 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
               objectFit: 'cover',
             }}
           >
-            <source src="/animations/total.webm" type="video/webm" />
+            <source src={VERSIONED_ASSETS.VIDEO_TOTAL} type="video/webm" />
           </video>
         )}
       </motion.div>
