@@ -19,6 +19,11 @@ export default async function ServerHeroSection({ lang }: ServerHeroSectionProps
       <StarField3D />
 
       <HeroAnimationWrapper>
+      {/* 燃烧 Logo - 桌面端全屏居中（仅桌面端显示，动画完成后） */}
+      <div className="hidden lg:block">
+        <HeroFireLogoContainer />
+      </div>
+
       {/* 页面内容 - 1.5秒后淡入 */}
       <ServerHeroSectionClient>
         {/* Background decorative elements */}
