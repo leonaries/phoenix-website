@@ -1,10 +1,10 @@
 {
   "nav": {
     "overview": "概览",
-    "features": "功能",
+    "coreFeatures": "核心功能",
     "roadmap": "路线图",
-    "governance": "治理",
-    "partners": "合作伙伴"
+    "governanceCommunity": "治理与社区",
+    "docs": "文档"
   },
   "buttons": {
     "launchApp": "启动应用",

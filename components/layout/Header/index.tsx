@@ -14,15 +14,15 @@ export default async function Header({ lang }: HeaderProps) {
   // 准备翻译数据给客户端组件
   const translations = {
     'nav.overview': i18n.t('nav.overview'),
-    'nav.features': i18n.t('nav.features'),
+    'nav.coreFeatures': i18n.t('nav.coreFeatures'),
     'nav.roadmap': i18n.t('nav.roadmap'),
-    'nav.governance': i18n.t('nav.governance'),
-    'nav.partners': i18n.t('nav.partners'),
+    'nav.governanceCommunity': i18n.t('nav.governanceCommunity'),
+    'nav.docs': i18n.t('nav.docs'),
     'buttons.launchApp': i18n.t('buttons.launchApp'),
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#081122]/95 backdrop-blur-sm border-b border-white/10">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
       <div className="max-w-[1600px] mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20 relative">
           {/* Logo */}
@@ -42,7 +42,7 @@ export default async function Header({ lang }: HeaderProps) {
                 href={`/${lang}${item.href}`}
                 className="[font-family:'Montserrat',Helvetica] font-normal text-white text-sm lg:text-base tracking-[0] leading-[normal] hover:text-[#fc9e01] transition-colors duration-300 relative group"
               >
-                {i18n.t(`nav.${item.label.toLowerCase()}`)}
+                {i18n.t(`nav.${item.label}`)}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ffa700] to-[#d03d0a] group-hover:w-full transition-all duration-300"></span>
               </a>
             ))}
@@ -53,7 +53,7 @@ export default async function Header({ lang }: HeaderProps) {
             {/* Desktop Language Selector and Launch App Button */}
             <div className="hidden lg:flex items-center space-x-4">
               <LanguageSelector />
-              <a href={DAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-[25px] bg-gradient-to-r from-[#ffa700] to-[#d03d0a] hover:shadow-[0_0_20px_rgba(255,167,0,0.4)] hover:scale-105 transition-all duration-300">
+              <a href={DAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2.5 px-6 py-2.5 rounded-full border-2 border-white hover:border-white/80 bg-transparent hover:bg-white/5 transition-all duration-300">
                 <span className="[font-family:'Montserrat',Helvetica] font-semibold text-white text-sm lg:text-base tracking-[0] leading-[normal] whitespace-nowrap">
                   {i18n.t('buttons.launchApp')}
                 </span>

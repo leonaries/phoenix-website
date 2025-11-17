@@ -1,9 +1,9 @@
 export const navigationItems = [
   { label: "overview", href: "#overview" },
-  { label: "features", href: "#features" },
+  { label: "coreFeatures", href: "#features" },
   { label: "roadmap", href: "#roadmap" },
-  { label: "governance", href: "#governance" },
-  { label: "partners", href: "#partners" },
+  { label: "governanceCommunity", href: "#governance" },
+  { label: "docs", href: "#docs" },
 ];
 
 // External links

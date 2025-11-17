@@ -52,7 +52,7 @@ export default async function HomePage({ params }: HomePageProps) {
           <Header lang={lang} />
         </Suspense>
         
-        <main className="w-full max-w-[1920px] mx-auto pt-16 lg:pt-20">
+        <main className="w-full max-w-[1920px] mx-auto">
           <Suspense fallback={<div className="min-h-screen bg-gradient-to-br from-gray-900 to-black animate-pulse" />}>
             <ServerHeroSection lang={lang} />
           </Suspense>

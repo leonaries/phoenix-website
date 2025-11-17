@@ -1,6 +1,5 @@
 import React from 'react';
 import { initI18nServer } from '@/lib/i18nserver';
-import SectionBackground from './SectionBackground';
 
 interface FeaturesSectionProps {
   lang: string;
@@ -56,27 +55,14 @@ export default async function FeaturesSection({ lang }: FeaturesSectionProps) {
   
   return (
     <section id="features" className="w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-14 lg:py-16 relative overflow-hidden">
-      <SectionBackground />
-      
+
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-10 lg:mb-12 space-y-3 sm:space-y-4 animate-fadeInUp">
-          {/* Badge */}
-          <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r from-[#fc9e01]/20 to-[#d03d0a]/20 border border-[#fc9e01]/30 backdrop-blur-sm">
-            <span className="[font-family:'Manrope',Helvetica] font-semibold text-[#fc9e01] text-xs sm:text-sm tracking-wide">
-              {t('buttons.phoenixCoreFeatures')}
-            </span>
-          </div>
-          
           {/* Title */}
           <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl text-center tracking-tight leading-tight max-w-3xl mx-auto">
             {t('features.title')}
           </h2>
-          
-          {/* Subtitle */}
-          <p className="[font-family:'Manrope',Helvetica] font-light text-white/80 text-base sm:text-lg text-center leading-relaxed max-w-2xl mx-auto px-4">
-            {t('features.subtitle')}
-          </p>
         </div>
 
         {/* Features Grid - Mobile: 1 column, Tablet: 2 columns, Desktop: Custom 2-row layout */}

@@ -14,7 +14,7 @@ export default async function ServerHeroSection({ lang }: ServerHeroSectionProps
   const i18n = await initI18nServer(lang);
 
   return (
-    <section className="w-full px-8 py-24 lg:py-32 relative overflow-hidden">
+    <section className="w-full px-8 py-24 lg:py-48 lg:pb-64 relative overflow-hidden">
       {/* 3D 星空粒子效果 - 限制在Hero Section内 */}
       <StarField3D />
 
@@ -26,29 +26,16 @@ export default async function ServerHeroSection({ lang }: ServerHeroSectionProps
 
       {/* 页面内容 - 1.5秒后淡入 */}
       <ServerHeroSectionClient>
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 pointer-events-none">
-        {/* Gradient orbs */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-[#ffa700]/20 to-[#d03d0a]/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-l from-[#fc9e01]/15 to-transparent rounded-full blur-3xl"></div>
-      </div>
 
       <div className="max-w-[1600px] mx-auto relative z-10">
         {/* 移动端：垂直布局 (文字在上，Logo在下) */}
         <div className="flex flex-col lg:hidden space-y-8">
           {/* 移动端：文字内容 */}
           <div className="space-y-4 sm:space-y-6">
-            {/* Badge */}
-            <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r from-[#ffa700]/20 to-[#d03d0a]/20 border border-[#ffa700]/30">
-              <span className="text-[#fc9e01] text-xs font-medium">{i18n.t('hero.badge')}</span>
-            </div>
-
             {/* Main headline */}
             <h1 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-3xl sm:text-4xl tracking-[-0.02em] leading-[1.1]">
-              <span className="block">{i18n.t('hero.title.holdTo')}</span>
-              <span className="bg-gradient-to-r from-[#ffa700] to-[#d03d0a] bg-clip-text text-transparent">
-                {i18n.t('hero.title.earn')}
-              </span>
+              <span>{i18n.t('hero.title.holdTo')} </span>
+              <span>{i18n.t('hero.title.earn')}</span>
               <span className="block text-2xl sm:text-3xl mt-1 text-white/90">
                 {i18n.t('hero.title.makeDeFiStable')}
               </span>
@@ -59,27 +46,11 @@ export default async function ServerHeroSection({ lang }: ServerHeroSectionProps
               {i18n.t('hero.description').split('Phoenix').map((part, index, array) =>
                 index === array.length - 1 ? part : (
                   <React.Fragment key={index}>
-                    {part}<span className="text-[#fc9e01] font-medium">Phoenix</span>
+                    {part}<span className="text-white font-medium">Phoenix</span>
                   </React.Fragment>
                 )
               )}
             </p>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 sm:gap-6 py-4 sm:py-6">
-              <div className="text-center">
-                <div className="text-lg sm:text-xl font-bold text-[#fc9e01]">$10B+</div>
-                <div className="text-xs text-white/60">{i18n.t('hero.stats.targetTVL')}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-lg sm:text-xl font-bold text-[#fc9e01]">15%+</div>
-                <div className="text-xs text-white/60">{i18n.t('hero.stats.stableYield')}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-lg sm:text-xl font-bold text-[#fc9e01]">Multi</div>
-                <div className="text-xs text-white/60">{i18n.t('hero.stats.multiChain')}</div>
-              </div>
-            </div>
 
             {/* CTA buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
@@ -113,17 +84,10 @@ export default async function ServerHeroSection({ lang }: ServerHeroSectionProps
         <div className="hidden lg:block lg:max-w-3xl">
           {/* Content */}
           <div className="space-y-4">
-            {/* Badge */}
-            <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r from-[#ffa700]/20 to-[#d03d0a]/20 border border-[#ffa700]/30">
-              <span className="text-[#fc9e01] text-xs font-medium">{i18n.t('hero.badge')}</span>
-            </div>
-
             {/* Main headline */}
             <h1 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-3xl lg:text-4xl xl:text-5xl tracking-[-0.02em] leading-[1.1]">
-              <span className="block">{i18n.t('hero.title.holdTo')}</span>
-              <span className="bg-gradient-to-r from-[#ffa700] to-[#d03d0a] bg-clip-text text-transparent">
-                {i18n.t('hero.title.earn')}
-              </span>
+              <span>{i18n.t('hero.title.holdTo')} </span>
+              <span>{i18n.t('hero.title.earn')}</span>
               <span className="block text-2xl lg:text-3xl xl:text-4xl mt-1 text-white/90">
                 {i18n.t('hero.title.makeDeFiStable')}
               </span>
@@ -134,27 +98,11 @@ export default async function ServerHeroSection({ lang }: ServerHeroSectionProps
               {i18n.t('hero.description').split('Phoenix').map((part, index, array) =>
                 index === array.length - 1 ? part : (
                   <React.Fragment key={index}>
-                    {part}<span className="text-[#fc9e01] font-medium">Phoenix</span>
+                    {part}<span className="text-white font-medium">Phoenix</span>
                   </React.Fragment>
                 )
               )}
             </p>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 lg:gap-6 py-4">
-              <div className="text-center">
-                <div className="text-lg lg:text-xl font-bold text-[#fc9e01]">$10B+</div>
-                <div className="text-xs text-white/60">{i18n.t('hero.stats.targetTVL')}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-lg lg:text-xl font-bold text-[#fc9e01]">15%+</div>
-                <div className="text-xs text-white/60">{i18n.t('hero.stats.stableYield')}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-lg lg:text-xl font-bold text-[#fc9e01]">Multi</div>
-                <div className="text-xs text-white/60">{i18n.t('hero.stats.multiChain')}</div>
-              </div>
-            </div>
 
             {/* CTA buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">

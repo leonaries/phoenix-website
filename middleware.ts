@@ -5,7 +5,7 @@ export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   
   // 检查路径是否已经包含语言前缀
-  const pathnameHasLocale = /^\/(en|zh|ja|ko)/.test(pathname)
+  const pathnameHasLocale = /^\/(en|zh)/.test(pathname)
   
   // 如果是根路径，重定向到 /en
   if (pathname === '/') {

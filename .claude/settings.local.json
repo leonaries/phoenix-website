@@ -7,7 +7,8 @@
       "Bash(/Users/leon/Desktop/phoenix/phoenix_website/convert_to_webp.sh)",
       "Bash(/Users/leon/Desktop/phoenix/phoenix_website/convert_total_to_webp.sh:*)",
       "Bash(cat:*)",
-      "Bash(xargs ls:*)"
+      "Bash(xargs ls:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []

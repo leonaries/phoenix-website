@@ -1,6 +1,5 @@
 import React from 'react';
 import { initI18nServer } from '@/lib/i18nserver';
-import SectionBackground from './SectionBackground';
 
 interface VisionSectionProps {
   lang: string;
@@ -10,7 +9,6 @@ export default async function VisionSection({ lang }: VisionSectionProps) {
   const { t } = await initI18nServer(lang);
   return (
     <section className="w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-14 lg:py-16 relative overflow-hidden">
-      <SectionBackground showGradient={false} showGlow={false} />
       
       <div className="max-w-4xl mx-auto relative z-10">
         <div className="text-center space-y-4 sm:space-y-5">

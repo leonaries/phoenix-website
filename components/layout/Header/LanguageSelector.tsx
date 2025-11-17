@@ -3,7 +3,7 @@
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { LANGUAGES } from "@/lib/settings";
-import { FlagIcon, ChevronDownIcon } from "@/components/ui/Icons";
+import { FlagIcon, ChevronDownIcon, GlobeIcon } from "@/components/ui/Icons";
 
 export function LanguageSelector() {
   const router = useRouter();
@@ -42,11 +42,11 @@ export function LanguageSelector() {
     <div className="relative" ref={ref}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center px-3 py-2 rounded-md bg-white/10 hover:bg-white/20 text-white text-sm backdrop-blur-sm border border-white/20 transition-all duration-200"
+        className="flex items-center gap-2 px-3 py-2 text-white text-sm transition-all duration-300 bg-transparent hover:opacity-80"
       >
-        <FlagIcon code={currentLang} />
-        <span className="mx-2 text-sm font-medium">
-          {languages.find((lang) => lang.code === currentLang)?.nativeName}
+        <GlobeIcon className="w-5 h-5" />
+        <span className="text-sm font-medium">
+          {languages.find((lang) => lang.code === currentLang)?.code.toUpperCase()}
         </span>
         <ChevronDownIcon className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
       </button>

@@ -1,10 +1,10 @@
 {
   "nav": {
     "overview": "Overview",
-    "features": "Features", 
+    "coreFeatures": "Core Features",
     "roadmap": "Roadmap",
-    "governance": "Governance",
-    "partners": "Partners"
+    "governanceCommunity": "Governance & Community",
+    "docs": "Docs"
   },
   "buttons": {
     "launchApp": "Launch App",
