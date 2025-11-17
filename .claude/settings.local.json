@@ -6,7 +6,8 @@
       "Bash(chmod:*)",
       "Bash(/Users/leon/Desktop/phoenix/phoenix_website/convert_to_webp.sh)",
       "Bash(/Users/leon/Desktop/phoenix/phoenix_website/convert_total_to_webp.sh:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(xargs ls:*)"
     ],
     "deny": [],
     "ask": []

@@ -82,10 +82,18 @@ const FrameSequencePlayer = forwardRef<FrameSequencePlayerRef, FrameSequencePlay
 
       const getFrameName = frameNamePattern || defaultNamePattern;
 
+      // 分离 frameFolder 中的路径和版本参数
+      // 如果 frameFolder 是 "/frames/total_webp_frames?v=1.0.0"
+      // 需要将版本参数附加到每个图片文件后面
+      const [basePath, versionParam] = frameFolder.split('?');
+      const versionSuffix = versionParam ? `?${versionParam}` : '';
+
       for (let i = 0; i < totalFrames; i++) {
         const img = new Image();
         const frameIndex = startFrameNumber + i;
-        img.src = `${frameFolder}/${getFrameName(frameIndex, format)}`;
+        const frameName = getFrameName(frameIndex, format);
+        // 将版本参数附加到文件名后面，而不是文件夹路径后面
+        img.src = `${basePath}/${frameName}${versionSuffix}`;
         img.onload = checkAllLoaded;
         img.onerror = () => {
           console.error(`Failed to load frame: ${img.src}`);
