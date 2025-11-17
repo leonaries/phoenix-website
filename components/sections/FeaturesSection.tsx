@@ -76,45 +76,42 @@ export default async function FeaturesSection({ lang }: FeaturesSectionProps) {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Feature Card */}
-                <div className={`relative h-full p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[#1a2332]/80 to-[#0f1419]/80 border border-white/10 backdrop-blur-xl transition-all duration-500 ease-out hover:border-white/30 hover:shadow-2xl hover:shadow-[#fc9e01]/10 hover:-translate-y-2 overflow-hidden`}>
-                  
+                <div className="relative h-full p-6 sm:p-8 rounded-3xl bg-[#1a2332]/40 border border-white/5 backdrop-blur-sm transition-all duration-300 ease-out hover:border-white/10 overflow-hidden">
+
                   {/* Background Pattern */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
-                  
+
                   {/* Background Number - Left Bottom */}
                   <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 [font-family:'Manrope',Helvetica] font-black text-4xl sm:text-5xl lg:text-6xl leading-none text-white/5 select-none transition-all duration-500 group-hover:text-white/10">
                     {feature.id}
                   </div>
 
-                  {/* Icon Container */}
-                  <div className={`relative z-10 w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 mb-4 sm:mb-5 rounded-xl ${feature.iconBg} border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6`}>
+                  {/* Icon - Direct display without container */}
+                  <div className="relative z-10 mb-6 sm:mb-8">
                     <img
-                      className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 object-contain"
+                      className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
                       alt={`${t(`features.${feature.key}.title`)} icon`}
                       src={feature.icon}
                     />
                   </div>
 
                   {/* Content */}
-                  <div className="relative z-10 space-y-2 sm:space-y-3">
-                    {/* Title */}
-                    <h3 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-base sm:text-lg tracking-tight leading-tight transition-colors duration-300 group-hover:text-[#fc9e01]">
-                      {t(`features.${feature.key}.title`)}
-                    </h3>
-                    
-                    {/* Subtitle */}
-                    <h4 className="[font-family:'Manrope',Helvetica] font-bold text-white/90 text-sm sm:text-base leading-relaxed">
-                      {t(`features.${feature.key}.subtitle`)}
-                    </h4>
-                    
+                  <div className="relative z-10 space-y-3 sm:space-y-4">
+                    {/* Title and Subtitle in one line */}
+                    <div className="space-y-2">
+                      <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-tight">
+                        {t(`features.${feature.key}.title`)}
+                      </h3>
+                      <h4 className="[font-family:'Manrope',Helvetica] font-semibold text-white/90 text-base sm:text-lg lg:text-xl leading-tight">
+                        {t(`features.${feature.key}.subtitle`)}
+                      </h4>
+                    </div>
+
                     {/* Description */}
-                    <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-xs sm:text-sm leading-relaxed transition-colors duration-300 group-hover:text-white/85">
+                    <p className="[font-family:'Manrope',Helvetica] font-normal text-white/60 text-sm sm:text-base leading-relaxed">
                       {t(`features.${feature.key}.description`)}
                     </p>
                   </div>
-
-                  {/* Bottom Accent Line */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#fc9e01]/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
                 </div>
               </div>
             ))}
@@ -129,45 +126,42 @@ export default async function FeaturesSection({ lang }: FeaturesSectionProps) {
                 style={{ animationDelay: `${(index + 2) * 0.1}s` }}
               >
                 {/* Feature Card */}
-                <div className={`relative h-full p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[#1a2332]/80 to-[#0f1419]/80 border border-white/10 backdrop-blur-xl transition-all duration-500 ease-out hover:border-white/30 hover:shadow-2xl hover:shadow-[#fc9e01]/10 hover:-translate-y-2 overflow-hidden`}>
-                
+                <div className="relative h-full p-6 sm:p-8 rounded-3xl bg-[#1a2332]/40 border border-white/5 backdrop-blur-sm transition-all duration-300 ease-out hover:border-white/10 overflow-hidden">
+
                 {/* Background Pattern */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
-                
+
                 {/* Background Number - Left Bottom */}
                 <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 [font-family:'Manrope',Helvetica] font-black text-4xl sm:text-5xl lg:text-6xl leading-none text-white/5 select-none transition-all duration-500 group-hover:text-white/10">
                   {feature.id}
                 </div>
 
-                {/* Icon Container */}
-                <div className={`relative z-10 w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 mb-4 sm:mb-5 rounded-xl ${feature.iconBg} border border-white/10 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6`}>
+                {/* Icon - Direct display without container */}
+                <div className="relative z-10 mb-6 sm:mb-8">
                   <img
-                    className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 object-contain"
+                    className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
                     alt={`${t(`features.${feature.key}.title`)} icon`}
                     src={feature.icon}
                   />
                 </div>
 
                 {/* Content */}
-                <div className="relative z-10 space-y-2 sm:space-y-3">
-                  {/* Title */}
-                  <h3 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-base sm:text-lg tracking-tight leading-tight transition-colors duration-300 group-hover:text-[#fc9e01]">
-                    {t(`features.${feature.key}.title`)}
-                  </h3>
-                  
-                  {/* Subtitle */}
-                  <h4 className="[font-family:'Manrope',Helvetica] font-bold text-white/90 text-sm sm:text-base leading-relaxed">
-                    {t(`features.${feature.key}.subtitle`)}
-                  </h4>
-                  
+                <div className="relative z-10 space-y-3 sm:space-y-4">
+                  {/* Title and Subtitle */}
+                  <div className="space-y-2">
+                    <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-tight">
+                      {t(`features.${feature.key}.title`)}
+                    </h3>
+                    <h4 className="[font-family:'Manrope',Helvetica] font-semibold text-white/90 text-base sm:text-lg lg:text-xl leading-tight">
+                      {t(`features.${feature.key}.subtitle`)}
+                    </h4>
+                  </div>
+
                   {/* Description */}
-                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-xs sm:text-sm leading-relaxed transition-colors duration-300 group-hover:text-white/85">
+                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/60 text-sm sm:text-base leading-relaxed">
                     {t(`features.${feature.key}.description`)}
                   </p>
                 </div>
-
-                {/* Bottom Accent Line */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#fc9e01]/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
               </div>
             </div>
           ))}
