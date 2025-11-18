@@ -6,31 +6,57 @@ interface RoadmapSectionProps {
   lang: string;
 }
 
-// Roadmap phases data - SVG固定坐标 + 文字位置
+// Roadmap phases data - SVG固定坐标 + 文字位置（标题和描述独立定位）
 const roadmapPhases = [
   {
     id: "phase1",
     color: "#ffa700",
-    // SVG内固定坐标 + 外部文字位置
     svg: { cx: 250, cy: 318 }, // 左下角节点
     desktop: {
-      cardTop: "15%", cardLeft: "5%", cardWidth: "28%"
+      // 标题位置（在曲线下方）
+      title: {
+        top: "85%",
+        left: "19%",
+      },
+      // 描述位置（在曲线上方）
+      description: {
+        top: "37%",
+        left: "16%",
+      }
     }
   },
   {
-    id: "phase2", 
+    id: "phase2",
     color: "#00d4ff",
     svg: { cx: 600, cy: 186 }, // 中间节点
     desktop: {
-      cardTop: "50%", cardLeft: "36%", cardWidth: "28%"
+      // 标题位置（在曲线上方）
+      title: {
+        top: "27%",
+        left: "44%",
+      },
+      // 描述位置（在曲线下方）
+      description: {
+        top: "56%",
+        left: "47%",
+      }
     }
   },
   {
     id: "phase3",
-    color: "#d03d0a", 
-    svg: { cx: 1090, cy: 77 }, // 右上角节点
+    color: "#d03d0a",
+    svg: { cx: 940, cy: 137 }, // 右上角节点
     desktop: {
-      cardTop: "5%", cardLeft: "67%", cardWidth: "28%"
+      // 标题位置（在曲线下方）
+      title: {
+        top: "42%",
+        left: "73%",
+      },
+      // 描述位置（在曲线上方）
+      description: {
+        top: "2%",
+        left: "54%",
+      }
     }
   },
 ];
@@ -120,46 +146,52 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
             </svg>
           </div>
 
-          {/* 文字描述卡片 - 纯透明外层 */}
+          {/* Phase 标题容器 - 第一组循环 */}
           {roadmapPhases.map((phase, index) => (
             <div
-              key={`card-${phase.id}`}
-              className={`absolute animate-fadeInUp`}
+              key={`title-${phase.id}`}
+              className="absolute animate-fadeInUp"
               style={{
-                top: phase.desktop.cardTop,
-                left: phase.desktop.cardLeft,
-                width: phase.desktop.cardWidth,
+                top: phase.desktop.title.top,
+                left: phase.desktop.title.left,
                 animationDelay: `${index * 0.2}s`,
                 zIndex: 10
               }}
             >
-              <div className="relative p-4">
-                {/* 内容 */}
-                <div className="space-y-3">
-                  {/* Phase & Quarter */}
-                  <div className="text-center">
-                    <h3 className="[font-family:'Manrope',Helvetica] font-extrabold text-sm xl:text-base text-orange-400 drop-shadow-lg">
-                      {t(`roadmap.phases.${phase.id}.phase`)}
-                    </h3>
-                    <p className="[font-family:'Manrope',Helvetica] font-bold text-xl xl:text-2xl text-white drop-shadow-lg">
-                      {t(`roadmap.phases.${phase.id}.quarter`)}
-                    </p>
-                  </div>
-
-                  {/* Description - 带背景样式的P标签 */}
-                  <p
-                    className="[font-family:'Manrope',Helvetica] font-normal text-white/90 text-xs xl:text-sm leading-relaxed text-left p-6 backdrop-blur-sm"
-                    style={{
-                      width: '466px',
-                      borderRadius: '28px',
-                      background: 'linear-gradient(270deg, #081122 0%, #101B32 100%)'
-                    }}
-                  >
-                    {t(`roadmap.phases.${phase.id}.description`)}
-                  </p>
-                </div>
-
+              <div className="text-center">
+                <h3 className="[font-family:'Manrope',Helvetica] font-extrabold text-sm xl:text-base text-orange-400 drop-shadow-lg">
+                  {t(`roadmap.phases.${phase.id}.phase`)}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-bold text-xl xl:text-2xl text-white drop-shadow-lg">
+                  {t(`roadmap.phases.${phase.id}.quarter`)}
+                </p>
               </div>
+            </div>
+          ))}
+
+          {/* Phase 描述容器 - 第二组循环 */}
+          {roadmapPhases.map((phase, index) => (
+            <div
+              key={`description-${phase.id}`}
+              className="absolute animate-fadeInUp"
+              style={{
+                top: phase.desktop.description.top,
+                left: phase.desktop.description.left,
+                animationDelay: `${index * 0.2 + 0.1}s`,
+                zIndex: 10
+              }}
+            >
+              {/* Description - 带背景样式的P标签 */}
+              <p
+                className="[font-family:'Manrope',Helvetica] font-normal text-white/90 text-xs xl:text-sm leading-relaxed text-left p-6 backdrop-blur-sm"
+                style={{
+                  width: '466px',
+                  borderRadius: '28px',
+                  background: 'linear-gradient(270deg, #081122 0%, #101B32 100%)'
+                }}
+              >
+                {t(`roadmap.phases.${phase.id}.description`)}
+              </p>
             </div>
           ))}
         </div>
