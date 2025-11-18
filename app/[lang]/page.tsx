@@ -34,7 +34,7 @@ export default async function HomePage({ params }: HomePageProps) {
           alt="Ellipse"
           src="/img/ellipse-7.svg"
         />
-        <img
+        {/* <img
           className="absolute top-[2800px] left-0 w-full h-[892px] object-cover opacity-30"
           alt="Background"
           src="/img/bg3-1.png"
@@ -43,7 +43,7 @@ export default async function HomePage({ params }: HomePageProps) {
           className="absolute top-[2700px] left-0 w-full h-[892px] object-cover opacity-30"
           alt="Background"
           src="/img/bg3-2.png"
-        />
+        /> */}
       </div>
 
       {/* Main content flow */}

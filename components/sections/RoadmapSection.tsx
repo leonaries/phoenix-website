@@ -1,7 +1,7 @@
 import React from 'react';
 import { initI18nServer } from '@/lib/i18nserver';
 import SectionBackground from './SectionBackground';
-
+import ReversedSectionBackground from './ReversedSectionBackground';
 interface RoadmapSectionProps {
   lang: string;
 }
@@ -47,22 +47,18 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
       
       {/* Section Header */}
       <div className="text-center pt-12 sm:pt-14 lg:pt-16 pb-6 sm:pb-8 lg:pb-10 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-3xl mx-auto space-y-3 sm:space-y-4 animate-fadeInUp">
+        <div className="max-w-6xl mx-auto space-y-3 sm:space-y-4 animate-fadeInUp">
           {/* Title */}
-          <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl text-center tracking-tight leading-tight">
+          <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl text-left tracking-tight leading-tight translate-y-12">
             {t('roadmap.title')}
           </h2>
           
-          {/* Subtitle */}
-          <p className="[font-family:'Manrope',Helvetica] font-light text-white/80 text-base sm:text-lg text-center leading-relaxed">
-            {t('roadmap.subtitle')}
-          </p>
         </div>
       </div>
 
       {/* Desktop/Tablet Roadmap with Original Curve */}
       <div className="hidden lg:block relative pb-16 xl:pb-24">
-        <div className="relative h-[500px] xl:h-[600px] max-w-[1400px] mx-auto px-4">
+        <div className="relative h-[500px] xl:h-[600px] max-w-[1920px] mx-auto px-4">
           {/* SVG Container with Fixed Nodes */}
           <div className="absolute inset-0 flex items-center justify-center">
             <svg 
@@ -84,36 +80,47 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
               {/* Fixed Timeline Dots - 固定在SVG坐标系内 */}
               {roadmapPhases.map((phase, index) => (
                 <g key={`dot-${phase.id}`}>
-                  {/* 发光效果 */}
+                 
+
+                  {/* 外层背景圆 */}
                   <circle
                     cx={phase.svg.cx}
                     cy={phase.svg.cy}
-                    r="8"
-                    fill={phase.color}
-                    fillOpacity="0.3"
-                    className="animate-pulse"
+                    r="16"
+                    fill="rgba(255, 255, 255, 0.3)"
+                    filter="url(#dropShadow)"
                   />
-                  
-                  {/* 主节点圆圈 */}
+
+                  {/* 内层发光核心 */}
                   <circle
                     cx={phase.svg.cx}
                     cy={phase.svg.cy}
                     r="6"
-                    fill={phase.color}
-                    stroke="white"
-                    strokeWidth="1"
-                    className="animate-fadeInUp"
-                    style={{ 
-                      animationDelay: `${index * 0.1}s`,
-                      filter: `drop-shadow(0 0 8px ${phase.color}66)`
-                    }}
+                    fill="rgba(255, 167, 0, 1)"
+                    className="animate-pulse blur-sm"
                   />
+
                 </g>
               ))}
+
+              {/* 定义滤镜效果 */}
+              <defs>
+                <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                  <feOffset dx="0" dy="2" result="offset"/>
+                  <feComponentTransfer>
+                    <feFuncA type="linear" slope="0.3"/>
+                  </feComponentTransfer>
+                  <feMerge>
+                    <feMergeNode/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
             </svg>
           </div>
 
-          {/* 纯透明文字描述 - 不遮挡曲线 */}
+          {/* 文字描述卡片 - 纯透明外层 */}
           {roadmapPhases.map((phase, index) => (
             <div
               key={`card-${phase.id}`}
@@ -126,43 +133,32 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
                 zIndex: 10
               }}
             >
-              {/* 纯透明 - 无背景无边框 */}
               <div className="relative p-4">
-                
                 {/* 内容 */}
                 <div className="space-y-3">
                   {/* Phase & Quarter */}
                   <div className="text-center">
-                    <h3 className="[font-family:'Manrope',Helvetica] font-extrabold text-lg xl:text-xl text-white drop-shadow-lg">
+                    <h3 className="[font-family:'Manrope',Helvetica] font-extrabold text-sm xl:text-base text-orange-400 drop-shadow-lg">
                       {t(`roadmap.phases.${phase.id}.phase`)}
                     </h3>
-                    <p className="[font-family:'Manrope',Helvetica] font-bold text-sm xl:text-base drop-shadow-lg" style={{ color: phase.color }}>
+                    <p className="[font-family:'Manrope',Helvetica] font-bold text-xl xl:text-2xl text-white drop-shadow-lg">
                       {t(`roadmap.phases.${phase.id}.quarter`)}
                     </p>
                   </div>
-                  
-                  {/* Title */}
-                  <h4 className="[font-family:'Manrope',Helvetica] font-bold text-white text-base xl:text-lg text-center leading-tight drop-shadow-lg">
-                    {t(`roadmap.phases.${phase.id}.title`)}
-                  </h4>
-                  
-                  {/* Description */}
-                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/90 text-xs xl:text-sm leading-relaxed text-center drop-shadow-lg">
+
+                  {/* Description - 带背景样式的P标签 */}
+                  <p
+                    className="[font-family:'Manrope',Helvetica] font-normal text-white/90 text-xs xl:text-sm leading-relaxed text-left p-6 backdrop-blur-sm"
+                    style={{
+                      width: '466px',
+                      borderRadius: '28px',
+                      background: 'linear-gradient(270deg, #081122 0%, #101B32 100%)'
+                    }}
+                  >
                     {t(`roadmap.phases.${phase.id}.description`)}
                   </p>
                 </div>
 
-                {/* 连接线 - 从文字指向节点 */}
-                <div 
-                  className="absolute w-0.5 h-6 bg-gradient-to-b from-transparent via-white/50 to-transparent"
-                  style={{
-                    bottom: index === 1 ? 'auto' : '-24px',
-                    top: index === 1 ? '-24px' : 'auto',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    display: 'block'
-                  }}
-                ></div>
               </div>
             </div>
           ))}
@@ -219,6 +215,11 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
           </div>
         </div>
       </div>
+
+      <ReversedSectionBackground
+        glowSize={{ width: '800px', height: '400px' }}
+        glowOpacity="/8"
+      />
     </section>
   );
 }
