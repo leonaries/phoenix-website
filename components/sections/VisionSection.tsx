@@ -17,7 +17,6 @@ export default async function VisionSection({ lang }: VisionSectionProps) {
             <span className="text-white opacity-60">|</span>
             <span className="text-[#fc9e01] mx-2 sm:mx-3 relative">
               {t('vision.badge')}
-              <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#fc9e01] to-transparent opacity-50"></div>
             </span>
             <span className="text-white opacity-60">|</span>
           </div>
@@ -37,10 +36,7 @@ export default async function VisionSection({ lang }: VisionSectionProps) {
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#081122]/20 pointer-events-none rounded-lg"></div>
           </div>
 
-          {/* Optional: Add a subtle call-to-action or visual element */}
-          <div className="pt-3 sm:pt-4 lg:pt-5 animate-fadeInUp animation-delay-600">
-            <div className="w-12 sm:w-16 lg:w-20 h-0.5 bg-gradient-to-r from-transparent via-[#fc9e01] to-transparent mx-auto opacity-60"></div>
-          </div>
+        
         </div>
       </div>
     </section>
