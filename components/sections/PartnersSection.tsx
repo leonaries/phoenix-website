@@ -98,33 +98,29 @@ export default async function PartnersSection({ lang }: PartnersSectionProps) {
             </div>
           </div>
 
-          {/* Partners Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
+          {/* Partners Grid - Two Rows, Four Columns */}
+          <div className="grid grid-cols-4 gap-5 mb-12 sm:mb-16 max-w-5xl mx-auto">
             {partnersData.map((partner, index) => (
               <div
                 key={partner.id}
-                className={`group relative bg-gradient-to-br from-[#1a2332]/80 to-[#081122]/80 backdrop-blur-sm border border-white/10 rounded-2xl p-4 sm:p-6 hover:border-[#fc9e01]/50 hover:bg-gradient-to-br hover:from-[#fc9e01]/5 hover:to-[#d03d0a]/5 transition-all duration-500 animate-fadeInUp`}
+                className={`group relative bg-gradient-to-br from-[#152138] to-[#081122] border-2 border-[#223049] rounded-[100px] p-5 hover:border-[#fc9e01]/50 transition-all duration-500 animate-fadeInUp`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {/* Partner Logo */}
-                <div className="flex justify-center mb-4">
-                  <div className={`relative w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 ${partner.needsWhiteBg ? 'bg-white p-1' : ''}`}>
+                {/* Partner Content - Horizontal Layout */}
+                <div className="flex items-center gap-4">
+                  {/* Partner Logo */}
+                  <div className={`relative w-12 h-12 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 ${partner.needsWhiteBg ? 'bg-white p-1' : ''}`}>
                     <img
-                      className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain"
+                      className="w-8 h-8 object-contain"
                       alt={partner.name}
                       src={partner.icon}
                     />
                   </div>
-                </div>
-                
-                {/* Partner Info */}
-                <div className="text-center space-y-2">
-                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-sm sm:text-base tracking-tight">
+
+                  {/* Partner Name */}
+                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-base tracking-tight whitespace-nowrap">
                     {partner.name}
                   </h3>
-                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/60 text-xs sm:text-sm leading-relaxed">
-                    {t(`partners.descriptions.${partner.id}`)}
-                  </p>
                 </div>
 
                 {/* Category Badge */}
@@ -139,7 +135,7 @@ export default async function PartnersSection({ lang }: PartnersSectionProps) {
                 </div>
 
                 {/* Hover Effect Overlay */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#fc9e01]/0 via-[#fc9e01]/5 to-[#d03d0a]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 rounded-[20px] bg-gradient-to-r from-[#fc9e01]/0 via-[#fc9e01]/5 to-[#d03d0a]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
             ))}
           </div>
