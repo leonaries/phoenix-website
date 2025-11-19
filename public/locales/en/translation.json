@@ -93,16 +93,17 @@
     "subtitle": "Phoenix puts community at its core, empowering members to shape the future through decentralized governance and collaborative growth",
     "features": {
       "dao": {
-        "title": "DAO Governance",
-        "description": "Progressive decentralized autonomous organization to gradually achieve community-driven decision-making and protocol evolution"
+        "rootNode": "Governance",
+        "title": "DAO",
+        "description": "Progressive DAO to gradually achieve decentralized decision-making"
       },
       "fire": {
-        "title": "$FIRE Token",
-        "description": "Governance token that provides voting rights and captures ecosystem value, empowering holders to influence Phoenix development"
+        "title": "$FIRE",
+        "description": "$FIRE governance token for rights and value capture"
       },
       "badge": {
-        "title": "Badge + Points",
-        "description": "Contribution-based voting system where active members earn badges and points for greater governance influence and rewards"
+        "title": "Badge + point",
+        "description": "Badge + point-weighted voting to empower contributors with greater influence"
       }
     },
     "community": {

@@ -93,16 +93,17 @@
     "subtitle": "Phoenix 将社区置于核心，通过去中心化治理和协作增长，赋能成员共同塑造未来",
     "features": {
       "dao": {
-        "title": "DAO 治理",
-        "description": "渐进式去中心化自治组织，逐步实现社区驱动的决策制定和协议演进"
+        "rootNode": "治理",
+        "title": "DAO",
+        "description": "渐进式 DAO，逐步实现去中心化决策"
       },
       "fire": {
-        "title": "$FIRE 代币",
-        "description": "提供投票权并捕获生态系统价值的治理代币，赋能持有者影响 Phoenix 发展"
+        "title": "$FIRE",
+        "description": "$FIRE 治理代币，用于权利和价值捕获"
       },
       "badge": {
         "title": "徽章 + 积分",
-        "description": "基于贡献的投票系统，活跃成员通过赚取徽章和积分获得更大的治理影响力和奖励"
+        "description": "徽章 + 积分加权投票，赋予贡献者更大的影响力"
       }
     },
     "community": {

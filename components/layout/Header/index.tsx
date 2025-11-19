@@ -36,16 +36,21 @@ export default async function Header({ lang }: HeaderProps) {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8 xl:space-x-12">
-            {navigationItems.map((item, index) => (
-              <a
-                key={index}
-                href={`/${lang}${item.href}`}
-                className="[font-family:'Montserrat',Helvetica] font-normal text-white text-sm lg:text-base tracking-[0] leading-[normal] hover:text-[#fc9e01] transition-colors duration-300 relative group"
-              >
-                {i18n.t(`nav.${item.label}`)}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ffa700] to-[#d03d0a] group-hover:w-full transition-all duration-300"></span>
-              </a>
-            ))}
+            {navigationItems.map((item, index) => {
+              const isDocs = item.label === 'docs';
+              const href = isDocs ? 'https://docs.phnx.finance/' : `/${lang}${item.href}`;
+              return (
+                <a
+                  key={index}
+                  href={href}
+                  {...(isDocs ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  className="[font-family:'Montserrat',Helvetica] font-normal text-white text-sm lg:text-base tracking-[0] leading-[normal] hover:text-[#fc9e01] transition-colors duration-300 relative group"
+                >
+                  {i18n.t(`nav.${item.label}`)}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ffa700] to-[#d03d0a] group-hover:w-full transition-all duration-300"></span>
+                </a>
+              );
+            })}
           </nav>
 
           {/* Right Side - Language and Launch App */}
