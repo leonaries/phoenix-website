@@ -29,11 +29,11 @@ export default async function HomePage({ params }: HomePageProps) {
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* 现有背景装饰元素 */}
-        <img
+        {/* <img
           className="absolute top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1463px] h-[1463px] opacity-20"
           alt="Ellipse"
           src="/img/ellipse-7.svg"
-        />
+        /> */}
         {/* <img
           className="absolute top-[2800px] left-0 w-full h-[892px] object-cover opacity-30"
           alt="Background"

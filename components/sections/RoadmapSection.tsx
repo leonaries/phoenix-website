@@ -86,10 +86,10 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
       <div className="hidden lg:block relative pb-16 xl:pb-24">
         <div className="relative h-[500px] xl:h-[600px] max-w-[1920px] mx-auto px-4">
           {/* SVG Container with Fixed Nodes */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <svg 
-              className="w-full h-auto max-w-full" 
-              viewBox="0 0 1200 400" 
+          <div className="absolute inset-0 flex items-center justify-center z-20">
+            <svg
+              className="w-full h-auto max-w-full"
+              viewBox="0 0 1200 400"
               preserveAspectRatio="xMidYMid meet"
               style={{ maxHeight: '100%' }}
             >
@@ -155,7 +155,7 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
                 top: phase.desktop.title.top,
                 left: phase.desktop.title.left,
                 animationDelay: `${index * 0.2}s`,
-                zIndex: 10
+                zIndex: 30
               }}
             >
               <div className="text-center">
