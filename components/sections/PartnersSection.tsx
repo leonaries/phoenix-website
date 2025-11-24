@@ -76,28 +76,7 @@ export default async function PartnersSection({ lang }: PartnersSectionProps) {
       <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
         <div className="max-w-7xl mx-auto">
           
-          {/* Section Header */}
-          <div className="text-center mb-16 sm:mb-20 lg:mb-24">
-            <div className="space-y-4 sm:space-y-6 animate-fadeInUp">
-              {/* Badge */}
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#fc9e01]/20 to-[#d03d0a]/20 border border-[#fc9e01]/30 backdrop-blur-sm">
-                <span className="[font-family:'Manrope',Helvetica] font-semibold text-[#fc9e01] text-sm sm:text-base tracking-wide">
-                  {t('partners.badge')}
-                </span>
-              </div>
-              
-              {/* Title */}
-              <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl text-center tracking-tight leading-tight">
-                {t('partners.title')}
-              </h2>
-              
-              {/* Subtitle */}
-              <p className="[font-family:'Manrope',Helvetica] font-light text-white/80 text-base sm:text-lg text-center leading-relaxed max-w-3xl mx-auto">
-                {t('partners.subtitle')}
-              </p>
-            </div>
-          </div>
-
+       
           {/* Partners Grid - Two Rows, Four Columns */}
           <div className="grid grid-cols-4 gap-5 mb-12 sm:mb-16 max-w-5xl mx-auto">
             {partnersData.map((partner, index) => (
