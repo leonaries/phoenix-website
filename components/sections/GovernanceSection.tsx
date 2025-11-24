@@ -73,7 +73,7 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
                   }}
                 />
 
-          
+
               </div>
 
               {/* Feature Nodes */}
@@ -222,6 +222,157 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
 
         </div>
       </div>
+
+      {/* Community Earth Section */}
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto">
+
+          {/* Section Title */}
+          <div className="text-center">
+            <h2 className="[font-family:'Manrope',Helvetica] font-normal text-white text-xl sm:text-2xl lg:text-3xl tracking-tight leading-relaxed max-w-4xl mx-auto">
+              {t('governance.community.title', 'Phoenix puts community at its core, empowering members to engage through:')}
+            </h2>
+          </div>
+
+          {/* Earth Community Visualization - Desktop */}
+          <div className="hidden lg:block relative w-full max-w-6xl mx-auto overflow-hidden" style={{ height: '1400px' }}>
+
+            {/* 中心容器 - 有实际尺寸,包含所有元素 */}
+            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[30%]">
+
+              {/* 1. Earth 地球 - 最底层 z-10 */}
+              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[60%] z-10">
+                <img
+                  src="/img/earth.png"
+                  alt="Earth"
+                  width={1200}
+                  height={1200}
+                  className="rounded-full"
+                  style={{ width: '1200px', height: '1200px', maxWidth: 'none' }}
+                />
+              </div>
+
+              {/* 2. Earth Ring 红光 - 盖在地球上 z-20 */}
+              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[100%] z-50">
+                <img
+                  src="/img/earth-ring.png"
+                  alt="Phoenix Ring"
+                  width={1280}
+                  height={1280}
+                  className="animate-pulse"
+                  style={{ width: '1400px', height: '500px', maxWidth: 'none', animationDuration: '3s' }}
+                />
+              </div>
+
+              {/* 3. Circle Group 弧线和圆点 - 在上方 z-30 */}
+              <div className="absolute left-1/2 top-0 transform -translate-x-[53%] -translate-y-[120%] z-30">
+                <img
+                  src="/img/circle_group.png"
+                  alt="Circle Group"
+                  width={1600}
+                  height={400}
+                  style={{ width: '1600px', height: '400px', maxWidth: 'none' }}
+                />
+              </div>
+
+              {/* 4. Vector Logo 凤凰标志 - 最顶层 z-40 */}
+              <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-[250%] z-40">
+                <img
+                  src="/img/vector.svg"
+                  alt="Phoenix Logo"
+                  width={240}
+                  height={240}
+                  style={{ width: '240px', height: '240px', maxWidth: 'none' ,backgroundColor:'#071222' }}
+                />
+              </div>
+
+            </div>
+
+            {/* Connection Lines and Text Labels */}
+
+            {/* Top Left - Proposals & Voting */}
+
+          </div>
+
+          {/* Mobile Layout */}
+          <div className="lg:hidden space-y-12">
+            {/* Central Earth with Phoenix Logo */}
+            <div className="flex justify-center relative">
+              {/* Phoenix Logo Above Earth */}
+              <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-16 z-20">
+                <img
+                  src="/img/vector.svg"
+                  alt="Phoenix Logo"
+                  width={80}
+                  height={80}
+                  className="opacity-90"
+                />
+              </div>
+
+              <div className="relative w-[280px] h-[280px]">
+                <img
+                  src="/img/earth-ring.png"
+                  alt="Phoenix Ring"
+                  width={280}
+                  height={280}
+                  className="absolute inset-0 animate-pulse"
+                  style={{ animationDuration: '3s' }}
+                />
+                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px]">
+                  <img
+                    src="/img/earth.png"
+                    alt="Earth"
+                    width={200}
+                    height={200}
+                    className="rounded-full"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Feature Cards */}
+            <div className="space-y-8">
+              <div className="text-center">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-3">
+                  {t('governance.community.proposals.title', 'Proposals & Voting')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-base">
+                  {t('governance.community.proposals.description', 'Submit and vote to shape the ecosystem')}
+                </p>
+              </div>
+
+              <div className="text-center">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-3">
+                  {t('governance.community.incentives.title', 'Incentives & Recognition')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-base">
+                  {t('governance.community.incentives.description', 'Badges, leaderboards, and rewards for contributors')}
+                </p>
+              </div>
+
+              <div className="text-center">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-3">
+                  {t('governance.community.quests.title', 'Quests & Points')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-base">
+                  {t('governance.community.quests.description', 'Earn points from activities, redeemable for Phoenix tokens')}
+                </p>
+              </div>
+
+              <div className="text-center">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-3">
+                  {t('governance.community.cobuilding.title', 'Co-Building & Growth')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-base">
+                  {t('governance.community.cobuilding.description', 'Events and partnerships expand Phoenix globally')}
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </section>
   );
 }
