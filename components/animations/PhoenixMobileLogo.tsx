@@ -22,7 +22,7 @@ export default function PhoenixMobileLogo({ show }: PhoenixMobileLogoProps) {
         poster="/img/fire.png"
         style={{ maxHeight: '100%' }}
       >
-        <source src="/animations/dapplast.mp4" type="video/mp4" />
+        <source src="/animations/dapplast.webm" type="video/webm" />
       </video>
     </div>
   );

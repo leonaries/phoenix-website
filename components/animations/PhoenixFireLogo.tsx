@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import FrameSequencePlayer, { FrameSequencePlayerRef } from './FrameSequencePlayer';
+import LazyFrameSequencePlayer, { LazyFrameSequencePlayerRef } from './LazyFrameSequencePlayer';
 import { getPreferredAnimationFormat } from '@/utils/browserDetect';
 import { VERSIONED_ASSETS } from '@/utils/assetVersion';
 
@@ -16,17 +16,18 @@ interface PhoenixFireLogoProps {
  * 全屏显示，覆盖整个屏幕，保持与动画相同的位置和大小
  *
  * 浏览器兼容性处理：
- * - Safari浏览器：使用WebP帧序列（42MB，228帧）
+ * - Safari浏览器：使用WebP帧序列（42MB，228帧）- 使用懒加载优化
  * - 其他浏览器：使用WebM视频（更小的文件大小）
  *
- * WebP帧序列版本：
+ * WebP帧序列版本（懒加载优化）：
  * - 文件夹：public/frames/last_webp_frames（228帧，30fps）
  * - 命名格式：cy000.webp 到 cy227.webp
  * - 优化：从PNG（214MB）转换为WebP（42MB），节省172MB（80%）
+ * - 懒加载：首批加载30帧，边播放边加载，首帧时间从5-12s降至0.8-2s
  * - 循环时长：7.6秒，流畅的动画效果
  */
 export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLogoProps) {
-  const playerRef = useRef<FrameSequencePlayerRef>(null);
+  const playerRef = useRef<LazyFrameSequencePlayerRef>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [animationType, setAnimationType] = useState<'frames' | 'webm'>('frames');
   const [mounted, setMounted] = useState(false);
@@ -88,8 +89,8 @@ export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLog
       transition={{ duration: 0.5 }}
     >
       {animationType === 'frames' ? (
-        // Safari或不支持WebM的浏览器：使用帧序列
-        <FrameSequencePlayer
+        // Safari或不支持WebM的浏览器：使用懒加载帧序列
+        <LazyFrameSequencePlayer
           ref={playerRef}
           frameFolder={VERSIONED_ASSETS.FRAMES_LAST}
           totalFrames={228}
@@ -98,6 +99,9 @@ export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLog
           format="webp"
           startFrameNumber={0}
           frameNamePattern={(index, fmt) => `cy${String(index).padStart(3, '0')}.${fmt}`}
+          batchSize={30}
+          bufferAhead={40}
+          bufferBehind={30}
         />
       ) : (
         // 其他浏览器：使用WebM视频
