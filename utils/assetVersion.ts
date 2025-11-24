@@ -80,6 +80,9 @@ export const ASSET_PATHS = {
   // WebP 帧序列
   FRAMES_TOTAL: '/frames/total_webp_frames',
   FRAMES_LAST: '/frames/last_webp_frames',
+
+  // 移动端 dapp 帧序列（仅用于 iOS Safari）
+  FRAMES_DAPP_MOBILE: '/frames/last_webp_dapp_frames',
 } as const;
 
 // 预定义的带版本号的资源 URL
@@ -90,4 +93,5 @@ export const VERSIONED_ASSETS = {
   VIDEO_LAST_MP4: getVersionedUrl(ASSET_PATHS.VIDEO_LAST_MP4),
   FRAMES_TOTAL: getVersionedFrameFolder(ASSET_PATHS.FRAMES_TOTAL),
   FRAMES_LAST: getVersionedFrameFolder(ASSET_PATHS.FRAMES_LAST),
+  FRAMES_DAPP_MOBILE: getVersionedFrameFolder(ASSET_PATHS.FRAMES_DAPP_MOBILE),
 } as const;

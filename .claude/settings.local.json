@@ -1,19 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cwebp:*)",
-      "Bash(for num in {0..227})",
-      "Bash(chmod:*)",
-      "Bash(/Users/leon/Desktop/phoenix/phoenix_website/convert_to_webp.sh)",
-      "Bash(/Users/leon/Desktop/phoenix/phoenix_website/convert_total_to_webp.sh:*)",
-      "Bash(cat:*)",
-      "Bash(xargs ls:*)",
-      "Bash(find:*)",
-      "Bash(tree:*)",
-      "Bash(npm run dev:*)",
-      "Bash(curl:*)",
-      "Bash(lsof -ti:3001)",
-      "Bash(xargs kill:*)"
+      "Bash(/Users/leon/Desktop/phoenix/phoenix_website/convert_dapp_frames.sh)",
+      "Bash(awk:*)",
+      "Bash(pkill:*)"
     ],
     "deny": [],
     "ask": []

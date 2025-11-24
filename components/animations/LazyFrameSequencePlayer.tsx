@@ -298,8 +298,7 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
 
             if (nextFrame >= totalFrames) {
               if (loop) {
-                // 循环播放：预加载开头帧
-                loadFrameBatch(0, batchSize).catch(console.error);
+                // 循环播放：直接回到第 0 帧（帧已经缓存在内存中）
                 return 0;
               } else {
                 setIsPlaying(false);
@@ -314,7 +313,8 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
             }
 
             // 释放旧帧（每30帧清理一次）
-            if (nextFrame % 30 === 0) {
+            // 注意：循环播放时不释放帧，避免重复加载
+            if (!loop && nextFrame % 30 === 0) {
               releaseOldFrames(nextFrame);
             }
 
