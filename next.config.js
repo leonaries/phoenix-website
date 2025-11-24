@@ -11,8 +11,31 @@ const nextConfig = {
   // 启用压缩
   compress: true,
 
-  // 启用 SWC 压缩（更快的构建）
-  swcMinify: true,
+  // Webpack 配置 - 支持 WebWorker
+  webpack: (config, { isServer }) => {
+    // 仅在客户端启用 Worker 支持
+    if (!isServer) {
+      // Next.js 15 原生支持通过 new Worker(new URL(..., import.meta.url))
+      // 但需要确保文件系统层能正确处理 .ts 文件
+      config.module.rules.push({
+        test: /\.worker\.(js|ts)$/,
+        use: {
+          loader: 'worker-loader',
+          options: {
+            filename: 'static/[hash].worker.js',
+          }
+        }
+      });
+
+      // 确保 Worker 文件被正确处理
+      config.output = {
+        ...config.output,
+        globalObject: 'self',
+      };
+    }
+
+    return config;
+  },
 
   // 配置静态资源缓存头
   async headers() {
@@ -69,6 +92,20 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable'
+          }
+        ]
+      },
+      // WebWorker 文件缓存策略
+      {
+        source: '/workers/:path*.(js|ts)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
           }
         ]
       }
