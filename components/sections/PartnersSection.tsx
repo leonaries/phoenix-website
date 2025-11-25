@@ -73,16 +73,16 @@ export default async function PartnersSection({ lang }: PartnersSectionProps) {
     <section id="partners" className="w-full relative overflow-hidden">
       
       {/* Content Container */}
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
         <div className="max-w-7xl mx-auto">
           
        
           {/* Partners Grid - Two Rows, Four Columns */}
-          <div className="grid grid-cols-4 gap-5 mb-12 sm:mb-16 max-w-5xl mx-auto">
+          <div className="grid grid-cols-4 gap-5 mb-12 sm:mb-16 max-w-3xl mx-auto">
             {partnersData.map((partner, index) => (
               <div
                 key={partner.id}
-                className={`group relative bg-gradient-to-br from-[#152138] to-[#081122] border-2 border-[#223049] rounded-[100px] p-5 hover:border-[#fc9e01]/50 transition-all duration-500 animate-fadeInUp`}
+                className={`group relative bg-gradient-to-br from-[#152138] to-[#081122] border-2 border-[#223049] rounded-[100px] p-1 hover:border-[#fc9e01]/50 transition-all duration-500 animate-fadeInUp`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Partner Content - Horizontal Layout */}

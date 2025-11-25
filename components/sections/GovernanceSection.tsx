@@ -229,19 +229,19 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
 
           {/* Section Title */}
           <div className="text-center">
-            <h2 className="[font-family:'Manrope',Helvetica] font-normal text-white text-xl sm:text-2xl lg:text-3xl tracking-tight leading-relaxed max-w-4xl mx-auto">
+            <h2 className="[font-family:'Manrope',Helvetica] font-normal text-white text-xl sm:text-2xl lg:text-4xl tracking-tight leading-relaxed max-w-2xl mx-auto">
               {t('governance.community.title', 'Phoenix puts community at its core, empowering members to engage through:')}
             </h2>
           </div>
 
           {/* Earth Community Visualization - Desktop */}
-          <div className="hidden lg:block relative w-full max-w-6xl mx-auto overflow-hidden" style={{ height: '1400px' }}>
+          <div className="hidden lg:block relative w-full max-w-7xl mx-auto overflow-hidden mt-20" style={{ height: '800px' }}>
 
             {/* 中心容器 - 有实际尺寸,包含所有元素 */}
             <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[30%]">
 
               {/* 1. Earth 地球 - 最底层 z-10 */}
-              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[60%] z-10">
+              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[40%] z-10">
                 <img
                   src="/img/earth.png"
                   alt="Earth"
@@ -253,7 +253,7 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
               </div>
 
               {/* 2. Earth Ring 红光 - 盖在地球上 z-20 */}
-              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[100%] z-50">
+              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[55%] z-50">
                 <img
                   src="/img/earth-ring.png"
                   alt="Phoenix Ring"
@@ -265,7 +265,7 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
               </div>
 
               {/* 3. Circle Group 弧线和圆点 - 在上方 z-30 */}
-              <div className="absolute left-1/2 top-0 transform -translate-x-[53%] -translate-y-[120%] z-30">
+              <div className="absolute left-1/2 top-0 transform -translate-x-[53%] -translate-y-[65%] z-30">
                 <img
                   src="/img/circle_group.png"
                   alt="Circle Group"
@@ -276,7 +276,7 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
               </div>
 
               {/* 4. Vector Logo 凤凰标志 - 最顶层 z-40 */}
-              <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-[250%] z-40">
+              <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-[160%] z-40">
                 <img
                   src="/img/vector.svg"
                   alt="Phoenix Logo"
@@ -288,9 +288,55 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
 
             </div>
 
-            {/* Connection Lines and Text Labels */}
+            {/* Text Labels - positioned near white dots */}
 
             {/* Top Left - Proposals & Voting */}
+            <div className="absolute left-[20%] top-[8%] z-20">
+              <div className="text-center max-w-[250px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-2 leading-tight">
+                  {t('governance.community.proposals.title', 'Proposals & Voting')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-sm leading-relaxed">
+                  {t('governance.community.proposals.description', 'Submit and vote to shape the ecosystem')}
+                </p>
+              </div>
+            </div>
+
+            {/* Top Right - Incentives & Recognition */}
+            <div className="absolute right-[20%] top-[8%] z-20">
+              <div className="text-center max-w-[250px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-2 leading-tight">
+                  {t('governance.community.incentives.title', 'Incentives & Recognition')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-sm leading-relaxed">
+                  {t('governance.community.incentives.description', 'Badges, leaderboards, and rewards for contributors')}
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Left - Quests & Points */}
+            <div className="absolute left-[0%] top-[23%] z-20">
+              <div className="text-center max-w-[250px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-2 leading-tight">
+                  {t('governance.community.quests.title', 'Quests & Points')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-sm leading-relaxed">
+                  {t('governance.community.quests.description', 'Earn points from activities, redeemable for Phoenix tokens')}
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Right - Co-Building & Growth */}
+            <div className="absolute right-[0%] top-[23%] z-20">
+              <div className="text-center max-w-[250px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-2 leading-tight">
+                  {t('governance.community.cobuilding.title', 'Co-Building & Growth')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-sm leading-relaxed">
+                  {t('governance.community.cobuilding.description', 'Events and partnerships expand Phoenix globally')}
+                </p>
+              </div>
+            </div>
 
           </div>
 
