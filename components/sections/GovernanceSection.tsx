@@ -235,7 +235,7 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
           </div>
 
           {/* Earth Community Visualization - Desktop */}
-          <div className="hidden lg:block relative w-full max-w-7xl mx-auto overflow-hidden mt-20" style={{ height: '800px' }}>
+          <div className="hidden lg:block relative w-full max-w-6xl mx-auto overflow-hidden mt-20" style={{ height: '800px' }}>
 
             {/* 中心容器 - 有实际尺寸,包含所有元素 */}
             <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[30%]">

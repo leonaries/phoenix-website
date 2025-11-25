@@ -77,27 +77,27 @@ export default async function PartnersSection({ lang }: PartnersSectionProps) {
         <div className="max-w-7xl mx-auto">
           
        
-          {/* Partners Grid - Two Rows, Four Columns */}
-          <div className="grid grid-cols-4 gap-5 mb-12 sm:mb-16 max-w-3xl mx-auto">
+          {/* Partners Grid - Auto-width with consistent padding */}
+          <div className="flex flex-wrap justify-center gap-5 mb-12 sm:mb-16 max-w-3xl mx-auto">
             {partnersData.map((partner, index) => (
               <div
                 key={partner.id}
-                className={`group relative bg-gradient-to-br from-[#152138] to-[#081122] border-2 border-[#223049] rounded-[100px] p-1 hover:border-[#fc9e01]/50 transition-all duration-500 animate-fadeInUp`}
+                className={`group relative bg-gradient-to-br from-[#152138] to-[#081122] border-2 border-[#223049] rounded-[100px] hover:border-[#fc9e01]/50 transition-all duration-500 animate-fadeInUp`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {/* Partner Content - Horizontal Layout */}
-                <div className="flex items-center gap-4">
+                {/* Partner Content - Horizontal Layout with consistent padding */}
+                <div className="flex items-center gap-3 px-4 py-2">
                   {/* Partner Logo */}
-                  <div className={`relative w-12 h-12 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 ${partner.needsWhiteBg ? 'bg-white p-1' : ''}`}>
+                  <div className={`relative w-10 h-10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0 ${partner.needsWhiteBg ? 'bg-white p-1' : ''}`}>
                     <img
-                      className="w-8 h-8 object-contain"
+                      className="w-7 h-7 object-contain"
                       alt={partner.name}
                       src={partner.icon}
                     />
                   </div>
 
-                  {/* Partner Name */}
-                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-base tracking-tight whitespace-nowrap">
+                  {/* Partner Name - Auto width */}
+                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-sm tracking-tight whitespace-nowrap">
                     {partner.name}
                   </h3>
                 </div>

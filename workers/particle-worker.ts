@@ -56,13 +56,13 @@ self.onmessage = (e: MessageEvent<ParticleUpdateMessage>) => {
       }
     }
 
-    // 使用 Transferable Objects 返回结果（零拷贝）
+    // 不使用 Transferable Objects 返回结果（避免所有权转移问题）
     const response: ParticleUpdateResponse = {
       type: 'updated',
-      positions
+      positions: new Float32Array(positions) // 创建副本而不是转移所有权
     };
 
-    self.postMessage(response, [positions.buffer, velocities.buffer]);
+    self.postMessage(response);
   }
 };
 

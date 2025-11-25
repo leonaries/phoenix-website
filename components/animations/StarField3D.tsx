@@ -61,8 +61,13 @@ export default function StarField3D({ className }: StarField3DProps) {
 
     // 检测 Worker 支持
     const workerSupport = getWorkerRecommendation();
-    setUseWorker(workerSupport.useWorker);
-    console.log('Worker support:', workerSupport.reason);
+
+    // 临时禁用Worker来测试主线程模式
+    const forceMainThread = false; // 调试开关
+    const shouldUseWorker = workerSupport.useWorker && !forceMainThread;
+
+    setUseWorker(shouldUseWorker);
+    console.log('Worker support:', workerSupport.reason, 'Using Worker:', shouldUseWorker);
 
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -188,7 +193,16 @@ export default function StarField3D({ className }: StarField3DProps) {
 
       worker.onerror = (error) => {
         console.error('Worker error:', error);
+        console.log('Falling back to main thread animation');
         setUseWorker(false); // 降级到主线程
+
+        // 重新启动主线程动画
+        if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
+        }
+        setTimeout(() => {
+          animationRef.current = requestAnimationFrame(animateMainThread);
+        }, 100);
       };
 
       console.log('WebWorker initialized successfully');
@@ -298,11 +312,8 @@ export default function StarField3D({ className }: StarField3DProps) {
           // 标记正在更新
           isUpdatingRef.current = true;
 
-          // 发送到 Worker（使用 Transferable Objects）
-          workerRef.current.postMessage(message, [
-            activeBuffer.buffer,
-            velocitiesBufferRef.current.buffer
-          ]);
+          // 发送到 Worker（不使用 Transferable Objects）
+          workerRef.current.postMessage(message);
         }
       }
 
