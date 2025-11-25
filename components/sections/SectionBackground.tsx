@@ -16,6 +16,10 @@ interface SectionBackgroundProps {
   };
   /** 光晕颜色透明度 */
   glowOpacity?: string;
+  /** 背景位置 - PC端 */
+  backgroundPositionDesktop?: string;
+  /** 背景位置 - 移动端 */
+  backgroundPositionMobile?: string;
 }
 
 /**
@@ -28,19 +32,33 @@ export default function SectionBackground({
   gradientClass = 'bg-gradient-to-b from-transparent via-[#081122]/50 to-transparent',
   showGlow = true,
   glowSize = { width: '800px', height: '800px' },
-  glowOpacity = '/5'
+  glowOpacity = '/5',
+  backgroundPositionDesktop = 'center',
+  backgroundPositionMobile = 'center'
 }: SectionBackgroundProps) {
   return (
     <>
-      {/* Background Image - 统一尺寸 */}
-      <div 
-        className="absolute inset-0 z-0"
+      {/* Background Image - PC端 */}
+      <div
+        className="hidden lg:block absolute inset-0 z-0"
         style={{
           backgroundImage: `url('${imagePath}')`,
-          backgroundPosition: 'center',
-          backgroundSize: '100% auto', // 宽度100%，高度自动，保持统一
+          backgroundPosition: backgroundPositionDesktop,
+          backgroundSize: '100% auto',
           backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'scroll' // 移动端性能优化
+          backgroundAttachment: 'scroll'
+        }}
+      />
+
+      {/* Background Image - 移动端 */}
+      <div
+        className="lg:hidden absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url('${imagePath}')`,
+          backgroundPosition: backgroundPositionMobile,
+          backgroundSize: '100% auto',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'scroll'
         }}
       />
       
