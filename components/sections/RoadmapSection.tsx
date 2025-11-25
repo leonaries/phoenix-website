@@ -2,6 +2,8 @@ import React from 'react';
 import { initI18nServer } from '@/lib/i18nserver';
 import SectionBackground from './SectionBackground';
 import ReversedSectionBackground from './ReversedSectionBackground';
+import Web3SectionAnimator from '@/components/animations/Web3SectionAnimator';
+
 interface RoadmapSectionProps {
   lang: string;
 }
@@ -63,23 +65,24 @@ const roadmapPhases = [
 
 export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
   const { t } = await initI18nServer(lang);
-  
+
   return (
     <section id="roadmap" className="w-full relative overflow-hidden">
-      <SectionBackground 
-        glowSize={{ width: '800px', height: '400px' }}
-        glowOpacity="/8"
-      />
-      
-      {/* Section Header */}
-      <div className="text-center pt-12 sm:pt-14 lg:pt-16 pb-6 sm:pb-8 lg:pb-10 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-6xl mx-auto space-y-3 sm:space-y-4 animate-fadeInUp">
-          {/* Title */}
-          <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl text-left tracking-tight leading-tight translate-y-12">
-            {t('roadmap.title')}
-          </h2>
-          
-        </div>
+      <Web3SectionAnimator animationType="hologram" className="w-full">
+        <SectionBackground
+          glowSize={{ width: '800px', height: '400px' }}
+          glowOpacity="/8"
+        />
+
+        {/* Section Header */}
+        <div className="text-center pt-12 sm:pt-14 lg:pt-16 pb-6 sm:pb-8 lg:pb-10 px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-6xl mx-auto space-y-3 sm:space-y-4">
+            {/* Title */}
+            <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl text-left tracking-tight leading-tight translate-y-12">
+              {t('roadmap.title')}
+            </h2>
+
+          </div>
       </div>
 
       {/* Desktop/Tablet Roadmap with Original Curve */}
@@ -252,6 +255,7 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
         glowSize={{ width: '800px', height: '400px' }}
         glowOpacity="/8"
       />
+      </Web3SectionAnimator>
     </section>
   );
 }

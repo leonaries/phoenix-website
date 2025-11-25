@@ -3,7 +3,11 @@
     "allow": [
       "Bash(/Users/leon/Desktop/phoenix/phoenix_website/convert_dapp_frames.sh)",
       "Bash(awk:*)",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)"
     ],
     "deny": [],
     "ask": []

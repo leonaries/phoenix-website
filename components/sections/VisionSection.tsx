@@ -1,5 +1,6 @@
 import React from 'react';
 import { initI18nServer } from '@/lib/i18nserver';
+import Web3SectionAnimator from '@/components/animations/Web3SectionAnimator';
 
 interface VisionSectionProps {
   lang: string;
@@ -8,7 +9,8 @@ interface VisionSectionProps {
 export default async function VisionSection({ lang }: VisionSectionProps) {
   const { t } = await initI18nServer(lang);
   return (
-    <section className="w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-14 lg:py-16 relative overflow-hidden">
+    <section id="vision" className="w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-14 lg:py-16 relative overflow-hidden">
+      <Web3SectionAnimator animationType="matrix" className="w-full">
       
       <div className="max-w-4xl mx-auto relative z-10">
         <div className="text-center space-y-4 sm:space-y-5">
@@ -39,6 +41,7 @@ export default async function VisionSection({ lang }: VisionSectionProps) {
         
         </div>
       </div>
+      </Web3SectionAnimator>
     </section>
   );
 }

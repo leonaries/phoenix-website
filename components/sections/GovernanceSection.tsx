@@ -1,5 +1,6 @@
 import React from 'react';
 import { initI18nServer } from '@/lib/i18nserver';
+import Web3SectionAnimator from '@/components/animations/Web3SectionAnimator';
 
 interface GovernanceSectionProps {
   lang: string;
@@ -10,17 +11,18 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
 
   return (
     <section id="governance" className="w-full relative overflow-hidden">
+      <Web3SectionAnimator animationType="glitch" className="w-full">
 
-      {/* Content Container */}
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-        <div className="max-w-7xl mx-auto">
+        {/* Content Container */}
+        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+          <div className="max-w-7xl mx-auto">
 
-          {/* Section Title */}
-          <div className="text-center mb-16 sm:mb-10">
-            <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-tight animate-fadeInUp">
-              {t('governance.title')}
-            </h2>
-          </div>
+            {/* Section Title */}
+            <div className="text-center mb-16 sm:mb-10">
+              <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-tight">
+                {t('governance.title')}
+              </h2>
+            </div>
 
           {/* Governance Flow Chart - Desktop */}
           <div className="hidden lg:block relative max-w-6xl mx-auto">
@@ -419,6 +421,7 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
         </div>
       </div>
 
+      </Web3SectionAnimator>
     </section>
   );
 }

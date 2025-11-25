@@ -1,5 +1,6 @@
 import React from 'react';
 import { initI18nServer } from '@/lib/i18nserver';
+import Web3SectionAnimator from '@/components/animations/Web3SectionAnimator';
 
 interface PartnersSectionProps {
   lang: string;
@@ -68,9 +69,10 @@ const partnersData = [
 
 export default async function PartnersSection({ lang }: PartnersSectionProps) {
   const { t } = await initI18nServer(lang);
-  
+
   return (
     <section id="partners" className="w-full relative overflow-hidden">
+      <Web3SectionAnimator animationType="quantum" className="w-full">
       
       {/* Content Container */}
       <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
@@ -120,9 +122,10 @@ export default async function PartnersSection({ lang }: PartnersSectionProps) {
           </div>
 
 
-          
+
         </div>
       </div>
+      </Web3SectionAnimator>
     </section>
   );
 }

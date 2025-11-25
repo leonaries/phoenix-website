@@ -1,6 +1,7 @@
 import React from 'react';
 import { initI18nServer } from '@/lib/i18nserver';
 import { DAPP_URL } from '@/data/siteData';
+import Web3SectionAnimator from '@/components/animations/Web3SectionAnimator';
 
 interface CTASectionProps {
   lang: string;
@@ -16,21 +17,22 @@ const socialLinks = [
   {
     id: "telegram",
     icon: "/img/mask-group-8.png",
-    href: "https://t.me/Phoenix_Protocol"
+    href: "https://discord.gg/pNr65uHs"
   },
   {
     id: "discord",
     icon: "/img/mask-group-9.png",
-    href: "https://discord.gg/pNr65uHs"
+    href: "https://t.me/Phoenix_Protocol"
   }
 ];
 
 
 export default async function CTASection({ lang }: CTASectionProps) {
   const { t } = await initI18nServer(lang);
-  
+
   return (
     <section id="CTASection" className="w-full relative overflow-hidden">
+      <Web3SectionAnimator animationType="neon" className="w-full">
             
       {/* Content Container */}
       <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 lg:pb-24">
@@ -126,9 +128,10 @@ export default async function CTASection({ lang }: CTASectionProps) {
 
             </div>
           </div>
-          
+
         </div>
       </div>
+      </Web3SectionAnimator>
     </section>
   );
 }
