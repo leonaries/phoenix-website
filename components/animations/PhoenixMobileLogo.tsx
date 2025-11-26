@@ -85,7 +85,6 @@ export default function PhoenixMobileLogo({ show }: PhoenixMobileLogoProps) {
         loop
         autoPlay
         poster="/img/fire.png"
-        style={{ maxHeight: '100%' }}
       >
         <source src="/animations/dapp_last.webm" type="video/webm" />
       </video>

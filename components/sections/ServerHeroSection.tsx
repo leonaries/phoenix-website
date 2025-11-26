@@ -14,7 +14,7 @@ export default async function ServerHeroSection({ lang }: ServerHeroSectionProps
   const i18n = await initI18nServer(lang);
 
   return (
-    <section className="w-full px-8 py-24 lg:py-48 lg:pb-64 relative overflow-hidden">
+    <section className="w-full px-8 pt-24 lg:py-48 lg:pb-64 relative overflow-hidden">
       {/* 3D 星空粒子效果 - 限制在Hero Section内 */}
       <StarField3D />
 
