@@ -217,103 +217,95 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
         </div>
 
         <div className="relative max-w-2xl mx-auto px-4 sm:px-6">
-          {/* Vertical Timeline Line - Thicker and with gradient */}
-          <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#ffa700] via-[#00d4ff] to-[#d03d0a] opacity-60"></div>
+          {/* Vertical Timeline Line - Gradient from #FFA700 to transparent #D03D0A */}
+          <div
+            className="absolute left-8 sm:left-8 top-[20px] bottom-0 w-1"
+            style={{
+              background: 'linear-gradient(to bottom, #FFA700 0%, rgba(208, 61, 10, 0) 100%)'
+            }}
+          ></div>
 
-          <div className="space-y-16 sm:space-y-20">
+          <div className="space-y-12 sm:space-y-16">
             {roadmapPhases.map((phase, index) => (
               <div
                 key={phase.id}
-                className={`relative animate-fadeInUp pl-16 sm:pl-20`}
+                className={`relative animate-fadeInUp`}
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
-                {/* Timeline Dot - Larger with glow effect like PC */}
-                <div className="absolute left-3 sm:left-5 top-6 transform -translate-x-1/2 z-20">
-                  {/* Outer glow circle */}
-                  <div
-                    className="absolute inset-0 rounded-full blur-md animate-pulse"
-                    style={{
-                      width: '32px',
-                      height: '32px',
-                      backgroundColor: phase.color,
-                      opacity: 0.4,
-                      transform: 'translate(-50%, -50%)',
-                      left: '50%',
-                      top: '50%'
-                    }}
-                  ></div>
-
-                  {/* Outer white circle */}
-                  <div
-                    className="relative rounded-full flex items-center justify-center"
-                    style={{
-                      width: '28px',
-                      height: '28px',
-                      backgroundColor: 'rgba(255, 255, 255, 0.3)',
-                      boxShadow: '0 0 20px rgba(255, 255, 255, 0.2)'
-                    }}
-                  >
-                    {/* Inner glowing core */}
+                {/* Timeline Dot with Phase Info */}
+                <div className="flex items-start gap-4 mb-4">
+                  {/* Timeline Dot - Yellow/Orange unified */}
+                  <div className="relative flex-shrink-0">
+                    {/* Outer glow circle */}
                     <div
-                      className="rounded-full animate-pulse"
+                      className="absolute inset-0 rounded-full blur-lg animate-pulse"
                       style={{
-                        width: '10px',
-                        height: '10px',
-                        backgroundColor: phase.color,
-                        boxShadow: `0 0 10px ${phase.color}`
+                        width: '36px',
+                        height: '36px',
+                        backgroundColor: '#ffa700',
+                        opacity: 0.4,
+                        transform: 'translate(-50%, -50%)',
+                        left: '50%',
+                        top: '50%'
                       }}
                     ></div>
-                  </div>
-                </div>
 
-                {/* Phase Card - Enhanced design */}
-                <div
-                  className="relative overflow-hidden backdrop-blur-sm"
-                  style={{
-                    borderRadius: '20px',
-                    background: 'linear-gradient(135deg, rgba(27, 36, 54, 0.85) 0%, rgba(8, 17, 34, 0.85) 100%)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)'
-                  }}
-                >
-                  {/* Colored accent bar */}
-                  <div
-                    className="absolute top-0 left-0 right-0 h-1"
-                    style={{
-                      background: `linear-gradient(90deg, ${phase.color} 0%, transparent 100%)`
-                    }}
-                  ></div>
-
-                  <div className="p-5 sm:p-6">
-                    {/* Content */}
-                    <div className="space-y-3 sm:space-y-4">
-                      {/* Phase Label & Quarter */}
-                      <div className="flex items-baseline gap-3">
-                        <span
-                          className="[font-family:'Manrope',Helvetica] font-extrabold text-base sm:text-lg tracking-wide"
-                          style={{ color: phase.color }}
-                        >
-                          {t(`roadmap.phases.${phase.id}.phase`)}
-                        </span>
-                        <span className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl sm:text-2xl">
-                          {t(`roadmap.phases.${phase.id}.quarter`)}
-                        </span>
-                      </div>
-
-                      {/* Description */}
-                      <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-sm sm:text-base leading-relaxed">
-                        {t(`roadmap.phases.${phase.id}.description`)}
-                      </p>
+                    {/* Outer white circle */}
+                    <div
+                      className="relative rounded-full flex items-center justify-center z-10"
+                      style={{
+                        width: '32px',
+                        height: '32px',
+                        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                        boxShadow: '0 0 20px rgba(255, 167, 0, 0.3)',
+                        marginLeft: '6px'
+                      }}
+                    >
+                      {/* Inner glowing core */}
+                      <div
+                        className="rounded-full animate-pulse"
+                        style={{
+                          width: '12px',
+                          height: '12px',
+                          backgroundColor: '#ffa700',
+                          boxShadow: '0 0 12px #ffa700'
+                        }}
+                      ></div>
                     </div>
                   </div>
 
-                  {/* Bottom glow effect */}
+                  {/* Phase Label & Quarter - Next to circle */}
+                  <div className="pt-1">
+                    <span
+                      className="[font-family:'Manrope',Helvetica] font-extrabold text-lg tracking-wide block"
+                      style={{ color: '#ffa700' }}
+                    >
+                      {t(`roadmap.phases.${phase.id}.phase`)}
+                    </span>
+                    <span className="[font-family:'Manrope',Helvetica] font-bold text-white text-2xl block mt-1">
+                      {t(`roadmap.phases.${phase.id}.quarter`)}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Phase Card - PC style */}
+                <div className="ml-12">
                   <div
-                    className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none"
+                    className="backdrop-blur-sm p-5"
                     style={{
-                      background: `radial-gradient(ellipse at bottom, ${phase.color}15 0%, transparent 70%)`
+                      background: `
+                        linear-gradient(90deg, #081122 0%, #1C283F 100%) padding-box,
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(153, 153, 153, 0) 100%) border-box
+                      `,
+                      border: '2px solid transparent',
+                      borderRadius: '24px'
                     }}
-                  ></div>
+                  >
+                    {/* Description */}
+                    <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-base leading-relaxed">
+                      {t(`roadmap.phases.${phase.id}.description`)}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}

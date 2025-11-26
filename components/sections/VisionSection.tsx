@@ -33,12 +33,10 @@ export default async function VisionSection({ lang }: VisionSectionProps) {
             <p className="[font-family:'Manrope',Helvetica] font-light text-white/90 text-base sm:text-lg text-center tracking-wide leading-relaxed px-4 sm:px-6 lg:px-0">
               {t('vision.description')}
             </p>
-            
-            Subtle gradient overlay for depth
+
+            {/* Subtle gradient overlay for depth */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#081122]/20 pointer-events-none rounded-lg"></div>
           </div>
-
-        
         </div>
       </div>
       </Web3SectionAnimator>
