@@ -11,7 +11,11 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
 
   return (
     <section id="governance" className="w-full relative overflow-hidden">
-      <Web3SectionAnimator animationType="glitch" className="w-full">
+      <Web3SectionAnimator
+        animationType="glitch"
+        className="w-full"
+        viewport={{ once: true, amount: 0.1 }}
+      >
 
         {/* Content Container */}
         <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
@@ -388,11 +392,11 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
           </div>
 
           {/* Mobile Layout */}
-          <div className="relative lg:hidden space-y-12 h-[1400px] top-[700px]">
+          <div className="relative lg:hidden space-y-12 h-[1400px] top-[700px] overflow-visible">
             {/* Central Earth with Phoenix Logo */}
-            <div className="flex justify-center rotate-90 ">
+            <div className="flex justify-center rotate-90 " style={{ willChange: 'transform' }}>
               {/* Phoenix Logo Above Earth */}
-              <div className="absolute left-0 top-0 transform -translate-y-8 z-20 rotate-[-90deg]">
+              <div className="absolute left-[45px] -top-[25px] transform -translate-y-8 z-20 rotate-[-90deg]">
                 <img
                   src="/img/vector.svg"
                   alt="Phoenix Logo"
@@ -401,19 +405,19 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
                 />
               </div>
 
-              <div className="absolute w-[1000px] h-[380px] transform -translate-y-40">
+              <div className="absolute w-[1000px] h-[380px] transform -translate-y-40" style={{ willChange: 'transform' }}>
                 <img
                   src="/img/earth-ring.png"
                   alt="Phoenix Ring"
                   className="absolute inset-0 animate-pulse"
-                  style={{ animationDuration: '3s',width: '1000px', height: '380px', maxWidth: 'none' }}
+                  style={{ animationDuration: '3s',width: '1000px', height: '380px', maxWidth: 'none', willChange: 'opacity' }}
                 />
               </div>
-              <div className="absolute left-1/2 top-0 transform -translate-x-[53%] -translate-y-[50%] z-1">
+              <div className="absolute left-1/2 top-0 transform -translate-x-[53%] -translate-y-[50%] z-1" style={{ willChange: 'transform' }}>
                 <img
                   src="/img/circle_group.png"
                   alt="Circle Group"
-                  style={{ width: '1400px', height: '400px', maxWidth: 'none' }}
+                  style={{ width: '1400px', height: '400px', maxWidth: 'none', willChange: 'transform' }}
                 />
               </div>
             </div>

@@ -8,6 +8,10 @@ interface Web3SectionAnimatorProps {
   animationType: 'glitch' | 'matrix' | 'hologram' | 'quantum' | 'neon' | 'cyber';
   className?: string;
   delay?: number;
+  viewport?: {
+    once?: boolean;
+    amount?: number;
+  };
 }
 
 // Web3风格动画变体配置
@@ -133,7 +137,8 @@ const Web3SectionAnimator: React.FC<Web3SectionAnimatorProps> = ({
   children,
   animationType,
   className = '',
-  delay = 0
+  delay = 0,
+  viewport = { once: true, amount: 0.3 }
 }) => {
   const config = getAnimationConfig(animationType, delay);
 
@@ -142,10 +147,7 @@ const Web3SectionAnimator: React.FC<Web3SectionAnimatorProps> = ({
       className={className}
       initial={config.initial}
       whileInView={config.animate}
-      viewport={{
-        once: true,
-        amount: 0.3
-      }}
+      viewport={viewport}
       transition={config.transition}
       style={{
         transformStyle: 'preserve-3d',
