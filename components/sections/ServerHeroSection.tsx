@@ -98,7 +98,7 @@ export default async function ServerHeroSection({ lang }: ServerHeroSectionProps
               {i18n.t('hero.description').split('Phoenix').map((part, index, array) =>
                 index === array.length - 1 ? part : (
                   <React.Fragment key={index}>
-                    {part}<span className="text-white font-medium">Phoenix</span>
+                    {part}<span className="font-medium">Phoenix</span>
                   </React.Fragment>
                 )
               )}
