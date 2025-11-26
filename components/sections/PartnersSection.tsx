@@ -79,8 +79,8 @@ export default async function PartnersSection({ lang }: PartnersSectionProps) {
         <div className="max-w-7xl mx-auto">
           
        
-          {/* Partners Grid - Auto-width with consistent padding */}
-          <div className="flex flex-wrap justify-center gap-5 mb-12 sm:mb-16 max-w-3xl mx-auto">
+          {/* PC端 - Partners Grid - Auto-width with consistent padding */}
+          <div className="hidden lg:flex flex-wrap justify-center gap-5 mb-12 sm:mb-16 max-w-3xl mx-auto">
             {partnersData.map((partner, index) => (
               <div
                 key={partner.id}
@@ -105,7 +105,7 @@ export default async function PartnersSection({ lang }: PartnersSectionProps) {
                 </div>
 
                 {/* Category Badge */}
-                <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {/* <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className={`px-2 py-1 text-xs rounded-full font-medium ${
                     partner.category === 'defi' ? 'bg-[#ffa700]/20 text-[#ffa700]' :
                     partner.category === 'blockchain' ? 'bg-[#00d4ff]/20 text-[#00d4ff]' :
@@ -113,10 +113,42 @@ export default async function PartnersSection({ lang }: PartnersSectionProps) {
                   }`}>
                     {t(`partners.categories.${partner.category}`)}
                   </span>
-                </div>
+                </div> */}
+
 
                 {/* Hover Effect Overlay */}
                 <div className="absolute inset-0 rounded-[20px] bg-gradient-to-r from-[#fc9e01]/0 via-[#fc9e01]/5 to-[#d03d0a]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
+            ))}
+          </div>
+
+          {/* 移动端 - Partners Grid - 每行两个 */}
+          <div className="lg:hidden grid grid-cols-2 gap-3 sm:gap-4 mb-12 sm:mb-16 max-w-sm mx-auto">
+            {partnersData.map((partner, index) => (
+              <div
+                key={`mobile-${partner.id}`}
+                className={`group relative bg-gradient-to-br from-[#152138] to-[#081122] border-2 border-[#223049] rounded-[100px] hover:border-[#fc9e01]/50 transition-all duration-500 animate-fadeInUp`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {/* Partner Content - Horizontal Layout like PC but smaller */}
+                <div className="flex items-center gap-2 px-3 py-2">
+                  {/* Partner Logo */}
+                  <div className={`relative w-6 h-6 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0 ${partner.needsWhiteBg ? 'bg-white p-0.5' : ''}`}>
+                    <img
+                      className="w-4 h-4 object-contain"
+                      alt={partner.name}
+                      src={partner.icon}
+                    />
+                  </div>
+
+                  {/* Partner Name - Auto width */}
+                  <h3 className="[font-family:'Manrope',Helvetica] font-semibold text-white text-xs tracking-tight whitespace-nowrap overflow-hidden text-ellipsis">
+                    {partner.name}
+                  </h3>
+                </div>
+
+                {/* Hover Effect Overlay */}
+                <div className="absolute inset-0 rounded-[100px] bg-gradient-to-r from-[#fc9e01]/0 via-[#fc9e01]/5 to-[#d03d0a]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
             ))}
           </div>

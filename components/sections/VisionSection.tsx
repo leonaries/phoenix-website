@@ -34,7 +34,7 @@ export default async function VisionSection({ lang }: VisionSectionProps) {
               {t('vision.description')}
             </p>
             
-            {/* Subtle gradient overlay for depth */}
+            Subtle gradient overlay for depth
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#081122]/20 pointer-events-none rounded-lg"></div>
           </div>
 

@@ -188,33 +188,78 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
             {/* Feature Cards - Stacked */}
             <div className="space-y-6">
               <div className="animate-fadeInUp" style={{animationDelay: '0.2s'}}>
-                <div className="bg-black/60 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
-                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-lg mb-3 tracking-tight">
+                <div
+                  className="backdrop-blur-sm p-6"
+                  style={{
+                    background: `
+                      linear-gradient(90deg, #081122 0%, #1C283F 100%) padding-box,
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(153, 153, 153, 0) 100%) border-box
+                    `,
+                    border: '2px solid transparent',
+                    borderRadius: '28px'
+                  }}
+                >
+                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-2xl mb-3 tracking-tight" style={{
+                    background: 'linear-gradient(90deg, #FFFFFF 0%, #FF8000 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}>
                     {t('governance.features.dao.title')}
                   </h3>
-                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-sm leading-relaxed">
+                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-xs leading-relaxed">
                     {t('governance.features.dao.description')}
                   </p>
                 </div>
               </div>
 
               <div className="animate-fadeInUp" style={{animationDelay: '0.4s'}}>
-                <div className="bg-black/60 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
-                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-lg mb-3 tracking-tight">
+                <div
+                  className="backdrop-blur-sm p-6"
+                  style={{
+                    background: `
+                      linear-gradient(90deg, #081122 0%, #1C283F 100%) padding-box,
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(153, 153, 153, 0) 100%) border-box
+                    `,
+                    border: '2px solid transparent',
+                    borderRadius: '28px'
+                  }}
+                >
+                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-2xl mb-3 tracking-tight" style={{
+                    background: 'linear-gradient(90deg, #FFFFFF 0%, #FF8000 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}>
                     {t('governance.features.fire.title')}
                   </h3>
-                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-sm leading-relaxed">
+                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-xs leading-relaxed">
                     {t('governance.features.fire.description')}
                   </p>
                 </div>
               </div>
 
               <div className="animate-fadeInUp" style={{animationDelay: '0.6s'}}>
-                <div className="bg-black/60 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
-                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-lg mb-3 tracking-tight">
+                <div
+                  className="backdrop-blur-sm p-6"
+                  style={{
+                    background: `
+                      linear-gradient(90deg, #081122 0%, #1C283F 100%) padding-box,
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(153, 153, 153, 0) 100%) border-box
+                    `,
+                    border: '2px solid transparent',
+                    borderRadius: '28px'
+                  }}
+                >
+                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-2xl mb-3 tracking-tight" style={{
+                    background: 'linear-gradient(90deg, #FFFFFF 0%, #FF8000 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}>
                     {t('governance.features.badge.title')}
                   </h3>
-                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-sm leading-relaxed">
+                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-xs leading-relaxed">
                     {t('governance.features.badge.description')}
                   </p>
                 </div>
@@ -317,7 +362,7 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
             </div>
 
             {/* Bottom Left - Quests & Points */}
-            <div className="absolute left-[0%] top-[23%] z-20">
+            <div className="absolute left-[0%] top-[20%] z-20">
               <div className="text-center max-w-[250px]">
                 <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-2 leading-tight">
                   {t('governance.community.quests.title', 'Quests & Points')}

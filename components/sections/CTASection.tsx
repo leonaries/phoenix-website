@@ -35,7 +35,7 @@ export default async function CTASection({ lang }: CTASectionProps) {
       <Web3SectionAnimator animationType="neon" className="w-full">
             
       {/* Content Container */}
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 pb-16 sm:pb-20 lg:pb-24">
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 xs:pb-16 sm:pb-20 lg:pb-24">
         <div className="max-w-6xl mx-auto">
           
           {/* Main CTA Section - Orange Card Design */}
@@ -58,12 +58,12 @@ export default async function CTASection({ lang }: CTASectionProps) {
                 {/* Card Content */}
                 <div className="relative z-10 space-y-6 sm:space-y-8">
                   {/* Card Title */}
-                  <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl text-center tracking-tight leading-tight">
+                  <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-flex flex-wrap items-center justify-center gap-2 sm:gap-4xl sm:text-3xl lg:text-4xl text-center tracking-tight leading-tight">
                     {t('cta.title')}
                   </h2>
 
                   {/* Card Workflow Steps */}
-                  <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4">
+                  <div className="flex flex-wrap items-center justify-center xs:gap-2 sm:gap-4">
                     <span className="[font-family:'Manrope',Helvetica] font-medium text-white/90 text-base sm:text-lg">
                       {t('cta.workflow.mint')}
                     </span>
@@ -84,11 +84,11 @@ export default async function CTASection({ lang }: CTASectionProps) {
                   {/* Card CTA Button */}
                   <div className="flex justify-center pt-4">
                     <a href={DAPP_URL} target="_blank" rel="noopener noreferrer"
-                       className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full border-2 border-[#ffa700] bg-transparent text-[#ffa700] hover:bg-[#ffa700] hover:text-white transition-all duration-300 group">
-                      <span className="[font-family:'Manrope',Helvetica] font-semibold text-lg tracking-wide">
+                       className="inline-flex items-center justify-center gap-2 px-6 py-2 sm:px-8 sm:py-3 rounded-full border-2 border-[#ffa700] bg-transparent text-[#ffa700] hover:bg-[#ffa700] hover:text-white transition-all duration-300 group">
+                      <span className="[font-family:'Manrope',Helvetica] font-semibold text-base sm:text-lg tracking-wide">
                         {t('buttons.launchApp')}
                       </span>
-                      <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
                     </a>

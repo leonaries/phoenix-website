@@ -88,9 +88,7 @@ export default async function Footer({ lang }: FooterProps) {
   const { t } = await initI18nServer(lang);
 
   return (
-    <footer className="w-full relative overflow-hidden bg-[#0a1628]">
-      {/* Top border line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+    <footer className="w-full relative overflow-hidden bg-phoenix">
 
       {/* Content Container */}
       <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
@@ -101,8 +99,8 @@ export default async function Footer({ lang }: FooterProps) {
 
             {/* Left Column - Logo & Socials */}
             <div className="space-y-8 flex flex-col justify-between">
-              {/* Logo */}
-              <div className="flex items-center gap-3">
+              {/* Logo - Hidden on mobile, shown on desktop */}
+              <div className="hidden lg:flex items-center gap-3">
                 <img
                   className="w-10 h-10"
                   alt="Phoenix Logo"
@@ -164,7 +162,7 @@ export default async function Footer({ lang }: FooterProps) {
 
           {/* Bottom - Copyright */}
           <div className="pt-8 border-t border-white/10">
-            <p className="[font-family:'Manrope',Helvetica] font-normal text-white/50 text-sm text-center lg:text-left">
+            <p className="[font-family:'Manrope',Helvetica] font-normal text-white text-sm text-left lg:text-left">
               © 2025 Phoenix. All rights reserved.
             </p>
           </div>
