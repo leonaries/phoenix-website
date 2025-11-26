@@ -388,75 +388,72 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
           </div>
 
           {/* Mobile Layout */}
-          <div className="lg:hidden space-y-12">
+          <div className="relative lg:hidden space-y-12 h-[1400px] top-[700px]">
             {/* Central Earth with Phoenix Logo */}
-            <div className="flex justify-center relative">
+            <div className="flex justify-center rotate-90 ">
               {/* Phoenix Logo Above Earth */}
-              <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-16 z-20">
+              <div className="absolute left-0 top-0 transform -translate-y-8 z-20 rotate-[-90deg]">
                 <img
                   src="/img/vector.svg"
                   alt="Phoenix Logo"
-                  width={80}
-                  height={80}
-                  className="opacity-90"
+                  width={194}
+                  height={194}
                 />
               </div>
 
-              <div className="relative w-[280px] h-[280px]">
+              <div className="absolute w-[1000px] h-[380px] transform -translate-y-40">
                 <img
                   src="/img/earth-ring.png"
                   alt="Phoenix Ring"
-                  width={280}
-                  height={280}
                   className="absolute inset-0 animate-pulse"
-                  style={{ animationDuration: '3s' }}
+                  style={{ animationDuration: '3s',width: '1000px', height: '380px', maxWidth: 'none' }}
                 />
-                <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px]">
-                  <img
-                    src="/img/earth.png"
-                    alt="Earth"
-                    width={200}
-                    height={200}
-                    className="rounded-full"
-                  />
-                </div>
+              </div>
+              <div className="absolute left-1/2 top-0 transform -translate-x-[53%] -translate-y-[50%] z-1">
+                <img
+                  src="/img/circle_group.png"
+                  alt="Circle Group"
+                  style={{ width: '1400px', height: '400px', maxWidth: 'none' }}
+                />
               </div>
             </div>
 
             {/* Feature Cards */}
-            <div className="space-y-8">
-              <div className="text-center">
-                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-3">
-                  {t('governance.community.proposals.title', 'Proposals & Voting')}
-                </h3>
-                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-base">
-                  {t('governance.community.proposals.description', 'Submit and vote to shape the ecosystem')}
-                </p>
-              </div>
-
-              <div className="text-center">
-                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-3">
-                  {t('governance.community.incentives.title', 'Incentives & Recognition')}
-                </h3>
-                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-base">
-                  {t('governance.community.incentives.description', 'Badges, leaderboards, and rewards for contributors')}
-                </p>
-              </div>
-
-              <div className="text-center">
-                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-3">
+            <div className="space-y-8 absolute -top-[650px]">
+               <div className="text-left w-[62%] relative top-[70px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-sm mb-3">
                   {t('governance.community.quests.title', 'Quests & Points')}
                 </h3>
-                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-base">
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-xs">
                   {t('governance.community.quests.description', 'Earn points from activities, redeemable for Phoenix tokens')}
                 </p>
               </div>
 
-              <div className="text-center">
-                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-3">
+              <div className="text-left w-[62%] relative top-[160px] left-[100px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-sm mb-3">
+                  {t('governance.community.proposals.title', 'Proposals & Voting')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-xs">
+                  {t('governance.community.proposals.description', 'Submit and vote to shape the ecosystem')}
+                </p>
+              </div>
+
+              <div className="text-left w-[62%] relative top-[500px] left-[80px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-sm mb-3">
+                  {t('governance.community.incentives.title', 'Incentives & Recognition')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-xs">
+                  {t('governance.community.incentives.description', 'Badges, leaderboards, and rewards for contributors')}
+                </p>
+              </div>
+
+             
+
+              <div className="text-left w-[62%] relative top-[610px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-sm mb-3">
                   {t('governance.community.cobuilding.title', 'Co-Building & Growth')}
                 </h3>
-                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-base">
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-xs">
                   {t('governance.community.cobuilding.description', 'Events and partnerships expand Phoenix globally')}
                 </p>
               </div>
