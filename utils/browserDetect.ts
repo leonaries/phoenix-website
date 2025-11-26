@@ -67,6 +67,28 @@ export function isMobileSafari(): boolean {
 }
 
 /**
+ * 检测是否为安卓设备
+ */
+export function isAndroid(): boolean {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
+  const userAgent = window.navigator.userAgent;
+  const result = /Android/i.test(userAgent);
+
+  // 开发模式下输出检测结果
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[isAndroid] Detection:', {
+      userAgent,
+      result
+    });
+  }
+
+  return result;
+}
+
+/**
  * 检测浏览器是否支持 WebM 视频格式
  * 支持 VP8 或 VP9 编解码器都视为支持
  */

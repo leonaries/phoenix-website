@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import { isMobileSafari } from '@/utils/browserDetect';
+import { isMobile } from '@/utils/browserDetect';
 import { LazyFrameSequencePlayer } from './index';
 import { VERSIONED_ASSETS } from '@/utils/assetVersion';
 
@@ -11,21 +11,21 @@ interface PhoenixMobileLogoProps {
 
 /**
  * 移动端燃烧的凤凰 Logo（无缝循环播放）
- * - iOS Safari: 使用帧序列播放（WebP frames）配合懒加载
- * - 其他浏览器: 使用 WebM 视频（更小的文件大小）
+ * - 所有移动端设备: 统一使用帧序列播放（解决移动端浏览器视频兼容性问题）
+ * - 桌面端浏览器: 使用 WebM 视频（更小的文件大小）
  */
 export default function PhoenixMobileLogo({ show }: PhoenixMobileLogoProps) {
-  const [useSafariFrames, setUseSafariFrames] = useState(false);
+  const [useFrames, setUseFrames] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const playerRef = useRef<any>(null);
 
   useEffect(() => {
-    // 检测是否为 iOS Safari（仅在客户端执行）
-    const shouldUseSafariFrames = isMobileSafari();
-    setUseSafariFrames(shouldUseSafariFrames);
+    // 所有移动端设备统一使用帧序列（解决视频兼容性问题）
+    const shouldUseFrames = isMobile();
+    setUseFrames(shouldUseFrames);
 
     if (process.env.NODE_ENV === 'development') {
-      console.log(`[PhoenixMobileLogo] iOS Safari detected: ${shouldUseSafariFrames}`);
+      console.log(`[PhoenixMobileLogo] Mobile detected: ${shouldUseFrames}, UseFrames: ${shouldUseFrames}`);
     }
   }, []);
 
@@ -44,8 +44,8 @@ export default function PhoenixMobileLogo({ show }: PhoenixMobileLogoProps) {
     playerRef.current?.play();
   };
 
-  // iOS Safari: 使用帧序列播放器（懒加载优化）
-  if (useSafariFrames) {
+  // 所有移动端设备: 使用帧序列播放器（懒加载优化）
+  if (useFrames) {
     return (
       <div className="w-full h-full flex items-center justify-center relative">
         <LazyFrameSequencePlayer
@@ -75,7 +75,7 @@ export default function PhoenixMobileLogo({ show }: PhoenixMobileLogoProps) {
     );
   }
 
-  // 其他移动浏览器: 使用 WebM 视频
+  // 桌面端浏览器: 使用 WebM 视频（理论上移动端不会走到这里，因为都会被 useFrames 拦截）
   return (
     <div className="w-full h-full flex items-center justify-center">
       <video
