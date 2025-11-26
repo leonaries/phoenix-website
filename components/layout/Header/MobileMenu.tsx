@@ -109,7 +109,7 @@ export function MobileMenu({ lang, translations }: MobileMenuProps) {
 
       {/* Full Screen Mobile Menu Panel */}
       <div
-        className={`lg:hidden fixed inset-0 z-[9999] transition-all duration-300 ease-in-out ${
+        className={`lg:hidden fixed inset-0 z-[9999] transition-all duration-500 ease-in-out ${
           isOpen
             ? 'opacity-100 visible'
             : 'opacity-0 invisible pointer-events-none'
@@ -118,7 +118,9 @@ export function MobileMenu({ lang, translations }: MobileMenuProps) {
           background: 'linear-gradient(180deg, #0B1A2E 0%, #081528 100%)'
         }}
       >
-        <div className="flex flex-col w-screen h-screen fixed inset-0 bg-[#081122]">
+        <div className={`flex flex-col h-full bg-[#081122] w-screen h-screen fixed left-0 top-0 transition-transform duration-500 ease-out ${
+          isOpen ? 'translate-y-0' : '-translate-y-full'
+        }`}>
           {/* Header with Logo and Close Button */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
             <img
@@ -136,10 +138,20 @@ export function MobileMenu({ lang, translations }: MobileMenuProps) {
           </div>
 
           {/* Navigation Links - Centered vertically */}
-          <div className="flex-1 flex flex-col justify-center px-6 py-8">
+          <div className="flex-1 flex flex-col justify-between px-6">
             <nav className="space-y-0">
               {navigationItems.map((item, index) => (
-                <div key={index}>
+                <div
+                  key={index}
+                  className={`transition-all duration-500 ease-out ${
+                    isOpen
+                      ? 'opacity-100 translate-x-0'
+                      : 'opacity-0 -translate-x-8'
+                  }`}
+                  style={{
+                    transitionDelay: isOpen ? `${150 + index * 80}ms` : '0ms'
+                  }}
+                >
                   <a
                     href={`/${lang}${item.href}`}
                     onClick={() => setIsOpen(false)}
@@ -163,7 +175,12 @@ export function MobileMenu({ lang, translations }: MobileMenuProps) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
-              className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-[25px] bg-gradient-to-r from-[#ffa700] to-[#d03d0a] hover:shadow-[0_0_20px_rgba(255,167,0,0.4)] hover:scale-105 transition-all duration-300"
+              className={`w-full flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-[25px] bg-gradient-to-r from-[#ffa700] to-[#d03d0a] hover:shadow-[0_0_20px_rgba(255,167,0,0.4)] hover:scale-105 transition-all duration-500 ${
+                isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{
+                transitionDelay: isOpen ? '600ms' : '0ms'
+              }}
             >
               <span className="[font-family:'Montserrat',Helvetica] font-semibold text-white text-base tracking-[0] leading-[normal] whitespace-nowrap">
                 {translations['buttons.launchApp'] || 'Launch App'}
@@ -171,14 +188,21 @@ export function MobileMenu({ lang, translations }: MobileMenuProps) {
             </a>
 
             {/* Social Links */}
-            <div className="flex items-center justify-center gap-5 pt-2">
+            <div
+              className={`flex items-center justify-center gap-5 pt-2 transition-all duration-500 ${
+                isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+              style={{
+                transitionDelay: isOpen ? '700ms' : '0ms'
+              }}
+            >
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/70 hover:text-[#fc9e01] transition-colors duration-200"
+                  className="text-white hover:text-[#fc9e01] transition-all duration-200 hover:scale-110"
                   aria-label={social.name}
                 >
                   {social.svg}

@@ -74,6 +74,7 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
           glowOpacity="/8"
           backgroundPositionDesktop="center"
           backgroundPositionMobile="top"
+          showGradient={false}
         />
 
         {/* Section Header */}
@@ -318,6 +319,7 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
         glowOpacity="/8"
         backgroundPositionDesktop="center"
         backgroundPositionMobile="top"
+        showGradient={false}
       />
       </Web3SectionAnimator>
     </section>
