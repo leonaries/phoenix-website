@@ -18,8 +18,24 @@
     background-color: #081122;
   }
 
+  /* Ensure dark background during page transitions */
+  html {
+    background-color: #081122 !important;
+  }
+
+  body {
+    background-color: #081122 !important;
+  }
+
+  /* Next.js root container */
   #__next {
     min-height: 100vh;
+    background-color: #081122;
+  }
+
+  /* Prevent white flash during route transitions */
+  main {
+    background-color: #081122;
   }
 }
 

@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { navigationItems, DAPP_URL } from '@/data/siteData';
 import { LanguageSelector } from './LanguageSelector';
 import { MenuIcon, CloseIcon } from '@/components/ui/Icons';
@@ -140,30 +141,64 @@ export function MobileMenu({ lang, translations }: MobileMenuProps) {
           {/* Navigation Links - Centered vertically */}
           <div className="flex-1 flex flex-col justify-between px-6">
             <nav className="space-y-0">
-              {navigationItems.map((item, index) => (
-                <div
-                  key={index}
-                  className={`transition-all duration-500 ease-out ${
-                    isOpen
-                      ? 'opacity-100 translate-x-0'
-                      : 'opacity-0 -translate-x-8'
-                  }`}
-                  style={{
-                    transitionDelay: isOpen ? `${150 + index * 80}ms` : '0ms'
-                  }}
-                >
-                  <a
-                    href={`/${lang}${item.href}`}
-                    onClick={() => setIsOpen(false)}
-                    className="block py-6 text-white hover:text-[#fc9e01] transition-colors duration-200 [font-family:'Manrope',Helvetica] font-semibold text-2xl"
+              {navigationItems.map((item, index) => {
+                const isDocs = item.label === 'docs';
+                const href = isDocs ? 'https://docs.phnx.finance/' : `/${lang}${item.href}`;
+
+                if (isDocs) {
+                  return (
+                    <div
+                      key={index}
+                      className={`transition-all duration-500 ease-out ${
+                        isOpen
+                          ? 'opacity-100 translate-x-0'
+                          : 'opacity-0 -translate-x-8'
+                      }`}
+                      style={{
+                        transitionDelay: isOpen ? `${150 + index * 80}ms` : '0ms'
+                      }}
+                    >
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setIsOpen(false)}
+                        className="block py-6 text-white hover:text-[#fc9e01] transition-colors duration-200 [font-family:'Manrope',Helvetica] font-semibold text-2xl"
+                      >
+                        {translations[`nav.${item.label.toLowerCase()}`] || item.label}
+                      </a>
+                      {index < navigationItems.length - 1 && (
+                        <div className="h-px bg-white/10"></div>
+                      )}
+                    </div>
+                  );
+                }
+
+                return (
+                  <div
+                    key={index}
+                    className={`transition-all duration-500 ease-out ${
+                      isOpen
+                        ? 'opacity-100 translate-x-0'
+                        : 'opacity-0 -translate-x-8'
+                    }`}
+                    style={{
+                      transitionDelay: isOpen ? `${150 + index * 80}ms` : '0ms'
+                    }}
                   >
-                    {translations[`nav.${item.label.toLowerCase()}`] || item.label}
-                  </a>
-                  {index < navigationItems.length - 1 && (
-                    <div className="h-px bg-white/10"></div>
-                  )}
-                </div>
-              ))}
+                    <Link
+                      href={href}
+                      onClick={() => setIsOpen(false)}
+                      className="block py-6 text-white hover:text-[#fc9e01] transition-colors duration-200 [font-family:'Manrope',Helvetica] font-semibold text-2xl"
+                    >
+                      {translations[`nav.${item.label.toLowerCase()}`] || item.label}
+                    </Link>
+                    {index < navigationItems.length - 1 && (
+                      <div className="h-px bg-white/10"></div>
+                    )}
+                  </div>
+                );
+              })}
             </nav>
           </div>
 

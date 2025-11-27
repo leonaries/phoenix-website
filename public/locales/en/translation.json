@@ -110,22 +110,38 @@
       "title": "Phoenix puts community at its core, empowering members to engage through:",
       "subtitle": "Phoenix empowers members to engage, contribute, and co-build the future of DeFi through:",
       "imageAlt": "Community engagement visualization",
+      "proposals": {
+        "title": "Proposals & Voting",
+        "description": "Submit and vote to shape the ecosystem"
+      },
+      "quests": {
+        "title": "Quests & Points",
+        "description": "Earn points from activities, redeemable for Phoenix tokens"
+      },
+      "incentives": {
+        "title": "Incentives & Recognition",
+        "description": "Badges, leaderboards, and rewards for contributors"
+      },
+      "cobuilding": {
+        "title": "Co-Building & Growth",
+        "description": "Events and partnerships expand Phoenix globally"
+      },
       "engagement": {
         "proposals": {
           "title": "Proposals & Voting",
-          "description": "Submit governance proposals and participate in community voting to shape the Phoenix ecosystem and protocol direction"
+          "description": "Submit and vote to shape the ecosystem"
         },
         "quests": {
           "title": "Quests & Points",
-          "description": "Complete community quests and activities to earn Phoenix Points, redeemable for tokens and exclusive ecosystem rewards"
+          "description": "Earn points from activities, redeemable for Phoenix tokens"
         },
         "incentives": {
-          "title": "Incentives & Recognition", 
-          "description": "Earn badges, climb leaderboards, and receive rewards for meaningful contributions to the Phoenix community"
+          "title": "Incentives & Recognition",
+          "description": "Badges, leaderboards, and rewards for contributors"
         },
         "cobuilding": {
           "title": "Co-Building & Growth",
-          "description": "Join collaborative events, partnerships, and initiatives that expand Phoenix globally and drive ecosystem adoption"
+          "description": "Events and partnerships expand Phoenix globally"
         }
       }
     },

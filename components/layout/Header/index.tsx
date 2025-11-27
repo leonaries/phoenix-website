@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { initI18nServer } from '@/lib/i18nserver';
 import { navigationItems, DAPP_URL } from '@/data/siteData';
 import { LanguageSelector } from './LanguageSelector';
@@ -39,16 +40,31 @@ export default async function Header({ lang }: HeaderProps) {
             {navigationItems.map((item, index) => {
               const isDocs = item.label === 'docs';
               const href = isDocs ? 'https://docs.phnx.finance/' : `/${lang}${item.href}`;
+
+              if (isDocs) {
+                return (
+                  <a
+                    key={index}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="[font-family:'Montserrat',Helvetica] font-normal text-white text-sm lg:text-base tracking-[0] leading-[normal] hover:text-[#fc9e01] transition-colors duration-300 relative group"
+                  >
+                    {i18n.t(`nav.${item.label}`)}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ffa700] to-[#d03d0a] group-hover:w-full transition-all duration-300"></span>
+                  </a>
+                );
+              }
+
               return (
-                <a
+                <Link
                   key={index}
                   href={href}
-                  {...(isDocs ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   className="[font-family:'Montserrat',Helvetica] font-normal text-white text-sm lg:text-base tracking-[0] leading-[normal] hover:text-[#fc9e01] transition-colors duration-300 relative group"
                 >
                   {i18n.t(`nav.${item.label}`)}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#ffa700] to-[#d03d0a] group-hover:w-full transition-all duration-300"></span>
-                </a>
+                </Link>
               );
             })}
           </nav>
