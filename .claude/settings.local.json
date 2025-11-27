@@ -9,7 +9,8 @@
       "Bash(lsof:*)",
       "Bash(xargs kill:*)",
       "Bash(find:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(identify:*)"
     ],
     "deny": [],
     "ask": []

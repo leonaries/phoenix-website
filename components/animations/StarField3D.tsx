@@ -410,26 +410,29 @@ export default function StarField3D({ className }: StarField3DProps) {
   useEffect(() => {
     console.log('StarField3D useEffect triggered, isMobile:', isMobile, 'useWorker:', useWorker);
 
-    // 初始化 Worker（如果启用）
-    if (useWorker) {
-      const worker = initWorker();
-      if (worker) {
-        workerRef.current = worker;
-      } else {
-        setUseWorker(false); // 降级到主线程
+    // 添加一个小延迟,确保 DOM 已经完全准备好
+    const initTimer = setTimeout(() => {
+      // 初始化 Worker（如果启用）
+      if (useWorker) {
+        const worker = initWorker();
+        if (worker) {
+          workerRef.current = worker;
+        } else {
+          setUseWorker(false); // 降级到主线程
+        }
       }
-    }
 
-    const threeJS = initThreeJS();
-    if (!threeJS) {
-      console.error('Failed to initialize Three.js');
-      return;
-    }
+      const threeJS = initThreeJS();
+      if (!threeJS) {
+        console.error('Failed to initialize Three.js');
+        return;
+      }
 
-    setIsInitialized(true);
+      setIsInitialized(true);
 
-    // 启动动画
-    startAnimation();
+      // 启动动画
+      startAnimation();
+    }, 100); // 100ms 延迟,确保 DOM 准备就绪
 
     // 添加事件监听
     window.addEventListener('resize', handleResize);
@@ -438,10 +441,15 @@ export default function StarField3D({ className }: StarField3DProps) {
     // 清理函数
     return () => {
       console.log('StarField3D cleanup');
+
+      // 清除初始化定时器
+      clearTimeout(initTimer);
+
       setIsInitialized(false);
 
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
+        animationRef.current = undefined;
       }
 
       // 终止 Worker
@@ -462,11 +470,17 @@ export default function StarField3D({ className }: StarField3DProps) {
       if (particlesRef.current) {
         particlesRef.current.geometry.dispose();
         (particlesRef.current.material as THREE.Material).dispose();
+        particlesRef.current = undefined;
       }
 
       if (rendererRef.current) {
         rendererRef.current.dispose();
+        rendererRef.current = undefined;
       }
+
+      // 清理场景和相机引用
+      sceneRef.current = undefined;
+      cameraRef.current = undefined;
     };
   }, [isMobile, useWorker]);
 
