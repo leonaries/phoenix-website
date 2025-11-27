@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import ServiceWorkerRegister from '@/components/ServiceWorkerRegister'
+import { YandexMetrika } from '@/components/Analytics'
 
 type Props = {
   children: ReactNode
@@ -16,6 +17,10 @@ export default async function LangLayout({ children, params }: Props) {
 
   return (
     <html lang={lang} dir={dir} suppressHydrationWarning>
+      <head>
+        {/* Yandex.Metrika 数据分析 */}
+        <YandexMetrika counterId="105534931" />
+      </head>
       <body className="phoenix-bg" suppressHydrationWarning>
         {/* Service Worker 注册（仅生产环境） */}
         <ServiceWorkerRegister />
