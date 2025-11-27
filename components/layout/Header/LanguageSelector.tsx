@@ -46,7 +46,7 @@ export function LanguageSelector() {
       >
         <GlobeIcon className="w-5 h-5" />
         <span className="text-sm font-medium">
-          {languages.find((lang) => lang.code === currentLang)?.code.toUpperCase()}
+          {currentLang === 'zh' ? '中文' : languages.find((lang) => lang.code === currentLang)?.code.toUpperCase()}
         </span>
         <ChevronDownIcon className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
       </button>

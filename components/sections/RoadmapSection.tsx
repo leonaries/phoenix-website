@@ -2,6 +2,8 @@ import React from 'react';
 import { initI18nServer } from '@/lib/i18nserver';
 import SectionBackground from './SectionBackground';
 import ReversedSectionBackground from './ReversedSectionBackground';
+import Web3SectionAnimator from '@/components/animations/Web3SectionAnimator';
+
 interface RoadmapSectionProps {
   lang: string;
 }
@@ -63,23 +65,27 @@ const roadmapPhases = [
 
 export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
   const { t } = await initI18nServer(lang);
-  
+
   return (
     <section id="roadmap" className="w-full relative overflow-hidden">
-      <SectionBackground 
-        glowSize={{ width: '800px', height: '400px' }}
-        glowOpacity="/8"
-      />
-      
-      {/* Section Header */}
-      <div className="text-center pt-12 sm:pt-14 lg:pt-16 pb-6 sm:pb-8 lg:pb-10 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-6xl mx-auto space-y-3 sm:space-y-4 animate-fadeInUp">
-          {/* Title */}
-          <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl text-left tracking-tight leading-tight translate-y-12">
-            {t('roadmap.title')}
-          </h2>
-          
-        </div>
+      <Web3SectionAnimator animationType="hologram" className="w-full">
+        <SectionBackground
+          glowSize={{ width: '800px', height: '400px' }}
+          glowOpacity="/8"
+          backgroundPositionDesktop="center"
+          backgroundPositionMobile="top"
+          showGradient={false}
+        />
+
+        {/* Section Header */}
+        <div className="text-center pt-12 sm:pt-14 lg:pt-16 pb-6 sm:pb-8 lg:pb-10 px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-6xl mx-auto space-y-3 sm:space-y-4">
+            {/* Title */}
+            <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl lg:text-left tracking-tight leading-tight lg:translate-y-12">
+              {t('roadmap.title')}
+            </h2>
+
+          </div>
       </div>
 
       {/* Desktop/Tablet Roadmap with Original Curve */}
@@ -197,47 +203,107 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
         </div>
       </div>
 
-      {/* Mobile Roadmap - Vertical Timeline */}
-      <div className="lg:hidden px-4 sm:px-6 pb-16">
-        <div className="relative max-w-2xl mx-auto">
-          {/* Vertical Timeline Line */}
-          <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-[#ffa700] via-[#00d4ff] to-[#d03d0a] rounded-full"></div>
-          
-          <div className="space-y-12">
+      {/* Mobile Roadmap - Vertical Timeline with Grid Background */}
+      <div className="lg:hidden relative pb-16">
+        {/* Mobile Grid Background - Similar to PC */}
+        <div className="absolute inset-0 opacity-30 pointer-events-none">
+          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="mobile-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#mobile-grid)" />
+          </svg>
+        </div>
+
+        <div className="relative max-w-2xl mx-auto px-4 sm:px-6">
+          {/* Vertical Timeline Line - Gradient from #FFA700 to transparent #D03D0A */}
+          <div
+            className="absolute left-8 sm:left-8 top-[20px] bottom-0 w-1"
+            style={{
+              background: 'linear-gradient(to bottom, #FFA700 0%, rgba(208, 61, 10, 0) 100%)'
+            }}
+          ></div>
+
+          <div className="space-y-12 sm:space-y-16">
             {roadmapPhases.map((phase, index) => (
               <div
                 key={phase.id}
-                className={`relative animate-fadeInUp pl-20`}
+                className={`relative animate-fadeInUp`}
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
-                {/* Timeline Dot */}
-                <div className="absolute left-6 top-8 transform -translate-x-1/2 z-20">
-                  <div className={`w-6 h-6 rounded-full border-2 border-white`} style={{ backgroundColor: phase.color }}>
-                    <div className="absolute inset-0 rounded-full animate-pulse" style={{ backgroundColor: phase.color, opacity: 0.3 }}></div>
+                {/* Timeline Dot with Phase Info */}
+                <div className="flex items-start gap-4 mb-4">
+                  {/* Timeline Dot - Yellow/Orange unified */}
+                  <div className="relative flex-shrink-0">
+                    {/* Outer glow circle */}
+                    <div
+                      className="absolute inset-0 rounded-full blur-lg animate-pulse"
+                      style={{
+                        width: '36px',
+                        height: '36px',
+                        backgroundColor: '#ffa700',
+                        opacity: 0.4,
+                        transform: 'translate(-50%, -50%)',
+                        left: '50%',
+                        top: '50%'
+                      }}
+                    ></div>
+
+                    {/* Outer white circle */}
+                    <div
+                      className="relative rounded-full flex items-center justify-center z-10"
+                      style={{
+                        width: '32px',
+                        height: '32px',
+                        backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                        boxShadow: '0 0 20px rgba(255, 167, 0, 0.3)',
+                        marginLeft: '6px'
+                      }}
+                    >
+                      {/* Inner glowing core */}
+                      <div
+                        className="rounded-full animate-pulse"
+                        style={{
+                          width: '12px',
+                          height: '12px',
+                          backgroundColor: '#ffa700',
+                          boxShadow: '0 0 12px #ffa700'
+                        }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  {/* Phase Label & Quarter - Next to circle */}
+                  <div className="pt-1">
+                    <span
+                      className="[font-family:'Manrope',Helvetica] font-extrabold text-lg tracking-wide block"
+                      style={{ color: '#ffa700' }}
+                    >
+                      {t(`roadmap.phases.${phase.id}.phase`)}
+                    </span>
+                    <span className="[font-family:'Manrope',Helvetica] font-bold text-white text-2xl block mt-1">
+                      {t(`roadmap.phases.${phase.id}.quarter`)}
+                    </span>
                   </div>
                 </div>
 
-                {/* Phase Card */}
-                <div className="bg-[#1a2332]/80 border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
-                  {/* Content */}
-                  <div className="space-y-3">
-                    {/* Phase & Quarter */}
-                    <div className="flex items-center justify-between">
-                      <span className="[font-family:'Manrope',Helvetica] font-extrabold text-lg tracking-wide" style={{ color: phase.color }}>
-                        {t(`roadmap.phases.${phase.id}.phase`)}
-                      </span>
-                      <span className="[font-family:'Manrope',Helvetica] font-bold text-white/80 text-sm">
-                        {t(`roadmap.phases.${phase.id}.quarter`)}
-                      </span>
-                    </div>
-                    
-                    {/* Title */}
-                    <h3 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-xl tracking-tight leading-tight">
-                      {t(`roadmap.phases.${phase.id}.title`)}
-                    </h3>
-                    
+                {/* Phase Card - PC style */}
+                <div className="ml-12">
+                  <div
+                    className="backdrop-blur-sm p-5"
+                    style={{
+                      background: `
+                        linear-gradient(90deg, #081122 0%, #1C283F 100%) padding-box,
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(153, 153, 153, 0) 100%) border-box
+                      `,
+                      border: '2px solid transparent',
+                      borderRadius: '24px'
+                    }}
+                  >
                     {/* Description */}
-                    <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-sm leading-relaxed">
+                    <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-base leading-relaxed">
                       {t(`roadmap.phases.${phase.id}.description`)}
                     </p>
                   </div>
@@ -251,7 +317,11 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
       <ReversedSectionBackground
         glowSize={{ width: '800px', height: '400px' }}
         glowOpacity="/8"
+        backgroundPositionDesktop="center"
+        backgroundPositionMobile="top"
+        showGradient={false}
       />
+      </Web3SectionAnimator>
     </section>
   );
 }

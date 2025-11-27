@@ -1,5 +1,6 @@
 import React from 'react';
 import { initI18nServer } from '@/lib/i18nserver';
+import Web3SectionAnimator from '@/components/animations/Web3SectionAnimator';
 
 interface FeaturesSectionProps {
   lang: string;
@@ -52,18 +53,19 @@ const featuresData = [
 
 export default async function FeaturesSection({ lang }: FeaturesSectionProps) {
   const { t } = await initI18nServer(lang);
-  
+
   return (
     <section id="features" className="w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-14 lg:py-16 relative overflow-hidden">
+      <Web3SectionAnimator animationType="glitch" className="w-full">
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-8 sm:mb-10 lg:mb-12 space-y-3 sm:space-y-4 animate-fadeInUp">
-          {/* Title */}
-          <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl text-center tracking-tight leading-tight max-w-3xl mx-auto">
-            {t('features.title')}
-          </h2>
-        </div>
+        <div className="max-w-6xl mx-auto relative z-10">
+          {/* Section Header */}
+          <div className="text-center mb-8 sm:mb-10 lg:mb-12 space-y-3 sm:space-y-4">
+            {/* Title */}
+            <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl text-center tracking-tight leading-tight max-w-3xl mx-auto">
+              {t('features.title')}
+            </h2>
+          </div>
 
         {/* Features Grid - New Layout */}
         <div className="hidden lg:block">
@@ -451,7 +453,8 @@ export default async function FeaturesSection({ lang }: FeaturesSectionProps) {
             ))}
           </div>
         </div>
-      </div>
+        </div>
+      </Web3SectionAnimator>
     </section>
   );
 }

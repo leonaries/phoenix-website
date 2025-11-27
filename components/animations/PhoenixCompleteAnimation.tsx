@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import FrameSequencePlayer, { FrameSequencePlayerRef } from './FrameSequencePlayer';
+import LazyFrameSequencePlayer, { LazyFrameSequencePlayerRef } from './LazyFrameSequencePlayer';
 import { getPreferredAnimationFormat } from '@/utils/browserDetect';
 import { VERSIONED_ASSETS } from '@/utils/assetVersion';
 
@@ -14,13 +14,14 @@ interface PhoenixCompleteAnimationProps {
  * 凤凰完整动画
  *
  * 浏览器兼容性处理：
- * - Safari浏览器：使用WebP帧序列（34MB，135帧）
+ * - Safari浏览器：使用WebP帧序列（34MB，135帧）- 使用懒加载优化
  * - 其他浏览器：使用WebM视频（更小的文件大小）
  *
- * WebP帧序列版本：
+ * WebP帧序列版本（懒加载优化）：
  * - 文件夹：public/frames/total_webp_frames（135帧，30fps，WebP优化版）
  * - 命名格式：1_6000.webp 到 1_6134.webp
  * - 优化：从PNG（196MB）转换为WebP（34MB），节省162MB（83%）
+ * - 懒加载：首批加载30帧，边播放边加载，首帧时间从3-8s降至0.5-1.5s
  */
 export default function PhoenixCompleteAnimation({ onComplete }: PhoenixCompleteAnimationProps) {
   const [mounted, setMounted] = useState(false);
@@ -28,7 +29,8 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
   const [isLoaded, setIsLoaded] = useState(false);
   const [isLooping, setIsLooping] = useState(false);
   const [animationType, setAnimationType] = useState<'frames' | 'webm'>('frames');
-  const playerRef = useRef<FrameSequencePlayerRef>(null);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const playerRef = useRef<LazyFrameSequencePlayerRef>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -101,6 +103,12 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
     onComplete?.();
   };
 
+  // 加载进度更新
+  const handleLoadingProgress = (progress: number, loadedCount: number) => {
+    setLoadingProgress(progress);
+    console.log(`[PhoenixCompleteAnimation] Loading progress: ${progress}% (${loadedCount} frames)`);
+  };
+
   // 组件卸载时清理
   useEffect(() => {
     return () => {
@@ -124,13 +132,26 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
       {!isLoaded && (
         <div className="absolute inset-0 bg-[#081122] flex items-center justify-center">
           <div className="text-center">
-            <div className="text-[#fc9e01] text-2xl font-bold mb-4">Loading...</div>
+            <div className="text-[#fc9e01] text-2xl font-bold mb-4">
+              Loading... {animationType === 'frames' && `${loadingProgress}%`}
+            </div>
             <div className="w-64 h-2 bg-white/10 rounded-full overflow-hidden">
-              <motion.div
-                className="h-full bg-gradient-to-r from-[#ffa700] to-[#d03d0a]"
-                animate={{ width: ['0%', '100%'] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              />
+              {animationType === 'frames' ? (
+                // 帧序列：显示实际加载进度
+                <motion.div
+                  className="h-full bg-gradient-to-r from-[#ffa700] to-[#d03d0a]"
+                  initial={{ width: '0%' }}
+                  animate={{ width: `${loadingProgress}%` }}
+                  transition={{ duration: 0.3 }}
+                />
+              ) : (
+                // WebM视频：显示动画进度条
+                <motion.div
+                  className="h-full bg-gradient-to-r from-[#ffa700] to-[#d03d0a]"
+                  animate={{ width: ['0%', '100%'] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -160,8 +181,8 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
         }}
       >
         {animationType === 'frames' ? (
-          // Safari或不支持WebM的浏览器：使用帧序列
-          <FrameSequencePlayer
+          // Safari或不支持WebM的浏览器：使用懒加载帧序列
+          <LazyFrameSequencePlayer
             ref={playerRef}
             frameFolder={VERSIONED_ASSETS.FRAMES_TOTAL}
             totalFrames={135}
@@ -172,6 +193,10 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
             onLoaded={handleAnimationLoaded}
             onTimeUpdate={handleTimeUpdate}
             onEnded={handleAnimationEnded}
+            onLoadingProgress={handleLoadingProgress}
+            batchSize={30}
+            bufferAhead={30}
+            bufferBehind={20}
           />
         ) : (
           // 其他浏览器：使用WebM视频
@@ -204,7 +229,11 @@ export default function PhoenixCompleteAnimation({ onComplete }: PhoenixComplete
           Status: {isLoaded ? (isLooping ? 'Looping Last 1s' : isPlaying ? 'Playing' : 'Complete') : 'Loading'}
           <br />
           {animationType === 'frames' && playerRef.current && (
-            <>Frame: {playerRef.current.getCurrentFrame()} / 135</>
+            <>
+              Frame: {playerRef.current.getCurrentFrame()} / 135
+              <br />
+              Loaded: {playerRef.current.getLoadedFramesCount()} frames ({playerRef.current.getLoadingProgress()}%)
+            </>
           )}
           {animationType === 'webm' && videoRef.current && (
             <>Time: {videoRef.current.currentTime.toFixed(1)}s / {videoRef.current.duration?.toFixed(1)}s</>

@@ -14,9 +14,9 @@ export default async function ServerHeroSection({ lang }: ServerHeroSectionProps
   const i18n = await initI18nServer(lang);
 
   return (
-    <section className="w-full px-8 py-24 lg:py-48 lg:pb-64 relative overflow-hidden">
+    <section className="w-full px-8 pt-24 lg:py-48 lg:pb-64 relative overflow-hidden">
       {/* 3D 星空粒子效果 - 限制在Hero Section内 */}
-      <StarField3D />
+      <StarField3D key={`starfield-${lang}`} />
 
       <HeroAnimationWrapper>
       {/* 燃烧 Logo - 桌面端全屏居中（仅桌面端显示，动画完成后） */}
@@ -98,7 +98,7 @@ export default async function ServerHeroSection({ lang }: ServerHeroSectionProps
               {i18n.t('hero.description').split('Phoenix').map((part, index, array) =>
                 index === array.length - 1 ? part : (
                   <React.Fragment key={index}>
-                    {part}<span className="text-white font-medium">Phoenix</span>
+                    {part}<span className="font-medium">Phoenix</span>
                   </React.Fragment>
                 )
               )}

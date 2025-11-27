@@ -1,5 +1,6 @@
 import React from 'react';
 import { initI18nServer } from '@/lib/i18nserver';
+import Web3SectionAnimator from '@/components/animations/Web3SectionAnimator';
 
 interface PartnersSectionProps {
   lang: string;
@@ -68,67 +69,43 @@ const partnersData = [
 
 export default async function PartnersSection({ lang }: PartnersSectionProps) {
   const { t } = await initI18nServer(lang);
-  
+
   return (
     <section id="partners" className="w-full relative overflow-hidden">
+      <Web3SectionAnimator animationType="quantum" className="w-full">
       
       {/* Content Container */}
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
         <div className="max-w-7xl mx-auto">
           
-          {/* Section Header */}
-          <div className="text-center mb-16 sm:mb-20 lg:mb-24">
-            <div className="space-y-4 sm:space-y-6 animate-fadeInUp">
-              {/* Badge */}
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-[#fc9e01]/20 to-[#d03d0a]/20 border border-[#fc9e01]/30 backdrop-blur-sm">
-                <span className="[font-family:'Manrope',Helvetica] font-semibold text-[#fc9e01] text-sm sm:text-base tracking-wide">
-                  {t('partners.badge')}
-                </span>
-              </div>
-              
-              {/* Title */}
-              <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl text-center tracking-tight leading-tight">
-                {t('partners.title')}
-              </h2>
-              
-              {/* Subtitle */}
-              <p className="[font-family:'Manrope',Helvetica] font-light text-white/80 text-base sm:text-lg text-center leading-relaxed max-w-3xl mx-auto">
-                {t('partners.subtitle')}
-              </p>
-            </div>
-          </div>
-
-          {/* Partners Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
+       
+          {/* PC端 - Partners Grid - Auto-width with consistent padding */}
+          <div className="hidden lg:flex flex-wrap justify-center gap-5 mb-12 sm:mb-16 max-w-3xl mx-auto">
             {partnersData.map((partner, index) => (
               <div
                 key={partner.id}
-                className={`group relative bg-gradient-to-br from-[#1a2332]/80 to-[#081122]/80 backdrop-blur-sm border border-white/10 rounded-2xl p-4 sm:p-6 hover:border-[#fc9e01]/50 hover:bg-gradient-to-br hover:from-[#fc9e01]/5 hover:to-[#d03d0a]/5 transition-all duration-500 animate-fadeInUp`}
+                className={`group relative bg-gradient-to-br from-[#152138] to-[#081122] border-2 border-[#223049] rounded-[100px] hover:border-[#fc9e01]/50 transition-all duration-500 animate-fadeInUp`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {/* Partner Logo */}
-                <div className="flex justify-center mb-4">
-                  <div className={`relative w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 ${partner.needsWhiteBg ? 'bg-white p-1' : ''}`}>
+                {/* Partner Content - Horizontal Layout with consistent padding */}
+                <div className="flex items-center gap-3 px-4 py-2">
+                  {/* Partner Logo */}
+                  <div className={`relative w-10 h-10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0 ${partner.needsWhiteBg ? 'bg-white p-1' : ''}`}>
                     <img
-                      className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain"
+                      className="w-7 h-7 object-contain"
                       alt={partner.name}
                       src={partner.icon}
                     />
                   </div>
-                </div>
-                
-                {/* Partner Info */}
-                <div className="text-center space-y-2">
-                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-sm sm:text-base tracking-tight">
+
+                  {/* Partner Name - Auto width */}
+                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-sm tracking-tight whitespace-nowrap">
                     {partner.name}
                   </h3>
-                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/60 text-xs sm:text-sm leading-relaxed">
-                    {t(`partners.descriptions.${partner.id}`)}
-                  </p>
                 </div>
 
                 {/* Category Badge */}
-                <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {/* <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className={`px-2 py-1 text-xs rounded-full font-medium ${
                     partner.category === 'defi' ? 'bg-[#ffa700]/20 text-[#ffa700]' :
                     partner.category === 'blockchain' ? 'bg-[#00d4ff]/20 text-[#00d4ff]' :
@@ -136,18 +113,51 @@ export default async function PartnersSection({ lang }: PartnersSectionProps) {
                   }`}>
                     {t(`partners.categories.${partner.category}`)}
                   </span>
+                </div> */}
+
+
+                {/* Hover Effect Overlay */}
+                <div className="absolute inset-0 rounded-[20px] bg-gradient-to-r from-[#fc9e01]/0 via-[#fc9e01]/5 to-[#d03d0a]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
+            ))}
+          </div>
+
+          {/* 移动端 - Partners Grid - 每行两个 */}
+          <div className="lg:hidden grid grid-cols-2 gap-3 sm:gap-4 mb-12 sm:mb-16 max-w-sm mx-auto">
+            {partnersData.map((partner, index) => (
+              <div
+                key={`mobile-${partner.id}`}
+                className={`group relative bg-gradient-to-br from-[#152138] to-[#081122] border-2 border-[#223049] rounded-[100px] hover:border-[#fc9e01]/50 transition-all duration-500 animate-fadeInUp`}
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {/* Partner Content - Horizontal Layout like PC but smaller */}
+                <div className="flex items-center gap-2 px-3 py-2">
+                  {/* Partner Logo */}
+                  <div className={`relative w-6 h-6 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0 ${partner.needsWhiteBg ? 'bg-white p-0.5' : ''}`}>
+                    <img
+                      className="w-4 h-4 object-contain"
+                      alt={partner.name}
+                      src={partner.icon}
+                    />
+                  </div>
+
+                  {/* Partner Name - Auto width */}
+                  <h3 className="[font-family:'Manrope',Helvetica] font-semibold text-white text-xs tracking-tight whitespace-nowrap overflow-hidden text-ellipsis">
+                    {partner.name}
+                  </h3>
                 </div>
 
                 {/* Hover Effect Overlay */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#fc9e01]/0 via-[#fc9e01]/5 to-[#d03d0a]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 rounded-[100px] bg-gradient-to-r from-[#fc9e01]/0 via-[#fc9e01]/5 to-[#d03d0a]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
             ))}
           </div>
 
 
-          
+
         </div>
       </div>
+      </Web3SectionAnimator>
     </section>
   );
 }

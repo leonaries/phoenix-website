@@ -107,25 +107,41 @@
       }
     },
     "community": {
-      "title": "社区为核心",
+      "title": "Phoenix 将社区置于核心，赋能成员通过以下方式参与：",
       "subtitle": "Phoenix 赋能成员通过以下方式参与、贡献并共建 DeFi 的未来：",
       "imageAlt": "社区参与可视化",
+      "proposals": {
+        "title": "提案与投票",
+        "description": "提交和投票塑造生态系统"
+      },
+      "quests": {
+        "title": "任务与积分",
+        "description": "通过活动赚取积分，可兑换 Phoenix 代币"
+      },
+      "incentives": {
+        "title": "激励与认可",
+        "description": "为贡献者提供徽章、排行榜和奖励"
+      },
+      "cobuilding": {
+        "title": "共建与增长",
+        "description": "活动和合作推动 Phoenix 全球扩展"
+      },
       "engagement": {
         "proposals": {
           "title": "提案与投票",
-          "description": "提交治理提案并参与社区投票，共同塑造 Phoenix 生态系统和协议方向"
+          "description": "提交和投票塑造生态系统"
         },
         "quests": {
           "title": "任务与积分",
-          "description": "完成社区任务和活动赚取 Phoenix 积分，可兑换代币和专属生态奖励"
+          "description": "通过活动赚取积分，可兑换 Phoenix 代币"
         },
         "incentives": {
           "title": "激励与认可",
-          "description": "通过对 Phoenix 社区的有意义贡献赚取徽章、登上排行榜并获得奖励"
+          "description": "为贡献者提供徽章、排行榜和奖励"
         },
         "cobuilding": {
           "title": "共建与增长",
-          "description": "参与协作活动、合作伙伴关系和倡议，推动 Phoenix 全球扩展和生态采用"
+          "description": "活动和合作推动 Phoenix 全球扩展"
         }
       }
     },
@@ -167,7 +183,7 @@
   },
   "cta": {
     "badge": "立即开始",
-    "title": "准备开始您的 Phoenix 之旅了吗？",
+    "title": "开始使用 Phoenix",
     "subtitle": "加入已有数千名用户通过 Phoenix 获得收益的行列。只需几次点击即可开始您的 DeFi 之旅。",
     "backgroundAlt": "Phoenix CTA 背景图案",
     "workflow": {
@@ -195,7 +211,7 @@
   },
   "footer": {
     "description": "Phoenix 是下一代 DeFi 协议，通过创新的稳定机制和跨链兼容性将您的资产转化为收益。",
-    "copyright": "版权所有。",
+    "copyright": "© 2025 Phoenix. 版权所有。",
     "poweredBy": "由社区创新驱动",
     "sections": {
       "resources": "资源",
@@ -215,10 +231,11 @@
       "governance": "治理",
       "forum": "社区论坛",
       "newsletter": "新闻通讯",
-      "support": "支持中心"
+      "support": "支持中心",
+      "contact": "联系我们"
     },
     "social": {
-      "title": "关注我们",
+      "title": "社交媒体",
       "twitter": "在 Twitter 上关注我们",
       "telegram": "加入我们的 Telegram",
       "discord": "在 Discord 上聊天",

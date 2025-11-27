@@ -18,6 +18,10 @@ interface ReversedSectionBackgroundProps {
   glowOpacity?: string;
   /** 翻转方向 */
   flipDirection?: 'horizontal' | 'vertical' | 'both' | 'none';
+  /** 背景位置 - PC端 */
+  backgroundPositionDesktop?: string;
+  /** 背景位置 - 移动端 */
+  backgroundPositionMobile?: string;
 }
 
 /**
@@ -32,7 +36,9 @@ export default function ReversedSectionBackground({
   showGlow = true,
   glowSize = { width: '800px', height: '800px' },
   glowOpacity = '/5',
-  flipDirection = 'horizontal'
+  flipDirection = 'horizontal',
+  backgroundPositionDesktop = 'center',
+  backgroundPositionMobile = 'center'
 }: ReversedSectionBackgroundProps) {
 
   // 根据翻转方向生成CSS transform
@@ -52,17 +58,30 @@ export default function ReversedSectionBackground({
 
   return (
     <>
-      {/* Background Image - 带翻转效果 */}
+      {/* Background Image - PC端 带翻转效果 */}
       <div
-        className="absolute inset-0 z-0"
+        className="hidden lg:block absolute inset-0 z-0"
         style={{
           backgroundImage: `url('${imagePath}')`,
-          backgroundPosition: 'center',
+          backgroundPosition: backgroundPositionDesktop,
           backgroundSize: '100% auto',
           backgroundRepeat: 'no-repeat',
           backgroundAttachment: 'scroll',
           transform: getTransform(),
-          // 确保翻转后仍然覆盖整个区域
+          transformOrigin: 'center'
+        }}
+      />
+
+      {/* Background Image - 移动端 带翻转效果 */}
+      <div
+        className="lg:hidden absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url('${imagePath}')`,
+          backgroundPosition: backgroundPositionMobile,
+          backgroundSize: '100% auto',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'scroll',
+          transform: getTransform(),
           transformOrigin: 'center'
         }}
       />

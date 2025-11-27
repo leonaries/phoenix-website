@@ -11,7 +11,7 @@
  * 更新版本号时，旧缓存会被清理
  */
 
-const CACHE_VERSION = '1.0.0';
+const CACHE_VERSION = '1.0.1';
 const CACHE_NAME = `phoenix-cache-v${CACHE_VERSION}`;
 
 // 需要预缓存的核心资源（首次安装时缓存）
@@ -151,9 +151,14 @@ async function cacheFirst(request, hasVersion) {
   if (hasVersion) {
     try {
       const networkResponse = await fetch(request);
-      if (networkResponse.ok) {
+      // 只缓存完整响应（200），跳过部分响应（206）
+      if (networkResponse.ok && networkResponse.status === 200) {
         // 缓存新版本
         cache.put(request, networkResponse.clone());
+        return networkResponse;
+      }
+      // 如果是 206 或其他状态码，直接返回不缓存
+      if (networkResponse.status === 206 || networkResponse.ok) {
         return networkResponse;
       }
     } catch (error) {
@@ -170,7 +175,8 @@ async function cacheFirst(request, hasVersion) {
   // 缓存未命中，从网络获取
   try {
     const networkResponse = await fetch(request);
-    if (networkResponse.ok) {
+    // 只缓存完整响应（200），跳过部分响应（206）
+    if (networkResponse.status === 200) {
       // 缓存响应
       cache.put(request, networkResponse.clone());
     }

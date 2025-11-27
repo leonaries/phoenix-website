@@ -107,25 +107,41 @@
       }
     },
     "community": {
-      "title": "Community at the Core",
+      "title": "Phoenix puts community at its core, empowering members to engage through:",
       "subtitle": "Phoenix empowers members to engage, contribute, and co-build the future of DeFi through:",
       "imageAlt": "Community engagement visualization",
+      "proposals": {
+        "title": "Proposals & Voting",
+        "description": "Submit and vote to shape the ecosystem"
+      },
+      "quests": {
+        "title": "Quests & Points",
+        "description": "Earn points from activities, redeemable for Phoenix tokens"
+      },
+      "incentives": {
+        "title": "Incentives & Recognition",
+        "description": "Badges, leaderboards, and rewards for contributors"
+      },
+      "cobuilding": {
+        "title": "Co-Building & Growth",
+        "description": "Events and partnerships expand Phoenix globally"
+      },
       "engagement": {
         "proposals": {
           "title": "Proposals & Voting",
-          "description": "Submit governance proposals and participate in community voting to shape the Phoenix ecosystem and protocol direction"
+          "description": "Submit and vote to shape the ecosystem"
         },
         "quests": {
           "title": "Quests & Points",
-          "description": "Complete community quests and activities to earn Phoenix Points, redeemable for tokens and exclusive ecosystem rewards"
+          "description": "Earn points from activities, redeemable for Phoenix tokens"
         },
         "incentives": {
-          "title": "Incentives & Recognition", 
-          "description": "Earn badges, climb leaderboards, and receive rewards for meaningful contributions to the Phoenix community"
+          "title": "Incentives & Recognition",
+          "description": "Badges, leaderboards, and rewards for contributors"
         },
         "cobuilding": {
           "title": "Co-Building & Growth",
-          "description": "Join collaborative events, partnerships, and initiatives that expand Phoenix globally and drive ecosystem adoption"
+          "description": "Events and partnerships expand Phoenix globally"
         }
       }
     },
@@ -167,7 +183,7 @@
   },
   "cta": {
     "badge": "GET STARTED TODAY",
-    "title": "Ready to Start Your Phoenix Journey?",
+    "title": "Get started with Phoenix",
     "subtitle": "Join thousands of users already earning with Phoenix. Start your DeFi journey today with just a few clicks.",
     "backgroundAlt": "Phoenix CTA background pattern",
     "workflow": {
@@ -195,7 +211,7 @@
   },
   "footer": {
     "description": "Phoenix is the next-generation DeFi protocol that turns your assets into yield through innovative stability mechanisms and cross-chain compatibility.",
-    "copyright": "All rights reserved.",
+    "copyright": "© 2025 Phoenix. All rights reserved.",
     "poweredBy": "Powered by community innovation",
     "sections": {
       "resources": "Resources",
@@ -203,22 +219,23 @@
       "community": "Community"
     },
     "links": {
-      "docs": "Documentation",
+      "docs": "Docs",
       "blog": "Blog",
       "whitepaper": "Whitepaper",
       "github": "GitHub",
       "contracts": "Contracts",
-      "audits": "Security Audits",
+      "audits": "Audits",
       "bugBounty": "Bug Bounty",
       "privacy": "Privacy Policy",
-      "terms": "Terms of Service",
+      "terms": "Terms of Use",
       "governance": "Governance",
       "forum": "Community Forum",
       "newsletter": "Newsletter",
-      "support": "Support Center"
+      "support": "Support Center",
+      "contact": "Contact"
     },
     "social": {
-      "title": "Follow Us",
+      "title": "Socials",
       "twitter": "Follow us on Twitter",
       "telegram": "Join our Telegram",
       "discord": "Chat on Discord",

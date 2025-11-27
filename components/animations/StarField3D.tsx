@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { getWorkerRecommendation } from '@/utils/worker-support';
+import type { ParticleConfig, ParticleUpdateMessage, ParticleUpdateResponse } from '@/workers/particle-worker';
 
 interface StarField3DProps {
   className?: string;
@@ -39,14 +41,33 @@ export default function StarField3D({ className }: StarField3DProps) {
   const cameraRef = useRef<THREE.PerspectiveCamera>();
   const particlesRef = useRef<THREE.Points>();
   const animationRef = useRef<number>();
+  const workerRef = useRef<Worker | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [useWorker, setUseWorker] = useState(false);
 
-  // 检测移动设备
+  // 双缓冲区用于 Worker 通信（避免竞态条件）
+  const positionsBufferARef = useRef<Float32Array | null>(null);
+  const positionsBufferBRef = useRef<Float32Array | null>(null);
+  const velocitiesBufferRef = useRef<Float32Array | null>(null);
+  const activeBufferRef = useRef<'A' | 'B'>('A');
+  const isUpdatingRef = useRef(false);
+
+  // 检测移动设备和 Worker 支持
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
+
+    // 检测 Worker 支持
+    const workerSupport = getWorkerRecommendation();
+
+    // 临时禁用Worker来测试主线程模式
+    const forceMainThread = false; // 调试开关
+    const shouldUseWorker = workerSupport.useWorker && !forceMainThread;
+
+    setUseWorker(shouldUseWorker);
+    console.log('Worker support:', workerSupport.reason, 'Using Worker:', shouldUseWorker);
 
     checkMobile();
     window.addEventListener('resize', checkMobile);
@@ -110,6 +131,14 @@ export default function StarField3D({ className }: StarField3DProps) {
       geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       geometry.userData = { velocities };
 
+      // 如果使用 Worker，初始化双缓冲区
+      if (useWorker) {
+        positionsBufferARef.current = new Float32Array(positions);
+        positionsBufferBRef.current = new Float32Array(particleCount * 3);
+        velocitiesBufferRef.current = new Float32Array(velocities);
+        console.log('Double buffering initialized for Worker');
+      }
+
       // 创建火焰般的星星纹理
       const texture = createStarTexture();
 
@@ -130,6 +159,56 @@ export default function StarField3D({ className }: StarField3DProps) {
       return points;
     } catch (error) {
       console.error('Error creating particles:', error);
+      return null;
+    }
+  };
+
+  // 初始化 WebWorker
+  const initWorker = () => {
+    if (!useWorker || typeof Worker === 'undefined') {
+      console.log('Worker disabled or not supported');
+      return null;
+    }
+
+    try {
+      // 使用 Next.js 15 的 Worker 支持
+      const worker = new Worker(new URL('@/workers/particle-worker.ts', import.meta.url));
+
+      worker.onmessage = (e: MessageEvent<ParticleUpdateResponse>) => {
+        if (e.data.type === 'updated' && particlesRef.current) {
+          const geometry = particlesRef.current.geometry as THREE.BufferGeometry;
+          const currentPositions = geometry.attributes.position.array as Float32Array;
+
+          // 复制更新后的位置数据
+          currentPositions.set(e.data.positions);
+          geometry.attributes.position.needsUpdate = true;
+
+          // 标记更新完成
+          isUpdatingRef.current = false;
+
+          // 切换活动缓冲区
+          activeBufferRef.current = activeBufferRef.current === 'A' ? 'B' : 'A';
+        }
+      };
+
+      worker.onerror = (error) => {
+        console.error('Worker error:', error);
+        console.log('Falling back to main thread animation');
+        setUseWorker(false); // 降级到主线程
+
+        // 重新启动主线程动画
+        if (animationRef.current) {
+          cancelAnimationFrame(animationRef.current);
+        }
+        setTimeout(() => {
+          animationRef.current = requestAnimationFrame(animateMainThread);
+        }, 100);
+      };
+
+      console.log('WebWorker initialized successfully');
+      return worker;
+    } catch (error) {
+      console.error('Error initializing Worker:', error);
       return null;
     }
   };
@@ -192,8 +271,63 @@ export default function StarField3D({ className }: StarField3DProps) {
     }
   };
 
-  // 动画循环
-  const animate = () => {
+  // 动画循环 - Worker 模式
+  const animateWithWorker = () => {
+    if (!particlesRef.current || !rendererRef.current || !sceneRef.current || !cameraRef.current || !workerRef.current) {
+      return;
+    }
+
+    try {
+      // 如果上一帧还在更新中，跳过本帧
+      if (!isUpdatingRef.current) {
+        const particles = particlesRef.current;
+        const geometry = particles.geometry as THREE.BufferGeometry;
+        const positions = geometry.attributes.position.array as Float32Array;
+        const velocities = geometry.userData.velocities as Float32Array;
+
+        // 获取当前活动缓冲区
+        const activeBuffer = activeBufferRef.current === 'A' ? positionsBufferARef.current : positionsBufferBRef.current;
+
+        if (activeBuffer && velocitiesBufferRef.current) {
+          // 复制当前位置和速度到缓冲区
+          activeBuffer.set(positions);
+          velocitiesBufferRef.current.set(velocities);
+
+          // 构建 Worker 消息
+          const config: ParticleConfig = {
+            spread: PARTICLE_CONFIG.spread,
+            depth: PARTICLE_CONFIG.depth,
+            speedBase: PARTICLE_CONFIG.speed.base,
+            speedVariation: PARTICLE_CONFIG.speed.variation
+          };
+
+          const message: ParticleUpdateMessage = {
+            type: 'update',
+            positions: activeBuffer,
+            velocities: velocitiesBufferRef.current,
+            count: positions.length / 3,
+            config
+          };
+
+          // 标记正在更新
+          isUpdatingRef.current = true;
+
+          // 发送到 Worker（不使用 Transferable Objects）
+          workerRef.current.postMessage(message);
+        }
+      }
+
+      // 渲染当前帧
+      rendererRef.current.render(sceneRef.current, cameraRef.current);
+
+      animationRef.current = requestAnimationFrame(animateWithWorker);
+    } catch (error) {
+      console.error('Error in Worker animation loop:', error);
+    }
+  };
+
+  // 动画循环 - 主线程模式（降级方案）
+  const animateMainThread = () => {
     if (!particlesRef.current || !rendererRef.current || !sceneRef.current || !cameraRef.current) {
       return;
     }
@@ -206,7 +340,7 @@ export default function StarField3D({ className }: StarField3DProps) {
 
       const particleCount = positions.length / 3;
 
-      // 更新每个粒子
+      // 更新每个粒子（主线程）
       for (let i = 0; i < particleCount; i++) {
         const i3 = i * 3;
 
@@ -234,9 +368,20 @@ export default function StarField3D({ className }: StarField3DProps) {
       // 渲染
       rendererRef.current.render(sceneRef.current, cameraRef.current);
 
-      animationRef.current = requestAnimationFrame(animate);
+      animationRef.current = requestAnimationFrame(animateMainThread);
     } catch (error) {
-      console.error('Error in animation loop:', error);
+      console.error('Error in main thread animation loop:', error);
+    }
+  };
+
+  // 统一的动画启动函数
+  const startAnimation = () => {
+    if (useWorker && workerRef.current) {
+      console.log('Starting animation with WebWorker');
+      animationRef.current = requestAnimationFrame(animateWithWorker);
+    } else {
+      console.log('Starting animation on main thread');
+      animationRef.current = requestAnimationFrame(animateMainThread);
     }
   };
 
@@ -257,24 +402,37 @@ export default function StarField3D({ className }: StarField3DProps) {
         cancelAnimationFrame(animationRef.current);
       }
     } else if (isInitialized) {
-      animationRef.current = requestAnimationFrame(animate);
+      startAnimation();
     }
   };
 
   // 主效果
   useEffect(() => {
-    console.log('StarField3D useEffect triggered, isMobile:', isMobile);
+    console.log('StarField3D useEffect triggered, isMobile:', isMobile, 'useWorker:', useWorker);
 
-    const threeJS = initThreeJS();
-    if (!threeJS) {
-      console.error('Failed to initialize Three.js');
-      return;
-    }
+    // 添加一个小延迟,确保 DOM 已经完全准备好
+    const initTimer = setTimeout(() => {
+      // 初始化 Worker（如果启用）
+      if (useWorker) {
+        const worker = initWorker();
+        if (worker) {
+          workerRef.current = worker;
+        } else {
+          setUseWorker(false); // 降级到主线程
+        }
+      }
 
-    setIsInitialized(true);
+      const threeJS = initThreeJS();
+      if (!threeJS) {
+        console.error('Failed to initialize Three.js');
+        return;
+      }
 
-    // 启动动画
-    animationRef.current = requestAnimationFrame(animate);
+      setIsInitialized(true);
+
+      // 启动动画
+      startAnimation();
+    }, 100); // 100ms 延迟,确保 DOM 准备就绪
 
     // 添加事件监听
     window.addEventListener('resize', handleResize);
@@ -283,10 +441,22 @@ export default function StarField3D({ className }: StarField3DProps) {
     // 清理函数
     return () => {
       console.log('StarField3D cleanup');
+
+      // 清除初始化定时器
+      clearTimeout(initTimer);
+
       setIsInitialized(false);
 
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
+        animationRef.current = undefined;
+      }
+
+      // 终止 Worker
+      if (workerRef.current) {
+        workerRef.current.terminate();
+        workerRef.current = null;
+        console.log('WebWorker terminated');
       }
 
       window.removeEventListener('resize', handleResize);
@@ -300,13 +470,19 @@ export default function StarField3D({ className }: StarField3DProps) {
       if (particlesRef.current) {
         particlesRef.current.geometry.dispose();
         (particlesRef.current.material as THREE.Material).dispose();
+        particlesRef.current = undefined;
       }
 
       if (rendererRef.current) {
         rendererRef.current.dispose();
+        rendererRef.current = undefined;
       }
+
+      // 清理场景和相机引用
+      sceneRef.current = undefined;
+      cameraRef.current = undefined;
     };
-  }, [isMobile]);
+  }, [isMobile, useWorker]);
 
   console.log('StarField3D render, isInitialized:', isInitialized);
 

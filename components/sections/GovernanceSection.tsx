@@ -1,5 +1,6 @@
 import React from 'react';
 import { initI18nServer } from '@/lib/i18nserver';
+import Web3SectionAnimator from '@/components/animations/Web3SectionAnimator';
 
 interface GovernanceSectionProps {
   lang: string;
@@ -10,17 +11,22 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
 
   return (
     <section id="governance" className="w-full relative overflow-hidden">
+      <Web3SectionAnimator
+        animationType="glitch"
+        className="w-full"
+        viewport={{ once: true, amount: 0.1 }}
+      >
 
-      {/* Content Container */}
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-        <div className="max-w-7xl mx-auto">
+        {/* Content Container */}
+        <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+          <div className="max-w-7xl mx-auto">
 
-          {/* Section Title */}
-          <div className="text-center mb-16 sm:mb-10">
-            <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-tight animate-fadeInUp">
-              {t('governance.title')}
-            </h2>
-          </div>
+            {/* Section Title */}
+            <div className="text-center mb-16 sm:mb-10">
+              <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl tracking-tight leading-tight">
+                {t('governance.title')}
+              </h2>
+            </div>
 
           {/* Governance Flow Chart - Desktop */}
           <div className="hidden lg:block relative max-w-6xl mx-auto">
@@ -73,7 +79,7 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
                   }}
                 />
 
-          
+
               </div>
 
               {/* Feature Nodes */}
@@ -186,33 +192,78 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
             {/* Feature Cards - Stacked */}
             <div className="space-y-6">
               <div className="animate-fadeInUp" style={{animationDelay: '0.2s'}}>
-                <div className="bg-black/60 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
-                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-lg mb-3 tracking-tight">
+                <div
+                  className="backdrop-blur-sm p-6"
+                  style={{
+                    background: `
+                      linear-gradient(90deg, #081122 0%, #1C283F 100%) padding-box,
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(153, 153, 153, 0) 100%) border-box
+                    `,
+                    border: '2px solid transparent',
+                    borderRadius: '28px'
+                  }}
+                >
+                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-2xl mb-3 tracking-tight" style={{
+                    background: 'linear-gradient(90deg, #FFFFFF 0%, #FF8000 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}>
                     {t('governance.features.dao.title')}
                   </h3>
-                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-sm leading-relaxed">
+                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-xs leading-relaxed">
                     {t('governance.features.dao.description')}
                   </p>
                 </div>
               </div>
 
               <div className="animate-fadeInUp" style={{animationDelay: '0.4s'}}>
-                <div className="bg-black/60 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
-                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-lg mb-3 tracking-tight">
+                <div
+                  className="backdrop-blur-sm p-6"
+                  style={{
+                    background: `
+                      linear-gradient(90deg, #081122 0%, #1C283F 100%) padding-box,
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(153, 153, 153, 0) 100%) border-box
+                    `,
+                    border: '2px solid transparent',
+                    borderRadius: '28px'
+                  }}
+                >
+                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-2xl mb-3 tracking-tight" style={{
+                    background: 'linear-gradient(90deg, #FFFFFF 0%, #FF8000 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}>
                     {t('governance.features.fire.title')}
                   </h3>
-                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-sm leading-relaxed">
+                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-xs leading-relaxed">
                     {t('governance.features.fire.description')}
                   </p>
                 </div>
               </div>
 
               <div className="animate-fadeInUp" style={{animationDelay: '0.6s'}}>
-                <div className="bg-black/60 backdrop-blur-sm border border-white/20 rounded-2xl p-6">
-                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-lg mb-3 tracking-tight">
+                <div
+                  className="backdrop-blur-sm p-6"
+                  style={{
+                    background: `
+                      linear-gradient(90deg, #081122 0%, #1C283F 100%) padding-box,
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(153, 153, 153, 0) 100%) border-box
+                    `,
+                    border: '2px solid transparent',
+                    borderRadius: '28px'
+                  }}
+                >
+                  <h3 className="[font-family:'Manrope',Helvetica] font-bold text-2xl mb-3 tracking-tight" style={{
+                    background: 'linear-gradient(90deg, #FFFFFF 0%, #FF8000 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}>
                     {t('governance.features.badge.title')}
                   </h3>
-                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-sm leading-relaxed">
+                  <p className="[font-family:'Manrope',Helvetica] font-normal text-white/80 text-xs leading-relaxed">
                     {t('governance.features.badge.description')}
                   </p>
                 </div>
@@ -222,6 +273,201 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
 
         </div>
       </div>
+
+      {/* Community Earth Section */}
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto">
+
+          {/* Section Title */}
+          <div className="text-center">
+            <h2 className="[font-family:'Manrope',Helvetica] font-normal text-white text-xl sm:text-2xl lg:text-4xl tracking-tight leading-relaxed max-w-2xl mx-auto">
+              {t('governance.community.title', 'Phoenix puts community at its core, empowering members to engage through:')}
+            </h2>
+          </div>
+
+          {/* Earth Community Visualization - Desktop */}
+          <div className="hidden lg:block relative w-full max-w-6xl mx-auto overflow-hidden mt-20" style={{ height: '800px' }}>
+
+            {/* 中心容器 - 有实际尺寸,包含所有元素 */}
+            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[30%]">
+
+              {/* 1. Earth 地球 - 最底层 z-10 */}
+              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[40%] z-10">
+                <img
+                  src="/img/earth.png"
+                  alt="Earth"
+                  width={1200}
+                  height={1200}
+                  className="rounded-full"
+                  style={{ width: '1200px', height: '1200px', maxWidth: 'none' }}
+                />
+              </div>
+
+              {/* 2. Earth Ring 红光 - 盖在地球上 z-20 */}
+              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[55%] z-50">
+                <img
+                  src="/img/earth-ring.png"
+                  alt="Phoenix Ring"
+                  width={1280}
+                  height={1280}
+                  className="animate-pulse"
+                  style={{ width: '1400px', height: '500px', maxWidth: 'none', animationDuration: '3s' }}
+                />
+              </div>
+
+              {/* 3. Circle Group 弧线和圆点 - 在上方 z-30 */}
+              <div className="absolute left-1/2 top-0 transform -translate-x-[53%] -translate-y-[65%] z-30">
+                <img
+                  src="/img/circle_group.png"
+                  alt="Circle Group"
+                  width={1600}
+                  height={400}
+                  style={{ width: '1600px', height: '400px', maxWidth: 'none' }}
+                />
+              </div>
+
+              {/* 4. Vector Logo 凤凰标志 - 最顶层 z-40 */}
+              <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-[160%] z-40">
+                <img
+                  src="/img/vector.svg"
+                  alt="Phoenix Logo"
+                  width={240}
+                  height={240}
+                  style={{ width: '240px', height: '240px', maxWidth: 'none' ,backgroundColor:'#071222' }}
+                />
+              </div>
+
+            </div>
+
+            {/* Text Labels - positioned near white dots */}
+
+            {/* Top Left - Proposals & Voting */}
+            <div className="absolute left-[20%] top-[8%] z-20">
+              <div className="text-center max-w-[250px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-2 leading-tight">
+                  {t('governance.community.engagement.proposals.title', 'Proposals & Voting')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-sm leading-relaxed">
+                  {t('governance.community.engagement.proposals.description', 'Submit governance proposals and participate in community voting to shape the Phoenix ecosystem and protocol direction')}
+                </p>
+              </div>
+            </div>
+
+            {/* Top Right - Incentives & Recognition */}
+            <div className="absolute right-[20%] top-[8%] z-20">
+              <div className="text-center max-w-[250px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-2 leading-tight">
+                  {t('governance.community.engagement.incentives.title', 'Incentives & Recognition')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-sm leading-relaxed">
+                  {t('governance.community.engagement.incentives.description', 'Earn badges, climb leaderboards, and receive rewards for meaningful contributions to the Phoenix community')}
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Left - Quests & Points */}
+            <div className="absolute left-[0%] top-[20%] z-20">
+              <div className="text-center max-w-[250px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-2 leading-tight">
+                  {t('governance.community.engagement.quests.title', 'Quests & Points')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-sm leading-relaxed">
+                  {t('governance.community.engagement.quests.description', 'Complete community quests and activities to earn Phoenix Points, redeemable for tokens and exclusive ecosystem rewards')}
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Right - Co-Building & Growth */}
+            <div className="absolute right-[0%] top-[23%] z-20">
+              <div className="text-center max-w-[250px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-2 leading-tight">
+                  {t('governance.community.engagement.cobuilding.title', 'Co-Building & Growth')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-sm leading-relaxed">
+                  {t('governance.community.engagement.cobuilding.description', 'Join collaborative events, partnerships, and initiatives that expand Phoenix globally and drive ecosystem adoption')}
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Mobile Layout */}
+          <div className="relative lg:hidden space-y-12 h-[1400px] top-[700px] overflow-visible">
+            {/* Central Earth with Phoenix Logo */}
+            <div className="flex justify-center rotate-90 " style={{ willChange: 'transform' }}>
+              {/* Phoenix Logo Above Earth */}
+              <div className="absolute left-[45px] -top-[25px] transform -translate-y-8 z-20 rotate-[-90deg]">
+                <img
+                  src="/img/vector.svg"
+                  alt="Phoenix Logo"
+                  width={194}
+                  height={194}
+                />
+              </div>
+
+              <div className="absolute w-[1000px] h-[380px] transform -translate-y-40" style={{ willChange: 'transform' }}>
+                <img
+                  src="/img/earth-ring.png"
+                  alt="Phoenix Ring"
+                  className="absolute inset-0 animate-pulse"
+                  style={{ animationDuration: '3s',width: '1000px', height: '380px', maxWidth: 'none', willChange: 'opacity' }}
+                />
+              </div>
+              <div className="absolute left-1/2 top-0 transform -translate-x-[53%] -translate-y-[50%] z-1" style={{ willChange: 'transform' }}>
+                <img
+                  src="/img/circle_group.png"
+                  alt="Circle Group"
+                  style={{ width: '1400px', height: '400px', maxWidth: 'none', willChange: 'transform' }}
+                />
+              </div>
+            </div>
+
+            {/* Feature Cards */}
+            <div className="space-y-8 absolute -top-[650px]">
+               <div className="text-left w-[62%] relative top-[70px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-sm mb-3">
+                  {t('governance.community.quests.title', 'Quests & Points')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-xs">
+                  {t('governance.community.quests.description', 'Earn points from activities, redeemable for Phoenix tokens')}
+                </p>
+              </div>
+
+              <div className="text-left w-[62%] relative top-[160px] left-[100px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-sm mb-3">
+                  {t('governance.community.proposals.title', 'Proposals & Voting')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-xs">
+                  {t('governance.community.proposals.description', 'Submit and vote to shape the ecosystem')}
+                </p>
+              </div>
+
+              <div className="text-left w-[62%] relative top-[500px] left-[80px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-sm mb-3">
+                  {t('governance.community.incentives.title', 'Incentives & Recognition')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-xs">
+                  {t('governance.community.incentives.description', 'Badges, leaderboards, and rewards for contributors')}
+                </p>
+              </div>
+
+             
+
+              <div className="text-left w-[62%] relative top-[610px]">
+                <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-sm mb-3">
+                  {t('governance.community.cobuilding.title', 'Co-Building & Growth')}
+                </h3>
+                <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-xs">
+                  {t('governance.community.cobuilding.description', 'Events and partnerships expand Phoenix globally')}
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      </Web3SectionAnimator>
     </section>
   );
 }
