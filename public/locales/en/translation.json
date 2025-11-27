@@ -195,7 +195,7 @@
   },
   "footer": {
     "description": "Phoenix is the next-generation DeFi protocol that turns your assets into yield through innovative stability mechanisms and cross-chain compatibility.",
-    "copyright": "All rights reserved.",
+    "copyright": "© 2025 Phoenix. All rights reserved.",
     "poweredBy": "Powered by community innovation",
     "sections": {
       "resources": "Resources",
@@ -203,22 +203,23 @@
       "community": "Community"
     },
     "links": {
-      "docs": "Documentation",
+      "docs": "Docs",
       "blog": "Blog",
       "whitepaper": "Whitepaper",
       "github": "GitHub",
       "contracts": "Contracts",
-      "audits": "Security Audits",
+      "audits": "Audits",
       "bugBounty": "Bug Bounty",
       "privacy": "Privacy Policy",
-      "terms": "Terms of Service",
+      "terms": "Terms of Use",
       "governance": "Governance",
       "forum": "Community Forum",
       "newsletter": "Newsletter",
-      "support": "Support Center"
+      "support": "Support Center",
+      "contact": "Contact"
     },
     "social": {
-      "title": "Follow Us",
+      "title": "Socials",
       "twitter": "Follow us on Twitter",
       "telegram": "Join our Telegram",
       "discord": "Chat on Discord",

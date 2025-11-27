@@ -195,7 +195,7 @@
   },
   "footer": {
     "description": "Phoenix 是下一代 DeFi 协议，通过创新的稳定机制和跨链兼容性将您的资产转化为收益。",
-    "copyright": "版权所有。",
+    "copyright": "© 2025 Phoenix. 版权所有。",
     "poweredBy": "由社区创新驱动",
     "sections": {
       "resources": "资源",
@@ -215,10 +215,11 @@
       "governance": "治理",
       "forum": "社区论坛",
       "newsletter": "新闻通讯",
-      "support": "支持中心"
+      "support": "支持中心",
+      "contact": "联系我们"
     },
     "social": {
-      "title": "关注我们",
+      "title": "社交媒体",
       "twitter": "在 Twitter 上关注我们",
       "telegram": "加入我们的 Telegram",
       "discord": "在 Discord 上聊天",

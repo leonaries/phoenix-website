@@ -114,7 +114,7 @@ export default async function Footer({ lang }: FooterProps) {
               {/* Socials */}
               <div className="space-y-4">
                 <h3 className="[font-family:'Manrope',Helvetica] font-semibold text-white text-sm">
-                  Socials
+                  {t('footer.social.title', 'Socials')}
                 </h3>
                 <div className="flex items-center gap-6">
                   {socialLinks.map((social) => (
@@ -138,7 +138,7 @@ export default async function Footer({ lang }: FooterProps) {
               {footerSections.map((section) => (
                 <div key={section.title} className="space-y-4">
                   <h3 className="[font-family:'Manrope',Helvetica] font-semibold text-white text-base">
-                    {section.title}
+                    {t(`footer.sections.${section.title.toLowerCase()}`, section.title)}
                   </h3>
                   <ul className="space-y-3">
                     {section.links.map((link) => (
@@ -149,7 +149,7 @@ export default async function Footer({ lang }: FooterProps) {
                           rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                           className="[font-family:'Manrope',Helvetica] font-normal text-white transition-colors duration-300 text-sm"
                         >
-                          {link.label}
+                          {t(`footer.links.${link.key}`, link.label)}
                         </a>
                       </li>
                     ))}
@@ -163,7 +163,7 @@ export default async function Footer({ lang }: FooterProps) {
           {/* Bottom - Copyright */}
           <div className="pt-8 border-t border-white/10">
             <p className="[font-family:'Manrope',Helvetica] font-normal text-white text-sm text-left lg:text-left">
-              © 2025 Phoenix. All rights reserved.
+              {t('footer.copyright', '© 2025 Phoenix. All rights reserved.')}
             </p>
           </div>
 

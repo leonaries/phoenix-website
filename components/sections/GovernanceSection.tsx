@@ -345,10 +345,10 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
             <div className="absolute left-[20%] top-[8%] z-20">
               <div className="text-center max-w-[250px]">
                 <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-2 leading-tight">
-                  {t('governance.community.proposals.title', 'Proposals & Voting')}
+                  {t('governance.community.engagement.proposals.title', 'Proposals & Voting')}
                 </h3>
                 <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-sm leading-relaxed">
-                  {t('governance.community.proposals.description', 'Submit and vote to shape the ecosystem')}
+                  {t('governance.community.engagement.proposals.description', 'Submit governance proposals and participate in community voting to shape the Phoenix ecosystem and protocol direction')}
                 </p>
               </div>
             </div>
@@ -357,10 +357,10 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
             <div className="absolute right-[20%] top-[8%] z-20">
               <div className="text-center max-w-[250px]">
                 <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-2 leading-tight">
-                  {t('governance.community.incentives.title', 'Incentives & Recognition')}
+                  {t('governance.community.engagement.incentives.title', 'Incentives & Recognition')}
                 </h3>
                 <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-sm leading-relaxed">
-                  {t('governance.community.incentives.description', 'Badges, leaderboards, and rewards for contributors')}
+                  {t('governance.community.engagement.incentives.description', 'Earn badges, climb leaderboards, and receive rewards for meaningful contributions to the Phoenix community')}
                 </p>
               </div>
             </div>
@@ -369,10 +369,10 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
             <div className="absolute left-[0%] top-[20%] z-20">
               <div className="text-center max-w-[250px]">
                 <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-2 leading-tight">
-                  {t('governance.community.quests.title', 'Quests & Points')}
+                  {t('governance.community.engagement.quests.title', 'Quests & Points')}
                 </h3>
                 <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-sm leading-relaxed">
-                  {t('governance.community.quests.description', 'Earn points from activities, redeemable for Phoenix tokens')}
+                  {t('governance.community.engagement.quests.description', 'Complete community quests and activities to earn Phoenix Points, redeemable for tokens and exclusive ecosystem rewards')}
                 </p>
               </div>
             </div>
@@ -381,10 +381,10 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
             <div className="absolute right-[0%] top-[23%] z-20">
               <div className="text-center max-w-[250px]">
                 <h3 className="[font-family:'Manrope',Helvetica] font-bold text-white text-xl mb-2 leading-tight">
-                  {t('governance.community.cobuilding.title', 'Co-Building & Growth')}
+                  {t('governance.community.engagement.cobuilding.title', 'Co-Building & Growth')}
                 </h3>
                 <p className="[font-family:'Manrope',Helvetica] font-normal text-white/70 text-sm leading-relaxed">
-                  {t('governance.community.cobuilding.description', 'Events and partnerships expand Phoenix globally')}
+                  {t('governance.community.engagement.cobuilding.description', 'Join collaborative events, partnerships, and initiatives that expand Phoenix globally and drive ecosystem adoption')}
                 </p>
               </div>
             </div>
