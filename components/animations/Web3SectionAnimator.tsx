@@ -14,10 +14,10 @@ interface Web3SectionAnimatorProps {
   };
 }
 
-// Web3风格动画变体配置
+// Web3 style animation variant configuration
 const getAnimationConfig = (type: string, delay: number = 0) => {
   const configs = {
-    // 1. 故障风格 - 适合Features Section
+    // 1. Glitch style - suitable for Features Section
     glitch: {
       initial: {
         opacity: 0,
@@ -36,7 +36,7 @@ const getAnimationConfig = (type: string, delay: number = 0) => {
       }
     },
 
-    // 2. 矩阵风格 - 适合Roadmap Section
+    // 2. Matrix style - suitable for Roadmap Section
     matrix: {
       initial: {
         opacity: 0,
@@ -55,7 +55,7 @@ const getAnimationConfig = (type: string, delay: number = 0) => {
       }
     },
 
-    // 3. 全息风格 - 适合Governance Section
+    // 3. Hologram style - suitable for Governance Section
     hologram: {
       initial: {
         opacity: 0,
@@ -72,7 +72,7 @@ const getAnimationConfig = (type: string, delay: number = 0) => {
       }
     },
 
-    // 4. 量子风格 - 适合Partners Section
+    // 4. Quantum style - suitable for Partners Section
     quantum: {
       initial: {
         opacity: 0,
@@ -91,7 +91,7 @@ const getAnimationConfig = (type: string, delay: number = 0) => {
       }
     },
 
-    // 5. 霓虹风格 - 适合CTA Section
+    // 5. Neon style - suitable for CTA Section
     neon: {
       initial: {
         opacity: 0,
@@ -110,7 +110,7 @@ const getAnimationConfig = (type: string, delay: number = 0) => {
       }
     },
 
-    // 6. 赛博风格 - 适合Vision Section
+    // 6. Cyber style - suitable for Vision Section
     cyber: {
       initial: {
         opacity: 0,

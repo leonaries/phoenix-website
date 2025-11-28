@@ -13,14 +13,14 @@ const resources = {
 };
 
 function detectLang(): string {
-  // 1. 优先从 URL 中获取语言参数（如 /zh/...）
+  // 1. First get language parameter from URL (e.g., /zh/...)
   if (typeof window !== 'undefined') {
     const pathLang = window.location.pathname.split('/')[1];
     if (resources[pathLang as keyof typeof resources]) {
       return pathLang;
     }
 
-    // 2. 其次尝试从 cookie 获取
+    // 2. Next try to get from cookie
     const match = document.cookie.match(/(?:^|;\s*)NEXT_LOCALE=([^;]*)/);
     if (match && resources[match[1] as keyof typeof resources]) {
       return match[1];
