@@ -25,26 +25,26 @@ interface LazyFrameSequencePlayerProps {
   onEnded?: () => void;
   onLoadingProgress?: (progress: number, loadedCount: number) => void;
 
-  // 懒加载配置
-  batchSize?: number;        // 每批加载多少帧（默认 30）
-  bufferAhead?: number;      // 向前预加载多少帧（默认 30）
-  bufferBehind?: number;     // 向后保留多少帧（默认 30）
-  maxConcurrent?: number;    // 最大并发加载数（默认 6）
+  // Lazy loading configuration
+  batchSize?: number;        // How many frames to load per batch (default 30)
+  bufferAhead?: number;      // How many frames to preload ahead (default 30)
+  bufferBehind?: number;     // How many frames to keep behind (default 30)
+  maxConcurrent?: number;    // Maximum concurrent loading number (default 6)
 }
 
 /**
- * 懒加载序列帧播放器
+ * Lazy loading frame sequence player
  *
- * 优化策略：
- * 1. 分批加载：首批快速加载前 N 帧，然后边播放边加载
- * 2. 滑动窗口：保持缓冲区（前后各 N 帧），释放旧帧节省内存
- * 3. 智能预加载：根据播放进度动态加载后续帧
- * 4. Safari 优化：限制并发请求，避免内存问题
+ * Optimization strategies:
+ * 1. Batch loading: Quickly load first N frames, then load while playing
+ * 2. Sliding window: Maintain buffer (N frames ahead and behind), release old frames to save memory
+ * 3. Smart preloading: Dynamically load subsequent frames based on playback progress
+ * 4. Safari optimization: Limit concurrent requests to avoid memory issues
  *
- * 性能提升：
- * - 首帧时间：3-8s → 0.5-1.5s (减少 70-85%)
- * - 内存占用：150MB → 13MB (减少 91%)
- * - 用户体验：立即开始播放，无长时间等待
+ * Performance improvements:
+ * - First frame time: 3-8s → 0.5-1.5s (70-85% reduction)
+ * - Memory usage: 150MB → 13MB (91% reduction)
+ * - User experience: Start playing immediately, no long wait
  */
 const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrameSequencePlayerProps>(
   (
@@ -73,16 +73,16 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
     const [isFirstBatchLoaded, setIsFirstBatchLoaded] = useState(false);
     const [loadedFramesCount, setLoadedFramesCount] = useState(0);
 
-    // 帧缓存：Map<frameIndex, HTMLImageElement>
+    // Frame cache: Map<frameIndex, HTMLImageElement>
     const framesCache = useRef<Map<number, HTMLImageElement>>(new Map());
-    const loadingQueue = useRef<Set<number>>(new Set()); // 正在加载的帧
+    const loadingQueue = useRef<Set<number>>(new Set()); // Frames currently loading
     const animationFrameRef = useRef<number | null>(null);
     const lastFrameTimeRef = useRef<number>(0);
 
-    // Safari 特殊配置
+    // Safari special configuration
     const safariMaxConcurrent = isSafari() ? Math.min(maxConcurrent, 4) : maxConcurrent;
 
-    // 暴露给父组件的方法
+    // Expose methods to parent component
     useImperativeHandle(ref, () => ({
       play: () => setIsPlaying(true),
       pause: () => setIsPlaying(false),
@@ -94,7 +94,7 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
       getLoadingProgress: () => Math.round((framesCache.current.size / totalFrames) * 100),
     }));
 
-    // 获取帧文件名
+    // Get frame file name
     const getFrameName = useCallback((frameIndex: number): string => {
       const defaultNamePattern = (index: number, fmt: string) => {
         const frameNumber = String(index).padStart(4, '0');
@@ -104,7 +104,7 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
       return pattern(frameIndex, format);
     }, [frameNamePattern, format]);
 
-    // 获取帧URL
+    // Get frame URL
     const getFrameUrl = useCallback((frameIndex: number): string => {
       const [basePath, versionParam] = frameFolder.split('?');
       const versionSuffix = versionParam ? `?${versionParam}` : '';
@@ -112,18 +112,18 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
       return `${basePath}/${frameName}${versionSuffix}`;
     }, [frameFolder, getFrameName, startFrameNumber]);
 
-    // 加载单个帧
+    // Load single frame
     const loadFrame = useCallback((frameIndex: number): Promise<HTMLImageElement> => {
       return new Promise((resolve, reject) => {
-        // 如果已缓存，直接返回
+        // If already cached, return directly
         if (framesCache.current.has(frameIndex)) {
           resolve(framesCache.current.get(frameIndex)!);
           return;
         }
 
-        // 如果正在加载，等待
+        // If loading, wait
         if (loadingQueue.current.has(frameIndex)) {
-          // 轮询等待加载完成
+          // Poll and wait for loading to complete
           const checkInterval = setInterval(() => {
             if (framesCache.current.has(frameIndex)) {
               clearInterval(checkInterval);
@@ -147,7 +147,7 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
           loadingQueue.current.delete(frameIndex);
           setLoadedFramesCount(framesCache.current.size);
 
-          // 通知加载进度
+          // Notify loading progress
           const progress = Math.round((framesCache.current.size / totalFrames) * 100);
           onLoadingProgress?.(progress, framesCache.current.size);
 
@@ -164,13 +164,13 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
       });
     }, [getFrameUrl, totalFrames, onLoadingProgress]);
 
-    // 批量加载帧
+    // Batch load frames
     const loadFrameBatch = useCallback(async (startFrame: number, count: number): Promise<void> => {
       const endFrame = Math.min(startFrame + count, totalFrames);
       const promises: Promise<HTMLImageElement>[] = [];
 
       for (let i = startFrame; i < endFrame; i++) {
-        // 限制并发数
+        // Limit concurrency
         if (promises.length >= safariMaxConcurrent) {
           await Promise.race(promises);
           promises.splice(promises.findIndex(p => p), 1);
@@ -185,11 +185,11 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
       }
     }, [totalFrames, loadFrame, safariMaxConcurrent]);
 
-    // 释放旧帧（LRU策略）
+    // Release old frames (LRU strategy)
     const releaseOldFrames = useCallback((currentFrameIndex: number) => {
       const framesToKeep = new Set<number>();
 
-      // 保留当前帧周围的缓冲区
+      // Keep buffer around current frame
       const start = Math.max(0, currentFrameIndex - bufferBehind);
       const end = Math.min(totalFrames - 1, currentFrameIndex + bufferAhead);
 
@@ -197,7 +197,7 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
         framesToKeep.add(i);
       }
 
-      // 删除不在缓冲区的帧
+      // Delete frames not in buffer
       framesCache.current.forEach((_, frameIndex) => {
         if (!framesToKeep.has(frameIndex)) {
           framesCache.current.delete(frameIndex);
@@ -205,12 +205,12 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
       });
     }, [bufferBehind, bufferAhead, totalFrames]);
 
-    // 智能预加载
+    // Smart preloading
     const preloadAhead = useCallback(async (currentFrameIndex: number) => {
       const preloadStart = currentFrameIndex + 1;
       const preloadEnd = Math.min(currentFrameIndex + bufferAhead, totalFrames - 1);
 
-      // 找出未加载的帧
+      // Find unloaded frames
       const framesToLoad: number[] = [];
       for (let i = preloadStart; i <= preloadEnd; i++) {
         if (!framesCache.current.has(i) && !loadingQueue.current.has(i)) {
@@ -218,23 +218,23 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
         }
       }
 
-      // 分批预加载
+      // Preload in batches
       if (framesToLoad.length > 0) {
         const batchCount = Math.ceil(framesToLoad.length / 10);
         for (let i = 0; i < batchCount; i++) {
           const batchStart = i * 10;
           const batchFrames = framesToLoad.slice(batchStart, batchStart + 10);
 
-          // 异步加载，不阻塞播放
+          // Load asynchronously, don't block playback
           loadFrameBatch(batchFrames[0], batchFrames.length).catch(console.error);
 
-          // 间隔一小段时间，避免阻塞
+          // Add small delay to avoid blocking
           await new Promise(resolve => setTimeout(resolve, 50));
         }
       }
     }, [bufferAhead, totalFrames, loadFrameBatch]);
 
-    // 初始化：加载首批帧
+    // Initialize: Load initial batch
     useEffect(() => {
       const loadInitialBatch = async () => {
         console.log(`[LazyFramePlayer] Loading initial batch: 0-${batchSize - 1}`);
@@ -252,7 +252,7 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
       loadInitialBatch();
     }, [batchSize, loadFrameBatch, onLoaded]);
 
-    // 渲染当前帧到 Canvas
+    // Render current frame to Canvas
     useEffect(() => {
       const canvas = canvasRef.current;
       if (!canvas || !isFirstBatchLoaded) return;
@@ -263,23 +263,23 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
       const currentImage = framesCache.current.get(currentFrame);
       if (!currentImage || !currentImage.complete) return;
 
-      // 设置 Canvas 尺寸为图片原始尺寸（仅首次）
+      // Set Canvas size to image original size (first time only)
       if (canvas.width !== currentImage.naturalWidth || canvas.height !== currentImage.naturalHeight) {
         canvas.width = currentImage.naturalWidth;
         canvas.height = currentImage.naturalHeight;
       }
 
-      // 清空画布
+      // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // 绘制当前帧
+      // Draw current frame
       ctx.drawImage(currentImage, 0, 0);
 
-      // 触发时间更新回调
+      // Trigger time update callback
       onTimeUpdate?.(currentFrame, totalFrames);
     }, [currentFrame, isFirstBatchLoaded, totalFrames, onTimeUpdate]);
 
-    // 动画循环
+    // Animation loop
     useEffect(() => {
       if (!isPlaying || !isFirstBatchLoaded) return;
 
@@ -298,7 +298,7 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
 
             if (nextFrame >= totalFrames) {
               if (loop) {
-                // 循环播放：直接回到第 0 帧（帧已经缓存在内存中）
+                // Loop playback: Go back to frame 0 directly (frames already cached in memory)
                 return 0;
               } else {
                 setIsPlaying(false);
@@ -307,13 +307,13 @@ const LazyFrameSequencePlayer = forwardRef<LazyFrameSequencePlayerRef, LazyFrame
               }
             }
 
-            // 智能预加载
+            // Smart preloading
             if (nextFrame % 10 === 0) {
               preloadAhead(nextFrame).catch(console.error);
             }
 
-            // 释放旧帧（每30帧清理一次）
-            // 注意：循环播放时不释放帧，避免重复加载
+            // Release old frames (clean up every 30 frames)
+            // Note: Don't release frames during loop playback to avoid repeated loading
             if (!loop && nextFrame % 30 === 0) {
               releaseOldFrames(nextFrame);
             }

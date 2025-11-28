@@ -3,31 +3,31 @@
 import { useEffect } from 'react';
 
 /**
- * Service Worker 注册组件
- * 自动注册 Service Worker，提供离线缓存功能
+ * Service Worker registration component
+ * Automatically registers Service Worker and provides offline caching functionality
  *
- * 功能：
- * 1. 自动注册 Service Worker
- * 2. 监听更新事件，提示用户刷新
- * 3. 提供手动清除缓存功能（开发时使用）
+ * Features:
+ * 1. Automatic Service Worker registration
+ * 2. Listen for update events and prompt user to refresh
+ * 3. Provide manual cache clear functionality (for development use)
  */
 export default function ServiceWorkerRegister() {
   useEffect(() => {
-    // 仅在生产环境和支持 Service Worker 的浏览器中注册
+    // Only register in production environment and browsers that support Service Worker
     if (
       typeof window !== 'undefined' &&
       'serviceWorker' in navigator &&
       process.env.NODE_ENV === 'production'
     ) {
-      // 页面加载完成后注册 Service Worker
+      // Register Service Worker after page load
       window.addEventListener('load', () => {
         registerServiceWorker();
       });
     }
 
-    // 开发环境：提供清除缓存的快捷方式
+    // Development environment: Provide shortcut for clearing cache
     if (process.env.NODE_ENV === 'development') {
-      // @ts-ignore - 添加全局方法用于开发调试
+      // @ts-ignore - Add global method for development debugging
       window.clearSWCache = () => {
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.controller?.postMessage({
@@ -40,7 +40,7 @@ export default function ServiceWorkerRegister() {
     }
   }, []);
 
-  return null; // 该组件不渲染任何内容
+  return null; // This component renders nothing
 }
 
 async function registerServiceWorker() {
@@ -51,22 +51,22 @@ async function registerServiceWorker() {
 
     console.log('[SW] Service Worker registered successfully:', registration.scope);
 
-    // 检查更新
+    // Check for updates
     registration.addEventListener('updatefound', () => {
       const newWorker = registration.installing;
       if (!newWorker) return;
 
       newWorker.addEventListener('statechange', () => {
         if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-          // 新的 Service Worker 安装完成，提示用户刷新
+          // New Service Worker installed, prompt user to refresh
           console.log('[SW] New content is available; please refresh.');
 
-          // 可选：显示通知提示用户刷新页面
-          if (window.confirm('网站有新版本可用，是否立即刷新？\nNew version available, refresh now?')) {
-            // 通知新的 Service Worker 跳过等待，立即激活
+          // Optional: Display notification to prompt user to refresh page
+          if (window.confirm('New version available, refresh now?\nNew version available, refresh now?')) {
+            // Notify new Service Worker to skip waiting and activate immediately
             newWorker.postMessage({ type: 'SKIP_WAITING' });
 
-            // 等待 Service Worker 激活后刷新页面
+            // Refresh page after Service Worker activation
             navigator.serviceWorker.addEventListener('controllerchange', () => {
               window.location.reload();
             });
@@ -75,7 +75,7 @@ async function registerServiceWorker() {
       });
     });
 
-    // 定期检查更新（每小时检查一次）
+    // Check for updates periodically (once per hour)
     setInterval(() => {
       registration.update();
     }, 60 * 60 * 1000);
@@ -85,12 +85,12 @@ async function registerServiceWorker() {
   }
 }
 
-// 监听来自 Service Worker 的消息
+// Listen for messages from Service Worker
 if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
   navigator.serviceWorker.addEventListener('message', (event) => {
     if (event.data && event.data.type === 'CACHE_CLEARED') {
       console.log('[SW] Cache has been cleared');
-      alert('缓存已清除\nCache cleared');
+      alert('Cache cleared\nCache cleared');
     }
   });
 }

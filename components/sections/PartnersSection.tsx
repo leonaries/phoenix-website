@@ -79,7 +79,7 @@ export default async function PartnersSection({ lang }: PartnersSectionProps) {
         <div className="max-w-7xl mx-auto">
           
        
-          {/* PC端 - Partners Grid - Auto-width with consistent padding */}
+          {/* Desktop - Partners Grid - Auto-width with consistent padding */}
           <div className="hidden lg:flex flex-wrap justify-center gap-5 mb-12 sm:mb-16 max-w-3xl mx-auto">
             {partnersData.map((partner, index) => (
               <div
@@ -122,7 +122,7 @@ export default async function PartnersSection({ lang }: PartnersSectionProps) {
             ))}
           </div>
 
-          {/* 移动端 - Partners Grid - 每行两个 */}
+          {/* Mobile - Partners Grid - 2 per row */}
           <div className="lg:hidden grid grid-cols-2 gap-3 sm:gap-4 mb-12 sm:mb-16 max-w-sm mx-auto">
             {partnersData.map((partner, index) => (
               <div

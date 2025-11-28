@@ -9,13 +9,13 @@ interface ServerHeroSectionClientProps {
 }
 
 /**
- * Hero Section 客户端包装器
- * 控制内容在动画1秒后淡入显示
+ * Hero Section client wrapper
+ * Controls content fade-in display after 1 second
  */
 export default function ServerHeroSectionClient({ children, onAnimationComplete }: ServerHeroSectionClientProps) {
   const [showContent, setShowContent] = useState(false);
 
-  // 1秒后显示内容
+  // Show content after 1 second
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setShowContent(true);

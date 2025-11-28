@@ -50,9 +50,9 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
                 </div>
               </div>
 
-              {/* Connection Lines - 使用div和渐变边框 */}
+              {/* Connection Lines - Using div and gradient borders */}
               <div className="absolute top-12 left-0 w-full h-full">
-                {/* 垂直线：从 Governance 向下 */}
+                {/* Vertical line: from Governance downward */}
                 <div
                   className="absolute left-1/2 transform -translate-x-1/2"
                   style={{
@@ -63,7 +63,7 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
                   }}
                 />
 
-                {/* 水平圆角长方形 - 中间横线（使用伪元素实现渐变边框，底部渐变到透明） */}
+                {/* Horizontal rounded rectangle - Middle horizontal line (using pseudo-elements for gradient border, bottom gradient to transparent) */}
                 <div
                   className="absolute left-1/2 transform -translate-x-1/2"
                   style={{
@@ -288,10 +288,10 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
           {/* Earth Community Visualization - Desktop */}
           <div className="hidden lg:block relative w-full max-w-6xl mx-auto overflow-hidden mt-20" style={{ height: '800px' }}>
 
-            {/* 中心容器 - 有实际尺寸,包含所有元素 */}
+            {/* Central container - Has actual dimensions, contains all elements */}
             <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[30%]">
 
-              {/* 1. Earth 地球 - 最底层 z-10 */}
+              {/* 1. Earth - Bottom layer z-10 */}
               <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[40%] z-10">
                 <img
                   src="/img/earth.png"
@@ -303,7 +303,7 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
                 />
               </div>
 
-              {/* 2. Earth Ring 红光 - 盖在地球上 z-20 */}
+              {/* 2. Earth Ring red glow - Overlays on Earth z-20 */}
               <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[55%] z-50">
                 <img
                   src="/img/earth-ring.png"
@@ -315,7 +315,7 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
                 />
               </div>
 
-              {/* 3. Circle Group 弧线和圆点 - 在上方 z-30 */}
+              {/* 3. Circle Group arcs and dots - Above z-30 */}
               <div className="absolute left-1/2 top-0 transform -translate-x-[53%] -translate-y-[65%] z-30">
                 <img
                   src="/img/circle_group.png"
@@ -326,7 +326,7 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
                 />
               </div>
 
-              {/* 4. Vector Logo 凤凰标志 - 最顶层 z-40 */}
+              {/* 4. Vector Logo Phoenix logo - Topmost layer z-40 */}
               <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-[160%] z-40">
                 <img
                   src="/img/vector.svg"

@@ -1,30 +1,30 @@
 import React from 'react';
 
 interface SectionBackgroundProps {
-  /** 背景图片路径 */
+  /** Background image path */
   imagePath?: string;
-  /** 是否显示渐变叠加层 */
+  /** Whether to show gradient overlay */
   showGradient?: boolean;
-  /** 自定义渐变样式 */
+  /** Custom gradient style */
   gradientClass?: string;
-  /** 是否显示光晕效果 */
+  /** Whether to show glow effect */
   showGlow?: boolean;
-  /** 光晕效果大小 */
+  /** Glow effect size */
   glowSize?: {
     width: string;
     height: string;
   };
-  /** 光晕颜色透明度 */
+  /** Glow color opacity */
   glowOpacity?: string;
-  /** 背景位置 - PC端 */
+  /** Background position - Desktop */
   backgroundPositionDesktop?: string;
-  /** 背景位置 - 移动端 */
+  /** Background position - Mobile */
   backgroundPositionMobile?: string;
 }
 
 /**
- * Section 通用背景组件
- * 统一管理所有 section 的背景样式
+ * Common background component for sections
+ * Manages all section background styles uniformly
  */
 export default function SectionBackground({
   imagePath = '/img/sectionbg.png',
@@ -38,7 +38,7 @@ export default function SectionBackground({
 }: SectionBackgroundProps) {
   return (
     <>
-      {/* Background Image - PC端 */}
+      {/* Background Image - Desktop */}
       <div
         className="hidden lg:block absolute inset-0 z-0"
         style={{
@@ -50,7 +50,7 @@ export default function SectionBackground({
         }}
       />
 
-      {/* Background Image - 移动端 */}
+      {/* Background Image - Mobile */}
       <div
         className="lg:hidden absolute inset-0 z-0"
         style={{
@@ -67,14 +67,14 @@ export default function SectionBackground({
         <div className={`absolute inset-0 ${gradientClass}`}></div>
       )}
       
-      {/* Glow Effect - 响应式尺寸 */}
+      {/* Glow Effect - Responsive size */}
       {showGlow && (
-        <div 
+        <div
           className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-radial from-[#fc9e01]${glowOpacity} to-transparent blur-3xl`}
           style={{
             width: glowSize.width,
             height: glowSize.height,
-            maxWidth: '100vw', // 移动端不超出屏幕
+            maxWidth: '100vw', // Don't exceed viewport width on mobile
             maxHeight: '100vh'
           }}
         ></div>

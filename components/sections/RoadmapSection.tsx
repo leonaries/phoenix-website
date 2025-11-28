@@ -8,19 +8,19 @@ interface RoadmapSectionProps {
   lang: string;
 }
 
-// Roadmap phases data - SVG固定坐标 + 文字位置（标题和描述独立定位）
+// Roadmap phases data - Fixed SVG coordinates + Text positions (title and description positioned independently)
 const roadmapPhases = [
   {
     id: "phase1",
     color: "#ffa700",
-    svg: { cx: 250, cy: 318 }, // 左下角节点
+    svg: { cx: 250, cy: 318 }, // Bottom left node
     desktop: {
-      // 标题位置（在曲线下方）
+      // Title position (below the curve)
       title: {
         top: "85%",
         left: "19%",
       },
-      // 描述位置（在曲线上方）
+      // Description position (above the curve)
       description: {
         top: "37%",
         left: "16%",
@@ -30,14 +30,14 @@ const roadmapPhases = [
   {
     id: "phase2",
     color: "#00d4ff",
-    svg: { cx: 600, cy: 186 }, // 中间节点
+    svg: { cx: 600, cy: 186 }, // Middle node
     desktop: {
-      // 标题位置（在曲线上方）
+      // Title position (above the curve)
       title: {
         top: "27%",
         left: "44%",
       },
-      // 描述位置（在曲线下方）
+      // Description position (below the curve)
       description: {
         top: "56%",
         left: "47%",
@@ -47,14 +47,14 @@ const roadmapPhases = [
   {
     id: "phase3",
     color: "#d03d0a",
-    svg: { cx: 940, cy: 137 }, // 右上角节点
+    svg: { cx: 940, cy: 137 }, // Top right node
     desktop: {
-      // 标题位置（在曲线下方）
+      // Title position (below the curve)
       title: {
         top: "42%",
         left: "73%",
       },
-      // 描述位置（在曲线上方）
+      // Description position (above the curve)
       description: {
         top: "2%",
         left: "54%",
@@ -109,12 +109,12 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
                 preserveAspectRatio="xMidYMid meet"
               />
               
-              {/* Fixed Timeline Dots - 固定在SVG坐标系内 */}
+              {/* Fixed Timeline Dots - Fixed within SVG coordinate system */}
               {roadmapPhases.map((phase, index) => (
                 <g key={`dot-${phase.id}`}>
-                 
 
-                  {/* 外层背景圆 */}
+
+                  {/* Outer background circle */}
                   <circle
                     cx={phase.svg.cx}
                     cy={phase.svg.cy}
@@ -123,7 +123,7 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
                     filter="url(#dropShadow)"
                   />
 
-                  {/* 内层发光核心 */}
+                  {/* Inner glowing core */}
                   <circle
                     cx={phase.svg.cx}
                     cy={phase.svg.cy}
@@ -135,7 +135,7 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
                 </g>
               ))}
 
-              {/* 定义滤镜效果 */}
+              {/* Define filter effects */}
               <defs>
                 <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
                   <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
@@ -152,7 +152,7 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
             </svg>
           </div>
 
-          {/* Phase 标题容器 - 第一组循环 */}
+          {/* Phase title container - First loop */}
           {roadmapPhases.map((phase, index) => (
             <div
               key={`title-${phase.id}`}
@@ -175,7 +175,7 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
             </div>
           ))}
 
-          {/* Phase 描述容器 - 第二组循环 */}
+          {/* Phase description container - Second loop */}
           {roadmapPhases.map((phase, index) => (
             <div
               key={`description-${phase.id}`}
@@ -187,7 +187,7 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
                 zIndex: 10
               }}
             >
-              {/* Description - 带背景样式的P标签 */}
+              {/* Description - P tag with background styles */}
               <p
                 className="[font-family:'Manrope',Helvetica] font-normal text-white/90 text-xs xl:text-sm leading-relaxed text-left p-6 backdrop-blur-sm"
                 style={{

@@ -1,36 +1,36 @@
 /**
- * 浏览器检测工具
- * 用于判断浏览器类型和能力，以便选择合适的动画格式
+ * Browser detection utility
+ * Used to determine browser type and capabilities for selecting appropriate animation formats
  */
 
 export function isSafari(): boolean {
   if (typeof window === 'undefined') {
-    return false; // SSR环境下默认返回false
+    return false; // Default to false in SSR environment
   }
 
   const userAgent = window.navigator.userAgent;
 
-  // 检测Safari浏览器（包括iOS Safari）
-  // 排除Chrome和其他基于Webkit的浏览器
+  // Detect Safari browser (including iOS Safari)
+  // Exclude Chrome and other Webkit-based browsers
   return /Safari/.test(userAgent) && !/Chrome/.test(userAgent) && !/Chromium/.test(userAgent);
 }
 
 /**
- * 检测是否为移动设备
+ * Detect if device is mobile
  */
 export function isMobile(): boolean {
   if (typeof window === 'undefined') {
-    return false; // SSR环境下默认返回false
+    return false; // Default to false in SSR environment
   }
 
   const userAgent = window.navigator.userAgent;
 
-  // 检测移动设备的User-Agent
+  // Detect mobile device User-Agent
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
 }
 
 /**
- * 检测是否为移动端 Safari（iOS Safari）
+ * Detect if device is mobile Safari (iOS Safari)
  */
 export function isMobileSafari(): boolean {
   if (typeof window === 'undefined') {
@@ -39,10 +39,10 @@ export function isMobileSafari(): boolean {
 
   const userAgent = window.navigator.userAgent;
 
-  // 检测 iOS Safari：必须是 Safari 且必须是移动设备
+  // Detect iOS Safari: must be Safari and must be mobile device
   const isIOSDevice = /iPhone|iPad|iPod/i.test(userAgent);
 
-  // 必须包含 Safari 关键字，但不能包含 Chrome/Chromium/CriOS/FxiOS/EdgiOS
+  // Must contain Safari keyword, but cannot contain Chrome/Chromium/CriOS/FxiOS/EdgiOS
   // CriOS = Chrome on iOS, FxiOS = Firefox on iOS, EdgiOS = Edge on iOS
   const isSafariBrowser = /Safari/.test(userAgent)
     && !/Chrome/.test(userAgent)
@@ -53,7 +53,7 @@ export function isMobileSafari(): boolean {
 
   const result = isIOSDevice && isSafariBrowser;
 
-  // 开发模式下输出检测结果
+  // Output detection results in development mode
   if (process.env.NODE_ENV === 'development') {
     console.log('[isMobileSafari] Detection:', {
       userAgent,
@@ -67,7 +67,7 @@ export function isMobileSafari(): boolean {
 }
 
 /**
- * 检测是否为安卓设备
+ * Detect if device is Android
  */
 export function isAndroid(): boolean {
   if (typeof window === 'undefined') {
@@ -77,7 +77,7 @@ export function isAndroid(): boolean {
   const userAgent = window.navigator.userAgent;
   const result = /Android/i.test(userAgent);
 
-  // 开发模式下输出检测结果
+  // Output detection results in development mode
   if (process.env.NODE_ENV === 'development') {
     console.log('[isAndroid] Detection:', {
       userAgent,
@@ -89,24 +89,24 @@ export function isAndroid(): boolean {
 }
 
 /**
- * 检测浏览器是否支持 WebM 视频格式
- * 支持 VP8 或 VP9 编解码器都视为支持
+ * Detect if browser supports WebM video format
+ * Support for VP8 or VP9 codecs is considered supported
  */
 export function supportsWebM(): boolean {
   if (typeof window === 'undefined') {
-    return false; // SSR环境下默认返回false
+    return false; // Default to false in SSR environment
   }
 
   const video = document.createElement('video');
 
-  // 检查多种 WebM 支持方式
+  // Check multiple WebM support methods
   const basicSupport = video.canPlayType('video/webm') !== '';
   const vp8Support = video.canPlayType('video/webm; codecs="vp8"') !== '';
   const vp9Support = video.canPlayType('video/webm; codecs="vp9"') !== '';
 
   const isSupported = basicSupport || vp8Support || vp9Support;
 
-  // 开发模式下输出详细信息
+  // Output detailed information in development mode
   if (process.env.NODE_ENV === 'development') {
     console.log('[WebM Detection]', {
       basicSupport,
@@ -121,24 +121,24 @@ export function supportsWebM(): boolean {
 }
 
 /**
- * 获取推荐的动画格式
+ * Get recommended animation format
  *
- * 检测优先级：
- * 1. 移动端 + 支持 WebM → 使用 WebM（节省流量）
- * 2. 桌面 Chrome/Firefox/Edge → 使用 WebM
- * 3. Safari（桌面/移动） → 使用帧序列（懒加载优化）
- * 4. 其他旧浏览器 → 使用帧序列
+ * Detection priority:
+ * 1. Mobile + supports WebM → use WebM (saves bandwidth)
+ * 2. Desktop Chrome/Firefox/Edge → use WebM
+ * 3. Safari (desktop/mobile) → use frame sequences (lazy loading optimization)
+ * 4. Other legacy browsers → use frame sequences
  */
 export function getPreferredAnimationFormat(): 'frames' | 'webm' {
   if (typeof window === 'undefined') {
-    return 'frames'; // SSR环境下默认使用帧序列
+    return 'frames'; // Default to frame sequences in SSR environment
   }
 
   const mobile = isMobile();
   const safari = isSafari();
   const webmSupport = supportsWebM();
 
-  // 移动端优先使用视频（文件更小，流量更省）
+  // Mobile prioritizes video (smaller files, saves bandwidth)
   if (mobile && webmSupport) {
     if (process.env.NODE_ENV === 'development') {
       console.log('[Animation Format] Mobile + WebM supported → using webm');
@@ -146,7 +146,7 @@ export function getPreferredAnimationFormat(): 'frames' | 'webm' {
     return 'webm';
   }
 
-  // Safari 使用帧序列（配合懒加载优化）
+  // Safari uses frame sequences (with lazy loading optimization)
   if (safari) {
     if (process.env.NODE_ENV === 'development') {
       console.log('[Animation Format] Safari detected → using frames (lazy loading)');
@@ -154,7 +154,7 @@ export function getPreferredAnimationFormat(): 'frames' | 'webm' {
     return 'frames';
   }
 
-  // 不支持 WebM 的浏览器使用帧序列
+  // Browsers that don't support WebM use frame sequences
   if (!webmSupport) {
     if (process.env.NODE_ENV === 'development') {
       console.log('[Animation Format] WebM not supported → using frames');
@@ -162,7 +162,7 @@ export function getPreferredAnimationFormat(): 'frames' | 'webm' {
     return 'frames';
   }
 
-  // 其他情况（桌面 Chrome/Firefox/Edge）使用 WebM
+  // Other cases (desktop Chrome/Firefox/Edge) use WebM
   if (process.env.NODE_ENV === 'development') {
     console.log('[Animation Format] Desktop + WebM supported → using webm');
   }

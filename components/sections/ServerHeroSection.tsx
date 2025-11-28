@@ -15,22 +15,22 @@ export default async function ServerHeroSection({ lang }: ServerHeroSectionProps
 
   return (
     <section className="w-full px-8 pt-24 lg:py-48 lg:pb-64 relative overflow-hidden">
-      {/* 3D 星空粒子效果 - 限制在Hero Section内 */}
+      {/* 3D starfield particle effect - Limited to Hero Section */}
       <StarField3D key={`starfield-${lang}`} />
 
       <HeroAnimationWrapper>
-      {/* 燃烧 Logo - 桌面端全屏居中（仅桌面端显示，动画完成后） */}
+      {/* Burning Logo - Desktop fullscreen centered (only shown on desktop, after animation completes) */}
       <div className="hidden lg:block">
         <HeroFireLogoContainer />
       </div>
 
-      {/* 页面内容 - 1.5秒后淡入 */}
+      {/* Page content - Fade in after 1.5s */}
       <ServerHeroSectionClient>
 
       <div className="max-w-[1600px] mx-auto relative z-10">
-        {/* 移动端：垂直布局 (文字在上，Logo在下) */}
+        {/* Mobile: Vertical layout (text on top, logo below) */}
         <div className="flex flex-col lg:hidden space-y-8">
-          {/* 移动端：文字内容 */}
+          {/* Mobile: Text content */}
           <div className="space-y-4 sm:space-y-6">
             {/* Main headline */}
             <h1 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-3xl sm:text-4xl tracking-[-0.02em] leading-[1.1]">
@@ -73,14 +73,14 @@ export default async function ServerHeroSection({ lang }: ServerHeroSectionProps
               </a>
             </div>
           </div>
-          
-          {/* 移动端：Logo 区域（简单垂直排列） */}
+
+          {/* Mobile: Logo area (simple vertical layout) */}
           <div className="relative w-full h-[400px] sm:h-[500px]">
             <HeroFireLogoContainer />
           </div>
         </div>
 
-        {/* 桌面端：紧凑布局 */}
+        {/* Desktop: Compact layout */}
         <div className="hidden lg:block lg:max-w-3xl">
           {/* Content */}
           <div className="space-y-4">

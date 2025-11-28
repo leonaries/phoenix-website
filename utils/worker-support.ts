@@ -1,22 +1,22 @@
 /**
- * WebWorker 支持检测工具
+ * WebWorker support detection utility
  *
- * 检测浏览器对 WebWorker 和 Transferable Objects 的支持
- * 提供优雅降级策略
+ * Detects browser support for WebWorker and Transferable Objects
+ * Provides graceful degradation strategy
  */
 
 /**
- * 检测浏览器是否支持 WebWorker
+ * Detect whether browser supports WebWorker
  */
 export function supportsWebWorker(): boolean {
   if (typeof window === 'undefined') {
-    return false; // SSR 环境
+    return false; // SSR environment
   }
   return typeof Worker !== 'undefined';
 }
 
 /**
- * 检测浏览器是否支持 Transferable Objects
+ * Detect whether browser supports Transferable Objects
  */
 export function supportsTransferable(): boolean {
   if (typeof window === 'undefined') {
@@ -24,7 +24,7 @@ export function supportsTransferable(): boolean {
   }
 
   try {
-    // 测试是否可以传输 ArrayBuffer
+    // Test if ArrayBuffer can be transferred
     const buffer = new ArrayBuffer(1);
     const worker = new Worker(
       URL.createObjectURL(
@@ -33,14 +33,14 @@ export function supportsTransferable(): boolean {
     );
     worker.postMessage(buffer, [buffer]);
     worker.terminate();
-    return buffer.byteLength === 0; // 如果为0，说明成功转移所有权
+    return buffer.byteLength === 0; // If 0, ownership was successfully transferred
   } catch (e) {
     return false;
   }
 }
 
 /**
- * 获取 Worker 使用建议
+ * Get Worker usage recommendation
  */
 export function getWorkerRecommendation(): {
   useWorker: boolean;
@@ -74,23 +74,23 @@ export function getWorkerRecommendation(): {
 }
 
 /**
- * 检测是否为低端设备（应该使用 Worker 优化）
+ * Detect if device is low-end (should use Worker optimization)
  */
 export function isLowEndDevice(): boolean {
   if (typeof window === 'undefined') {
     return false;
   }
 
-  // 检测 CPU 核心数
+  // Detect CPU core count
   const cores = (navigator as any).hardwareConcurrency || 4;
   if (cores <= 2) {
     return true;
   }
 
-  // 检测内存（如果可用）
+  // Detect memory (if available)
   const memory = (navigator as any).deviceMemory;
   if (memory && memory <= 4) {
-    return true; // 4GB 或更少
+    return true; // 4GB or less
   }
 
   return false;

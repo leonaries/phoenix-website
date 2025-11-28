@@ -28,13 +28,13 @@ export function LanguageSelector() {
   const handleLanguageChange = (code: string) => {
     if (code === currentLang) return;
 
-    // 替换 lang 并跳转
+    // Replace lang and navigate
     const segments = pathname.split("/");
     segments[1] = code;
     const newPath = segments.join("/");
     const queryString = searchParams.toString();
     const newUrl = queryString ? `${newPath}?${queryString}` : newPath;
-    document.cookie = `lang=${code}; path=/`; // 设置 cookie（middleware 会用到）
+    document.cookie = `lang=${code}; path=/`; // Set cookie (used by middleware)
     router.push(newUrl);
   };
 

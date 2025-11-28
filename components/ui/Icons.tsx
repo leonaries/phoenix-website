@@ -25,7 +25,7 @@ export const FlagIcon = ({ code }: { code: string }) => {
     br: "BR", // Brazilian Portuguese (Brazil)
   };
 
-  const countryCode = flagMap[code] || "GB"; // 默认使用英国国旗
+  const countryCode = flagMap[code] || "GB"; // Default to United Kingdom flag
 
   return (
     <ReactCountryFlag

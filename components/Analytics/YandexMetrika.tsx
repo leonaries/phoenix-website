@@ -7,19 +7,19 @@ interface YandexMetrikaProps {
 }
 
 /**
- * Yandex.Metrika 分析组件
+ * Yandex.Metrika analytics component
  *
- * 功能:
- * - 页面浏览追踪
- * - 用户行为分析 (点击热图、webvisor)
- * - 电商数据追踪
- * - 链接追踪
+ * Features:
+ * - Page view tracking
+ * - User behavior analysis (click heatmap, webvisor)
+ * - E-commerce data tracking
+ * - Link tracking
  *
- * 使用方式:
+ * Usage:
  * <YandexMetrika counterId="105534931" />
  */
 export default function YandexMetrika({ counterId = '105534931' }: YandexMetrikaProps) {
-  // 仅在生产环境启用
+  // Enable only in production environment
   const isProduction = process.env.NODE_ENV === 'production';
 
   useEffect(() => {
@@ -28,18 +28,18 @@ export default function YandexMetrika({ counterId = '105534931' }: YandexMetrika
       return;
     }
 
-    // 防止重复初始化
+    // Prevent duplicate initialization
     if (typeof window !== 'undefined' && (window as any).ym) {
       console.log('[YandexMetrika] Already initialized');
       return;
     }
 
-    // 加载 Yandex.Metrika 脚本
+    // Load Yandex.Metrika script
     (function(m: any, e: any, t: any, r: any, i: any, k: any, a: any) {
       m[i] = m[i] || function() { (m[i].a = m[i].a || []).push(arguments); };
       m[i].l = 1 * new Date().getTime();
 
-      // 检查脚本是否已存在
+      // Check if script already exists
       for (var j = 0; j < e.scripts.length; j++) {
         if (e.scripts[j].src === r) { return; }
       }
@@ -51,7 +51,7 @@ export default function YandexMetrika({ counterId = '105534931' }: YandexMetrika
       a.parentNode.insertBefore(k, a);
     })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
 
-    // 初始化 Yandex.Metrika
+    // Initialize Yandex.Metrika
     (window as any).ym(counterId, 'init', {
       clickmap: true,
       trackLinks: true,
@@ -63,7 +63,7 @@ export default function YandexMetrika({ counterId = '105534931' }: YandexMetrika
     console.log('[YandexMetrika] Initialized with counter ID:', counterId);
   }, [counterId, isProduction]);
 
-  // 渲染 noscript 降级方案
+  // Render noscript fallback
   if (!isProduction) {
     return null;
   }

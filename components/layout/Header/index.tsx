@@ -12,7 +12,7 @@ interface HeaderProps {
 export default async function Header({ lang }: HeaderProps) {
   const i18n = await initI18nServer(lang);
 
-  // 准备翻译数据给客户端组件
+  // Prepare translation data for client component
   const translations = {
     'nav.overview': i18n.t('nav.overview'),
     'nav.coreFeatures': i18n.t('nav.coreFeatures'),

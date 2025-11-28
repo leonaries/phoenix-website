@@ -9,28 +9,28 @@ interface StarField3DProps {
   className?: string;
 }
 
-// 粒子系统配置
+// Particle system configuration
 const PARTICLE_CONFIG = {
   count: {
-    desktop: 100000,    // 增加粒子数量，像满天星辰
-    mobile: 20000      // 移动端：适度优化
+    desktop: 100000,    // Increased particle count, like starry sky
+    mobile: 20000      // Mobile: Moderate optimization
   },
-  spread: 100,        // X/Y 轴分布范围
-  depth: 200,         // Z 轴深度范围
+  spread: 100,        // X/Y axis distribution range
+  depth: 200,         // Z axis depth range
   speed: {
-    base: 0.001,      // 基础速度（减半）
-    variation: 0.025  // 速度随机变化（减半）
+    base: 0.001,      // Base speed (halved)
+    variation: 0.025  // Speed variation (halved)
   },
   size: {
-    near: 3.0,        // 近距离粒子大小
-    far: 0.5,         // 远距离粒子大小
-    attenuation: 50   // 距离衰减系数
+    near: 3.0,        // Near distance particle size
+    far: 0.5,         // Far distance particle size
+    attenuation: 50   // Distance attenuation coefficient
   },
   colors: [
-    0xffffff,         // 白色
-    0xe6e6fa,         // 淡紫色
-    0xb0e0e6,         // 淡蓝色
-    0xffe4b5          // 暖黄色
+    0xffffff,         // White
+    0xe6e6fa,         // Lavender
+    0xb0e0e6,         // Powder blue
+    0xffe4b5          // Moccasin (warm yellow)
   ]
 };
 
@@ -46,24 +46,24 @@ export default function StarField3D({ className }: StarField3DProps) {
   const [isInitialized, setIsInitialized] = useState(false);
   const [useWorker, setUseWorker] = useState(false);
 
-  // 双缓冲区用于 Worker 通信（避免竞态条件）
+  // Double buffering for Worker communication (avoid race conditions)
   const positionsBufferARef = useRef<Float32Array | null>(null);
   const positionsBufferBRef = useRef<Float32Array | null>(null);
   const velocitiesBufferRef = useRef<Float32Array | null>(null);
   const activeBufferRef = useRef<'A' | 'B'>('A');
   const isUpdatingRef = useRef(false);
 
-  // 检测移动设备和 Worker 支持
+  // Detect mobile device and Worker support
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
-    // 检测 Worker 支持
+    // Detect Worker support
     const workerSupport = getWorkerRecommendation();
 
-    // 临时禁用Worker来测试主线程模式
-    const forceMainThread = false; // 调试开关
+    // Temporarily disable Worker to test main thread mode
+    const forceMainThread = false; // Debug switch
     const shouldUseWorker = workerSupport.useWorker && !forceMainThread;
 
     setUseWorker(shouldUseWorker);
@@ -74,7 +74,7 @@ export default function StarField3D({ className }: StarField3DProps) {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // 创建火焰色的小星星纹理
+  // Create fire-colored star texture
   const createStarTexture = () => {
     const canvas = document.createElement('canvas');
     canvas.width = 32;
@@ -86,13 +86,13 @@ export default function StarField3D({ className }: StarField3DProps) {
     const centerX = 16;
     const centerY = 16;
 
-    // 创建橙黄色火焰般的光晕
+    // Create orange-yellow flame-like glow
     const glow = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 16);
-    glow.addColorStop(0, 'rgba(255, 220, 150, 1)');      // 明亮的橙黄色核心
-    glow.addColorStop(0.2, 'rgba(255, 180, 100, 0.8)');  // 橙色
-    glow.addColorStop(0.4, 'rgba(255, 140, 60, 0.4)');   // 深橙色
-    glow.addColorStop(0.7, 'rgba(255, 100, 40, 0.1)');   // 火焰边缘
-    glow.addColorStop(1, 'rgba(255, 80, 20, 0)');        // 淡出
+    glow.addColorStop(0, 'rgba(255, 220, 150, 1)');      // Bright orange-yellow core
+    glow.addColorStop(0.2, 'rgba(255, 180, 100, 0.8)');  // Orange
+    glow.addColorStop(0.4, 'rgba(255, 140, 60, 0.4)');   // Deep orange
+    glow.addColorStop(0.7, 'rgba(255, 100, 40, 0.1)');   // Flame edge
+    glow.addColorStop(1, 'rgba(255, 80, 20, 0)');        // Fade out
 
     ctx.fillStyle = glow;
     ctx.fillRect(0, 0, 32, 32);
@@ -103,13 +103,13 @@ export default function StarField3D({ className }: StarField3DProps) {
     return texture;
   };
 
-  // 创建简化版粒子系统
+  // Create simplified particle system
   const createParticles = () => {
     try {
       const particleCount = isMobile ? PARTICLE_CONFIG.count.mobile : PARTICLE_CONFIG.count.desktop;
       console.log('Creating particles:', particleCount);
 
-      // 创建几何体
+      // Create geometry
       const geometry = new THREE.BufferGeometry();
       const positions = new Float32Array(particleCount * 3);
       const velocities = new Float32Array(particleCount * 3);
@@ -117,21 +117,21 @@ export default function StarField3D({ className }: StarField3DProps) {
       for (let i = 0; i < particleCount; i++) {
         const i3 = i * 3;
 
-        // 位置：在 3D 空间中随机分布
+        // Position: Randomly distributed in 3D space
         positions[i3] = (Math.random() - 0.5) * PARTICLE_CONFIG.spread * 2;     // x
         positions[i3 + 1] = (Math.random() - 0.5) * PARTICLE_CONFIG.spread * 2; // y
-        positions[i3 + 2] = -Math.random() * PARTICLE_CONFIG.depth;             // z (负值，在相机前方)
+        positions[i3 + 2] = -Math.random() * PARTICLE_CONFIG.depth;             // z (negative value, in front of camera)
 
-        // 速度：Z 轴向前飞（向屏幕方向）
-        velocities[i3] = (Math.random() - 0.5) * 0.02;     // x 轻微漂移
-        velocities[i3 + 1] = (Math.random() - 0.5) * 0.02; // y 轻微漂移
-        velocities[i3 + 2] = PARTICLE_CONFIG.speed.base + Math.random() * PARTICLE_CONFIG.speed.variation; // z 向前（正速度）
+        // Velocity: Z-axis flying forward (towards screen)
+        velocities[i3] = (Math.random() - 0.5) * 0.02;     // x slight drift
+        velocities[i3 + 1] = (Math.random() - 0.5) * 0.02; // y slight drift
+        velocities[i3 + 2] = PARTICLE_CONFIG.speed.base + Math.random() * PARTICLE_CONFIG.speed.variation; // z forward (positive velocity)
       }
 
       geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
       geometry.userData = { velocities };
 
-      // 如果使用 Worker，初始化双缓冲区
+      // If using Worker, initialize double buffering
       if (useWorker) {
         positionsBufferARef.current = new Float32Array(positions);
         positionsBufferBRef.current = new Float32Array(particleCount * 3);
@@ -139,13 +139,13 @@ export default function StarField3D({ className }: StarField3DProps) {
         console.log('Double buffering initialized for Worker');
       }
 
-      // 创建火焰般的星星纹理
+      // Create flame-like star texture
       const texture = createStarTexture();
 
-      // 使用带纹理的点材质，创建星星
+      // Use textured point material to create stars
       const material = new THREE.PointsMaterial({
-        color: 0xffffff,        // 白色
-        size: 0.1,              // 极小的粒子
+        color: 0xffffff,        // White
+        size: 0.1,              // Extremely small particles
         map: texture,
         sizeAttenuation: true,
         transparent: true,
@@ -163,7 +163,7 @@ export default function StarField3D({ className }: StarField3DProps) {
     }
   };
 
-  // 初始化 WebWorker
+  // Initialize WebWorker
   const initWorker = () => {
     if (!useWorker || typeof Worker === 'undefined') {
       console.log('Worker disabled or not supported');
@@ -171,7 +171,7 @@ export default function StarField3D({ className }: StarField3DProps) {
     }
 
     try {
-      // 使用 Next.js 15 的 Worker 支持
+      // Use Next.js 15 Worker support
       const worker = new Worker(new URL('@/workers/particle-worker.ts', import.meta.url));
 
       worker.onmessage = (e: MessageEvent<ParticleUpdateResponse>) => {
@@ -179,14 +179,14 @@ export default function StarField3D({ className }: StarField3DProps) {
           const geometry = particlesRef.current.geometry as THREE.BufferGeometry;
           const currentPositions = geometry.attributes.position.array as Float32Array;
 
-          // 复制更新后的位置数据
+          // Copy updated position data
           currentPositions.set(e.data.positions);
           geometry.attributes.position.needsUpdate = true;
 
-          // 标记更新完成
+          // Mark update complete
           isUpdatingRef.current = false;
 
-          // 切换活动缓冲区
+          // Switch active buffer
           activeBufferRef.current = activeBufferRef.current === 'A' ? 'B' : 'A';
         }
       };
@@ -194,9 +194,9 @@ export default function StarField3D({ className }: StarField3DProps) {
       worker.onerror = (error) => {
         console.error('Worker error:', error);
         console.log('Falling back to main thread animation');
-        setUseWorker(false); // 降级到主线程
+        setUseWorker(false); // Fallback to main thread
 
-        // 重新启动主线程动画
+        // Restart main thread animation
         if (animationRef.current) {
           cancelAnimationFrame(animationRef.current);
         }
@@ -213,7 +213,7 @@ export default function StarField3D({ className }: StarField3DProps) {
     }
   };
 
-  // 初始化 Three.js 场景
+  // Initialize Three.js scene
   const initThreeJS = () => {
     if (!mountRef.current) {
       console.error('Mount ref not available');
@@ -225,31 +225,31 @@ export default function StarField3D({ className }: StarField3DProps) {
       const rect = mount.getBoundingClientRect();
       console.log('Initializing Three.js with size:', rect.width, 'x', rect.height);
 
-      // 创建场景
+      // Create scene
       const scene = new THREE.Scene();
       sceneRef.current = scene;
 
-      // 创建相机
+      // Create camera
       const camera = new THREE.PerspectiveCamera(
         75,                          // FOV
-        rect.width / rect.height,    // 宽高比
-        0.1,                         // 近裁剪面
-        1000                         // 远裁剪面
+        rect.width / rect.height,    // Aspect ratio
+        0.1,                         // Near clipping plane
+        1000                         // Far clipping plane
       );
       camera.position.set(0, 0, 0);
       cameraRef.current = camera;
 
-      // 创建渲染器
+      // Create renderer
       const renderer = new THREE.WebGLRenderer({
         alpha: true,
         antialias: !isMobile
       });
       renderer.setSize(rect.width, rect.height);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setClearColor(0x000000, 0); // 透明背景
+      renderer.setClearColor(0x000000, 0); // Transparent background
       rendererRef.current = renderer;
 
-      // 创建粒子系统
+      // Create particle system
       const particles = createParticles();
       if (particles) {
         scene.add(particles);
@@ -260,7 +260,7 @@ export default function StarField3D({ className }: StarField3DProps) {
         return null;
       }
 
-      // 挂载到 DOM
+      // Mount to DOM
       mount.appendChild(renderer.domElement);
       console.log('Three.js initialized successfully');
 
@@ -271,29 +271,29 @@ export default function StarField3D({ className }: StarField3DProps) {
     }
   };
 
-  // 动画循环 - Worker 模式
+  // Animation loop - Worker mode
   const animateWithWorker = () => {
     if (!particlesRef.current || !rendererRef.current || !sceneRef.current || !cameraRef.current || !workerRef.current) {
       return;
     }
 
     try {
-      // 如果上一帧还在更新中，跳过本帧
+      // If previous frame is still updating, skip this frame
       if (!isUpdatingRef.current) {
         const particles = particlesRef.current;
         const geometry = particles.geometry as THREE.BufferGeometry;
         const positions = geometry.attributes.position.array as Float32Array;
         const velocities = geometry.userData.velocities as Float32Array;
 
-        // 获取当前活动缓冲区
+        // Get current active buffer
         const activeBuffer = activeBufferRef.current === 'A' ? positionsBufferARef.current : positionsBufferBRef.current;
 
         if (activeBuffer && velocitiesBufferRef.current) {
-          // 复制当前位置和速度到缓冲区
+          // Copy current positions and velocities to buffer
           activeBuffer.set(positions);
           velocitiesBufferRef.current.set(velocities);
 
-          // 构建 Worker 消息
+          // Build Worker message
           const config: ParticleConfig = {
             spread: PARTICLE_CONFIG.spread,
             depth: PARTICLE_CONFIG.depth,
@@ -309,15 +309,15 @@ export default function StarField3D({ className }: StarField3DProps) {
             config
           };
 
-          // 标记正在更新
+          // Mark as updating
           isUpdatingRef.current = true;
 
-          // 发送到 Worker（不使用 Transferable Objects）
+          // Send to Worker (not using Transferable Objects)
           workerRef.current.postMessage(message);
         }
       }
 
-      // 渲染当前帧
+      // Render current frame
       rendererRef.current.render(sceneRef.current, cameraRef.current);
 
       animationRef.current = requestAnimationFrame(animateWithWorker);
@@ -326,7 +326,7 @@ export default function StarField3D({ className }: StarField3DProps) {
     }
   };
 
-  // 动画循环 - 主线程模式（降级方案）
+  // Animation loop - Main thread mode (fallback solution)
   const animateMainThread = () => {
     if (!particlesRef.current || !rendererRef.current || !sceneRef.current || !cameraRef.current) {
       return;
@@ -340,32 +340,32 @@ export default function StarField3D({ className }: StarField3DProps) {
 
       const particleCount = positions.length / 3;
 
-      // 更新每个粒子（主线程）
+      // Update each particle (main thread)
       for (let i = 0; i < particleCount; i++) {
         const i3 = i * 3;
 
-        // 更新位置
+        // Update position
         positions[i3] += velocities[i3];         // x
         positions[i3 + 1] += velocities[i3 + 1]; // y
         positions[i3 + 2] += velocities[i3 + 2]; // z
 
-        // 粒子超出观察者后，重置到远处
+        // Reset particle to far distance when it passes the viewer
         if (positions[i3 + 2] > 10) {
           positions[i3] = (Math.random() - 0.5) * PARTICLE_CONFIG.spread * 2;
           positions[i3 + 1] = (Math.random() - 0.5) * PARTICLE_CONFIG.spread * 2;
           positions[i3 + 2] = -PARTICLE_CONFIG.depth;
 
-          // 重新设置速度
+          // Reset velocity
           velocities[i3] = (Math.random() - 0.5) * 0.02;
           velocities[i3 + 1] = (Math.random() - 0.5) * 0.02;
           velocities[i3 + 2] = PARTICLE_CONFIG.speed.base + Math.random() * PARTICLE_CONFIG.speed.variation;
         }
       }
 
-      // 通知 Three.js 属性已更新
+      // Notify Three.js that attributes have been updated
       geometry.attributes.position.needsUpdate = true;
 
-      // 渲染
+      // Render
       rendererRef.current.render(sceneRef.current, cameraRef.current);
 
       animationRef.current = requestAnimationFrame(animateMainThread);
@@ -374,7 +374,7 @@ export default function StarField3D({ className }: StarField3DProps) {
     }
   };
 
-  // 统一的动画启动函数
+  // Unified animation start function
   const startAnimation = () => {
     if (useWorker && workerRef.current) {
       console.log('Starting animation with WebWorker');
@@ -385,7 +385,7 @@ export default function StarField3D({ className }: StarField3DProps) {
     }
   };
 
-  // 响应式处理
+  // Responsive handling
   const handleResize = () => {
     if (!mountRef.current || !cameraRef.current || !rendererRef.current) return;
 
@@ -395,7 +395,7 @@ export default function StarField3D({ className }: StarField3DProps) {
     rendererRef.current.setSize(rect.width, rect.height);
   };
 
-  // 页面可见性处理
+  // Page visibility handling
   const handleVisibilityChange = () => {
     if (document.hidden) {
       if (animationRef.current) {
@@ -406,19 +406,19 @@ export default function StarField3D({ className }: StarField3DProps) {
     }
   };
 
-  // 主效果
+  // Main effect
   useEffect(() => {
     console.log('StarField3D useEffect triggered, isMobile:', isMobile, 'useWorker:', useWorker);
 
-    // 添加一个小延迟,确保 DOM 已经完全准备好
+    // Add a small delay to ensure DOM is fully ready
     const initTimer = setTimeout(() => {
-      // 初始化 Worker（如果启用）
+      // Initialize Worker (if enabled)
       if (useWorker) {
         const worker = initWorker();
         if (worker) {
           workerRef.current = worker;
         } else {
-          setUseWorker(false); // 降级到主线程
+          setUseWorker(false); // Fallback to main thread
         }
       }
 
@@ -430,19 +430,19 @@ export default function StarField3D({ className }: StarField3DProps) {
 
       setIsInitialized(true);
 
-      // 启动动画
+      // Start animation
       startAnimation();
-    }, 100); // 100ms 延迟,确保 DOM 准备就绪
+    }, 100); // 100ms delay to ensure DOM is ready
 
-    // 添加事件监听
+    // Add event listeners
     window.addEventListener('resize', handleResize);
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    // 清理函数
+    // Cleanup function
     return () => {
       console.log('StarField3D cleanup');
 
-      // 清除初始化定时器
+      // Clear initialization timer
       clearTimeout(initTimer);
 
       setIsInitialized(false);
@@ -452,7 +452,7 @@ export default function StarField3D({ className }: StarField3DProps) {
         animationRef.current = undefined;
       }
 
-      // 终止 Worker
+      // Terminate Worker
       if (workerRef.current) {
         workerRef.current.terminate();
         workerRef.current = null;
@@ -462,7 +462,7 @@ export default function StarField3D({ className }: StarField3DProps) {
       window.removeEventListener('resize', handleResize);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
 
-      // 清理 Three.js 资源
+      // Clean up Three.js resources
       if (mountRef.current && rendererRef.current && mountRef.current.contains(rendererRef.current.domElement)) {
         mountRef.current.removeChild(rendererRef.current.domElement);
       }
@@ -478,7 +478,7 @@ export default function StarField3D({ className }: StarField3DProps) {
         rendererRef.current = undefined;
       }
 
-      // 清理场景和相机引用
+      // Clean up scene and camera references
       sceneRef.current = undefined;
       cameraRef.current = undefined;
     };

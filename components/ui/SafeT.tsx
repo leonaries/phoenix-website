@@ -17,7 +17,7 @@ export default async function SafeT({
   values,
   components,
 }: SafeTProps) {
-  // 如果传入的lang不支持，则用fallbackLng代替
+  // If the provided lang is not supported, use fallbackLng instead
   const useLang = supportedLangs.includes(lang as typeof supportedLangs[number]) ? lang : fallbackLng;
 
   const i18n = await initI18nServer(useLang);

@@ -15,16 +15,16 @@ interface FrameSequencePlayerProps {
   fps?: number;
   loop?: boolean;
   format?: 'png' | 'webp';
-  frameNamePattern?: (index: number, format: string) => string; // 自定义帧命名函数
-  startFrameNumber?: number; // 起始帧编号
+  frameNamePattern?: (index: number, format: string) => string; // Custom frame naming function
+  startFrameNumber?: number; // Starting frame number
   onLoaded?: () => void;
   onTimeUpdate?: (currentFrame: number, totalFrames: number) => void;
   onEnded?: () => void;
 }
 
 /**
- * 序列帧播放器
- * 使用 Canvas 渲染 PNG/WebP 序列帧动画
+ * Frame sequence player
+ * Uses Canvas to render PNG/WebP frame sequence animations
  */
 const FrameSequencePlayer = forwardRef<FrameSequencePlayerRef, FrameSequencePlayerProps>(
   (
@@ -50,7 +50,7 @@ const FrameSequencePlayer = forwardRef<FrameSequencePlayerRef, FrameSequencePlay
     const animationFrameRef = useRef<number | null>(null);
     const lastFrameTimeRef = useRef<number>(0);
 
-    // 暴露给父组件的方法
+    // Expose methods to parent component
     useImperativeHandle(ref, () => ({
       play: () => setIsPlaying(true),
       pause: () => setIsPlaying(false),
@@ -60,7 +60,7 @@ const FrameSequencePlayer = forwardRef<FrameSequencePlayerRef, FrameSequencePlay
       },
     }));
 
-    // 预加载所有帧
+    // Preload all frames
     useEffect(() => {
       const frames: HTMLImageElement[] = [];
       let loadedCount = 0;
@@ -74,7 +74,7 @@ const FrameSequencePlayer = forwardRef<FrameSequencePlayerRef, FrameSequencePlay
         }
       };
 
-      // 默认命名模式：frame_0001.webp
+      // Default naming pattern: frame_0001.webp
       const defaultNamePattern = (index: number, fmt: string) => {
         const frameNumber = String(index).padStart(4, '0');
         return `frame_${frameNumber}.${fmt}`;
@@ -82,9 +82,9 @@ const FrameSequencePlayer = forwardRef<FrameSequencePlayerRef, FrameSequencePlay
 
       const getFrameName = frameNamePattern || defaultNamePattern;
 
-      // 分离 frameFolder 中的路径和版本参数
-      // 如果 frameFolder 是 "/frames/total_webp_frames?v=1.0.0"
-      // 需要将版本参数附加到每个图片文件后面
+      // Separate path and version parameter from frameFolder
+      // If frameFolder is "/frames/total_webp_frames?v=1.0.0"
+      // Need to append version parameter to each image file
       const [basePath, versionParam] = frameFolder.split('?');
       const versionSuffix = versionParam ? `?${versionParam}` : '';
 
@@ -92,7 +92,7 @@ const FrameSequencePlayer = forwardRef<FrameSequencePlayerRef, FrameSequencePlay
         const img = new Image();
         const frameIndex = startFrameNumber + i;
         const frameName = getFrameName(frameIndex, format);
-        // 将版本参数附加到文件名后面，而不是文件夹路径后面
+        // Append version parameter to filename, not to folder path
         img.src = `${basePath}/${frameName}${versionSuffix}`;
         img.onload = checkAllLoaded;
         img.onerror = () => {
@@ -103,7 +103,7 @@ const FrameSequencePlayer = forwardRef<FrameSequencePlayerRef, FrameSequencePlay
       }
 
       return () => {
-        // 清理
+        // Cleanup
         frames.forEach((img) => {
           img.onload = null;
           img.onerror = null;
@@ -111,7 +111,7 @@ const FrameSequencePlayer = forwardRef<FrameSequencePlayerRef, FrameSequencePlay
       };
     }, [frameFolder, totalFrames, format, frameNamePattern, startFrameNumber, onLoaded]);
 
-    // 渲染当前帧到 Canvas
+    // Render current frame to Canvas
     useEffect(() => {
       const canvas = canvasRef.current;
       if (!canvas || !isLoaded || framesRef.current.length === 0) return;
@@ -122,21 +122,21 @@ const FrameSequencePlayer = forwardRef<FrameSequencePlayerRef, FrameSequencePlay
       const currentImage = framesRef.current[currentFrame];
       if (!currentImage || !currentImage.complete) return;
 
-      // 设置 Canvas 尺寸为图片原始尺寸
+      // Set Canvas size to image original size
       canvas.width = currentImage.naturalWidth;
       canvas.height = currentImage.naturalHeight;
 
-      // 清空画布
+      // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // 绘制当前帧
+      // Draw current frame
       ctx.drawImage(currentImage, 0, 0);
 
-      // 触发时间更新回调
+      // Trigger time update callback
       onTimeUpdate?.(currentFrame, totalFrames);
     }, [currentFrame, isLoaded, totalFrames, onTimeUpdate]);
 
-    // 动画循环
+    // Animation loop
     useEffect(() => {
       if (!isPlaying || !isLoaded) return;
 

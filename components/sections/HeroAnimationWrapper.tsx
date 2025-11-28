@@ -20,25 +20,25 @@ interface HeroAnimationWrapperProps {
 }
 
 /**
- * Hero 动画包装器
- * 管理全屏动画播放和完成后在 Hero 区域显示燃烧视频
+ * Hero animation wrapper
+ * Manages fullscreen animation playback and displays burning video in Hero area after completion
  */
 export default function HeroAnimationWrapper({ children }: HeroAnimationWrapperProps) {
   const [animationComplete, setAnimationComplete] = useState(false);
 
   const handleAnimationComplete = () => {
-    console.log('Animation complete!'); // 调试
+    console.log('Animation complete!'); // Debug log
     setAnimationComplete(true);
   };
 
   return (
     <HeroAnimationContext.Provider value={{ animationComplete, setAnimationComplete }}>
-      {/* 全屏视频动画（仅桌面端） */}
+      {/* Fullscreen video animation (desktop only) */}
       <div className="hidden lg:block">
         <PhoenixCompleteAnimation onComplete={handleAnimationComplete} />
       </div>
 
-      {/* Hero 内容 */}
+      {/* Hero content */}
       {children}
     </HeroAnimationContext.Provider>
   );

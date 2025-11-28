@@ -5,23 +5,23 @@ import { PhoenixFireLogo, PhoenixMobileLogo } from '../animations';
 import { useHeroAnimation } from './HeroAnimationWrapper';
 
 /**
- * Hero 燃烧 Logo 容器
- * 桌面端：全屏覆盖，使用 total.webm 和 last.webm
- * 移动端：直接显示静态 logo（无飞入动画）
+ * Hero Fire Logo Container
+ * Desktop: Full-screen coverage, using total.webm and last.webm
+ * Mobile: Directly display static logo (no fly-in animation)
  */
 export default function HeroFireLogoContainer() {
   const { animationComplete } = useHeroAnimation();
 
   return (
     <>
-      {/* 桌面端：动画完成后显示循环 Logo */}
+      {/* Desktop: Show looping logo after animation completes */}
       {animationComplete && (
         <div className="hidden lg:block">
           <PhoenixFireLogo show={animationComplete} />
         </div>
       )}
-      
-      {/* 移动端：直接显示静态 Logo（无动画） */}
+
+      {/* Mobile: Directly display static logo (no animation) */}
       <div className="lg:hidden w-full h-full">
         <PhoenixMobileLogo show={true} />
       </div>

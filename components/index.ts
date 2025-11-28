@@ -8,6 +8,6 @@ export { default as SafeT } from './ui/SafeT';
 // Icons
 export * from './ui/Icons';
 
-// Header specific components (可以直接从 Header 模块导入)
+// Header specific components (can be imported directly from Header module)
 export { LanguageSelector } from './layout/Header/LanguageSelector';
 export { MobileMenu } from './layout/Header/MobileMenu';

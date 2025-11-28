@@ -1,33 +1,33 @@
 import React from 'react';
 
 interface ReversedSectionBackgroundProps {
-  /** 背景图片路径 */
+  /** Background image path */
   imagePath?: string;
-  /** 是否显示渐变叠加层 */
+  /** Whether to show gradient overlay */
   showGradient?: boolean;
-  /** 自定义渐变样式 */
+  /** Custom gradient class */
   gradientClass?: string;
-  /** 是否显示光晕效果 */
+  /** Whether to show glow effect */
   showGlow?: boolean;
-  /** 光晕效果大小 */
+  /** Glow effect size */
   glowSize?: {
     width: string;
     height: string;
   };
-  /** 光晕颜色透明度 */
+  /** Glow color opacity */
   glowOpacity?: string;
-  /** 翻转方向 */
+  /** Flip direction */
   flipDirection?: 'horizontal' | 'vertical' | 'both' | 'none';
-  /** 背景位置 - PC端 */
+  /** Background position - Desktop */
   backgroundPositionDesktop?: string;
-  /** 背景位置 - 移动端 */
+  /** Background position - Mobile */
   backgroundPositionMobile?: string;
 }
 
 /**
- * 反方向网格背景组件
- * 基于 SectionBackground，添加了网格翻转功能
- * 用于创建与其他区域相反方向的网格背景效果
+ * Reversed grid background component
+ * Based on SectionBackground, adds grid flipping functionality
+ * Used to create grid background effects in opposite direction from other sections
  */
 export default function ReversedSectionBackground({
   imagePath = '/img/sectionbg.png',
@@ -41,7 +41,7 @@ export default function ReversedSectionBackground({
   backgroundPositionMobile = 'center'
 }: ReversedSectionBackgroundProps) {
 
-  // 根据翻转方向生成CSS transform
+  // Generate CSS transform based on flip direction
   const getTransform = () => {
     switch (flipDirection) {
       case 'horizontal':
@@ -58,7 +58,7 @@ export default function ReversedSectionBackground({
 
   return (
     <>
-      {/* Background Image - PC端 带翻转效果 */}
+      {/* Background Image - Desktop with flip effect */}
       <div
         className="hidden lg:block absolute inset-0 z-0"
         style={{
@@ -72,7 +72,7 @@ export default function ReversedSectionBackground({
         }}
       />
 
-      {/* Background Image - 移动端 带翻转效果 */}
+      {/* Background Image - Mobile with flip effect */}
       <div
         className="lg:hidden absolute inset-0 z-0"
         style={{
@@ -91,7 +91,7 @@ export default function ReversedSectionBackground({
         <div className={`absolute inset-0 ${gradientClass}`}></div>
       )}
 
-      {/* Glow Effect - 响应式尺寸 */}
+      {/* Glow Effect - Responsive size */}
       {showGlow && (
         <div
           className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-radial from-[#fc9e01]${glowOpacity} to-transparent blur-3xl`}

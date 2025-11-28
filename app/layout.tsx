@@ -51,6 +51,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // 根 layout 不能返回 html/body，让子 layout 处理
+  // Root layout cannot return html/body, let child layout handle it
   return <>{children}</>
 }

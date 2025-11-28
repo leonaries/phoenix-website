@@ -8,23 +8,23 @@ import { VERSIONED_ASSETS } from '@/utils/assetVersion';
 
 interface PhoenixFireLogoProps {
   show: boolean;
-  startFrame?: number; // 从哪一帧开始播放
+  startFrame?: number; // Which frame to start playback from
 }
 
 /**
- * 燃烧的凤凰 Logo（无缝循环播放）
- * 全屏显示，覆盖整个屏幕，保持与动画相同的位置和大小
+ * Burning Phoenix Logo (seamless loop playback)
+ * Full-screen display, covering entire screen, maintaining same position and size as animation
  *
- * 浏览器兼容性处理：
- * - Safari浏览器：使用WebP帧序列（42MB，228帧）- 使用懒加载优化
- * - 其他浏览器：使用WebM视频（更小的文件大小）
+ * Browser compatibility handling:
+ * - Safari browser: Use WebP frame sequence (42MB, 228 frames) - with lazy loading optimization
+ * - Other browsers: Use WebM video (smaller file size)
  *
- * WebP帧序列版本（懒加载优化）：
- * - 文件夹：public/frames/last_webp_frames（228帧，30fps）
- * - 命名格式：cy000.webp 到 cy227.webp
- * - 优化：从PNG（214MB）转换为WebP（42MB），节省172MB（80%）
- * - 懒加载：首批加载30帧，边播放边加载，首帧时间从5-12s降至0.8-2s
- * - 循环时长：7.6秒，流畅的动画效果
+ * WebP frame sequence version (lazy loading optimization):
+ * - Folder: public/frames/last_webp_frames (228 frames, 30fps)
+ * - Naming format: cy000.webp to cy227.webp
+ * - Optimization: Converted from PNG (214MB) to WebP (42MB), saving 172MB (80%)
+ * - Lazy loading: Load first 30 frames, load while playing, first frame time reduced from 5-12s to 0.8-2s
+ * - Loop duration: 7.6 seconds, smooth animation effect
  */
 export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLogoProps) {
   const playerRef = useRef<LazyFrameSequencePlayerRef>(null);
@@ -32,7 +32,7 @@ export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLog
   const [animationType, setAnimationType] = useState<'frames' | 'webm'>('frames');
   const [mounted, setMounted] = useState(false);
 
-  // 客户端挂载后检测浏览器类型
+  // Detect browser type after client mount
   useEffect(() => {
     setAnimationType(getPreferredAnimationFormat());
     setMounted(true);
@@ -42,7 +42,7 @@ export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLog
     if (!mounted) return;
 
     if (animationType === 'frames') {
-      // 帧序列动画控制
+      // Frame sequence animation control
       if (!playerRef.current) return;
 
       if (show) {
@@ -52,14 +52,14 @@ export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLog
         playerRef.current.pause();
       }
     } else {
-      // WebM视频控制
+      // WebM video control
       if (!videoRef.current) return;
 
       if (show) {
-        // 手动加载并播放，避免预加载导致的多次请求
+        // Manually load and play, avoid multiple requests from preload
         const video = videoRef.current;
         if (video.readyState === 0) {
-          // 视频未加载，先加载
+          // Video not loaded, load first
           video.load();
         }
         video.currentTime = startFrame / 30; // 30fps
@@ -70,7 +70,7 @@ export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLog
     }
   }, [show, startFrame, animationType, mounted]);
 
-  // 防止SSR/客户端不一致，等待挂载完成
+  // Prevent SSR/client inconsistency, wait for mount to complete
   if (!mounted) {
     return (
       <motion.div
@@ -89,7 +89,7 @@ export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLog
       transition={{ duration: 0.5 }}
     >
       {animationType === 'frames' ? (
-        // Safari或不支持WebM的浏览器：使用懒加载帧序列
+        // Safari or browsers that don't support WebM: Use lazy-loaded frame sequence
         <LazyFrameSequencePlayer
           ref={playerRef}
           frameFolder={VERSIONED_ASSETS.FRAMES_LAST}
@@ -104,7 +104,7 @@ export default function PhoenixFireLogo({ show, startFrame = 0 }: PhoenixFireLog
           bufferBehind={30}
         />
       ) : (
-        // 其他浏览器：使用WebM视频
+        // Other browsers: Use WebM video
         <video
           ref={videoRef}
           key="phoenix-fire-logo-video"

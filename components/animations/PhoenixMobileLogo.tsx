@@ -10,9 +10,9 @@ interface PhoenixMobileLogoProps {
 }
 
 /**
- * 移动端燃烧的凤凰 Logo（无缝循环播放）
- * - 所有移动端设备: 统一使用帧序列播放（解决移动端浏览器视频兼容性问题）
- * - 桌面端浏览器: 使用 WebM 视频（更小的文件大小）
+ * Mobile Phoenix Logo (seamless loop playback)
+ * - All mobile devices: Unified frame sequence playback (solves mobile browser video compatibility issues)
+ * - Desktop browsers: Use WebM video (smaller file size)
  */
 export default function PhoenixMobileLogo({ show }: PhoenixMobileLogoProps) {
   const [useFrames, setUseFrames] = useState(false);
@@ -20,7 +20,7 @@ export default function PhoenixMobileLogo({ show }: PhoenixMobileLogoProps) {
   const playerRef = useRef<any>(null);
 
   useEffect(() => {
-    // 所有移动端设备统一使用帧序列（解决视频兼容性问题）
+    // All mobile devices uniformly use frame sequences (solves video compatibility issues)
     const shouldUseFrames = isMobile();
     setUseFrames(shouldUseFrames);
 
@@ -40,11 +40,11 @@ export default function PhoenixMobileLogo({ show }: PhoenixMobileLogoProps) {
     if (process.env.NODE_ENV === 'development') {
       console.log('[PhoenixMobileLogo] First batch loaded, starting playback');
     }
-    // 首批帧加载完成后自动开始播放
+    // Automatically start playback after first batch of frames is loaded
     playerRef.current?.play();
   };
 
-  // 所有移动端设备: 使用帧序列播放器（懒加载优化）
+  // All mobile devices: Use frame sequence player (lazy loading optimization)
   if (useFrames) {
     return (
       <div className="w-full h-full flex items-center justify-center relative">
@@ -65,7 +65,7 @@ export default function PhoenixMobileLogo({ show }: PhoenixMobileLogoProps) {
           maxConcurrent={4}
         />
 
-        {/* 开发模式：加载进度指示器 */}
+        {/* Development mode: Loading progress indicator */}
         {process.env.NODE_ENV === 'development' && loadingProgress < 100 && (
           <div className="absolute top-4 right-4 bg-black/70 text-white text-xs px-3 py-2 rounded">
             Loading: {loadingProgress}%
@@ -75,7 +75,7 @@ export default function PhoenixMobileLogo({ show }: PhoenixMobileLogoProps) {
     );
   }
 
-  // 桌面端浏览器: 使用 WebM 视频（理论上移动端不会走到这里，因为都会被 useFrames 拦截）
+  // Desktop browsers: Use WebM video (theoretically mobile devices won't reach here as they'll be intercepted by useFrames)
   return (
     <div className="w-full h-full flex items-center justify-center">
       <video

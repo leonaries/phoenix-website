@@ -98,7 +98,7 @@ export function MobileMenu({ lang, translations }: MobileMenuProps) {
           onClick={toggleMenu}
           className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-[#fc9e01] hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white transition-colors duration-200"
           aria-expanded={isOpen}
-          aria-label={isOpen ? "关闭菜单" : "打开菜单"}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
         >
           {isOpen ? (
             <CloseIcon className="h-6 w-6" />
@@ -132,7 +132,7 @@ export function MobileMenu({ lang, translations }: MobileMenuProps) {
             <button
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-[#fc9e01] hover:bg-white/10 focus:outline-none transition-colors duration-200"
-              aria-label="关闭菜单"
+              aria-label="Close menu"
             >
               <CloseIcon className="h-6 w-6" />
             </button>

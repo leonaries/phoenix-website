@@ -18,7 +18,7 @@ interface HomePageProps {
 export default async function HomePage({ params }: HomePageProps) {
   const { lang } = await params;
   
-  // 初始化 i18n 实例
+  // Initialize i18n instance
   const i18n = await initI18nServer(lang);
   
   return (
@@ -28,7 +28,7 @@ export default async function HomePage({ params }: HomePageProps) {
     >
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* 现有背景装饰元素 */}
+        {/* Existing background decorative elements */}
         {/* <img
           className="absolute top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1463px] h-[1463px] opacity-20"
           alt="Ellipse"
@@ -84,7 +84,7 @@ export default async function HomePage({ params }: HomePageProps) {
   );
 }
 
-// 生成静态路径
+// Generate static paths
 export async function generateStaticParams() {
   return [
     { lang: 'en' },

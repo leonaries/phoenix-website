@@ -1,19 +1,19 @@
 /**
  * Particle Update Worker
  *
- * 在独立线程中处理粒子位置更新，释放主线程用于渲染和UI交互
+ * Process particle position updates in a separate thread, freeing the main thread for rendering and UI interaction
  *
- * 性能优势：
- * - 100,000 个粒子的计算从主线程移到 Worker 线程
- * - 使用 Transferable Objects 实现零拷贝数据传输
- * - 主线程可以专注于 Three.js 渲染
+ * Performance benefits:
+ * - Move calculation of 100,000 particles from main thread to Worker thread
+ * - Use Transferable Objects for zero-copy data transfer
+ * - Main thread can focus on Three.js rendering
  */
 
 export interface ParticleConfig {
-  spread: number;      // X/Y 轴分布范围
-  depth: number;       // Z 轴深度范围
-  speedBase: number;   // 基础速度
-  speedVariation: number; // 速度随机变化
+  spread: number;      // X/Y axis distribution range
+  depth: number;       // Z-axis depth range
+  speedBase: number;   // Base speed
+  speedVariation: number; // Speed variation
 }
 
 export interface ParticleUpdateMessage {
@@ -29,42 +29,42 @@ export interface ParticleUpdateResponse {
   positions: Float32Array;
 }
 
-// Worker 消息处理
+// Worker message handling
 self.onmessage = (e: MessageEvent<ParticleUpdateMessage>) => {
   const { type, positions, velocities, count, config } = e.data;
 
   if (type === 'update') {
-    // 更新每个粒子的位置
+    // Update each particle's position
     for (let i = 0; i < count; i++) {
       const i3 = i * 3;
 
-      // 更新位置（应用速度）
+      // Update position (apply velocity)
       positions[i3] += velocities[i3];         // x
       positions[i3 + 1] += velocities[i3 + 1]; // y
       positions[i3 + 2] += velocities[i3 + 2]; // z
 
-      // 粒子超出观察者后，重置到远处
+      // Reset particle to far distance when it passes the viewer
       if (positions[i3 + 2] > 10) {
         positions[i3] = (Math.random() - 0.5) * config.spread * 2;
         positions[i3 + 1] = (Math.random() - 0.5) * config.spread * 2;
         positions[i3 + 2] = -config.depth;
 
-        // 重新设置速度
+        // Reset velocity
         velocities[i3] = (Math.random() - 0.5) * 0.02;
         velocities[i3 + 1] = (Math.random() - 0.5) * 0.02;
         velocities[i3 + 2] = config.speedBase + Math.random() * config.speedVariation;
       }
     }
 
-    // 不使用 Transferable Objects 返回结果（避免所有权转移问题）
+    // Return result without using Transferable Objects (avoid ownership transfer issues)
     const response: ParticleUpdateResponse = {
       type: 'updated',
-      positions: new Float32Array(positions) // 创建副本而不是转移所有权
+      positions: new Float32Array(positions) // Create copy instead of transferring ownership
     };
 
     self.postMessage(response);
   }
 };
 
-// 类型导出（供主线程使用）
+// Type export (for main thread use)
 export type {};
