@@ -35,7 +35,7 @@ export default function YandexMetrika({ counterId = '105534931' }: YandexMetrika
     }
 
     // Load Yandex.Metrika script
-    (function(m: any, e: any, t: any, r: any, i: any, k: any, a: any) {
+    (function(m: any, e: any, t: any, r: any, i: any) {
       m[i] = m[i] || function() { (m[i].a = m[i].a || []).push(arguments); };
       m[i].l = 1 * new Date().getTime();
 
@@ -44,8 +44,8 @@ export default function YandexMetrika({ counterId = '105534931' }: YandexMetrika
         if (e.scripts[j].src === r) { return; }
       }
 
-      k = e.createElement(t);
-      a = e.getElementsByTagName(t)[0];
+      const k = e.createElement(t);
+      const a = e.getElementsByTagName(t)[0];
       k.async = 1;
       k.src = r;
       a.parentNode.insertBefore(k, a);
