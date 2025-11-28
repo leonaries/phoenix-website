@@ -1,6 +1,6 @@
 'use client';
 
-import Script from 'next/script';
+import { useEffect } from 'react';
 
 interface YandexMetrikaProps {
   counterId?: string;
@@ -22,47 +22,61 @@ export default function YandexMetrika({ counterId = '105534931' }: YandexMetrika
   // 仅在生产环境启用
   const isProduction = process.env.NODE_ENV === 'production';
 
+  useEffect(() => {
+    if (!isProduction) {
+      console.log('[YandexMetrika] Disabled in development mode');
+      return;
+    }
+
+    // 防止重复初始化
+    if (typeof window !== 'undefined' && (window as any).ym) {
+      console.log('[YandexMetrika] Already initialized');
+      return;
+    }
+
+    // 加载 Yandex.Metrika 脚本
+    (function(m: any, e: any, t: any, r: any, i: any, k: any, a: any) {
+      m[i] = m[i] || function() { (m[i].a = m[i].a || []).push(arguments); };
+      m[i].l = 1 * new Date().getTime();
+
+      // 检查脚本是否已存在
+      for (var j = 0; j < e.scripts.length; j++) {
+        if (e.scripts[j].src === r) { return; }
+      }
+
+      k = e.createElement(t);
+      a = e.getElementsByTagName(t)[0];
+      k.async = 1;
+      k.src = r;
+      a.parentNode.insertBefore(k, a);
+    })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+
+    // 初始化 Yandex.Metrika
+    (window as any).ym(counterId, 'init', {
+      clickmap: true,
+      trackLinks: true,
+      accurateTrackBounce: true,
+      webvisor: true,
+      ecommerce: 'dataLayer'
+    });
+
+    console.log('[YandexMetrika] Initialized with counter ID:', counterId);
+  }, [counterId, isProduction]);
+
+  // 渲染 noscript 降级方案
   if (!isProduction) {
-    console.log('[YandexMetrika] Disabled in development mode');
     return null;
   }
 
   return (
-    <>
-      {/* Yandex.Metrika 主脚本 */}
-      <Script
-        id="yandex-metrika"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            (function(m,e,t,r,i,k,a){
-              m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-              m[i].l=1*new Date();
-              for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-              k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-            })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
-
-            ym(${counterId}, 'init', {
-              clickmap: true,
-              trackLinks: true,
-              accurateTrackBounce: true,
-              webvisor: true,
-              ecommerce: "dataLayer"
-            });
-          `,
-        }}
-      />
-
-      {/* Noscript 降级方案 */}
-      <noscript>
-        <div>
-          <img
-            src={`https://mc.yandex.ru/watch/${counterId}`}
-            style={{ position: 'absolute', left: '-9999px' }}
-            alt=""
-          />
-        </div>
-      </noscript>
-    </>
+    <noscript>
+      <div>
+        <img
+          src={`https://mc.yandex.ru/watch/${counterId}`}
+          style={{ position: 'absolute', left: '-9999px' }}
+          alt=""
+        />
+      </div>
+    </noscript>
   );
 }

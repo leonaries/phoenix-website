@@ -17,11 +17,10 @@ export default async function LangLayout({ children, params }: Props) {
 
   return (
     <html lang={lang} dir={dir} suppressHydrationWarning>
-      <head>
+      <body className="phoenix-bg" suppressHydrationWarning>
         {/* Yandex.Metrika 数据分析 */}
         <YandexMetrika counterId="105534931" />
-      </head>
-      <body className="phoenix-bg" suppressHydrationWarning>
+
         {/* Service Worker 注册（仅生产环境） */}
         <ServiceWorkerRegister />
         {children}
