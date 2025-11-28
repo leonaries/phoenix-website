@@ -29,7 +29,7 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
             </div>
 
           {/* Governance Flow Chart - Desktop */}
-          <div className="hidden lg:block relative max-w-6xl mx-auto">
+          <div className="hidden lg:block relative max-w-7xl mx-auto">
             <div className="relative h-[400px]">
 
               {/* Root Node - Governance */}
@@ -286,7 +286,7 @@ export default async function GovernanceSection({ lang }: GovernanceSectionProps
           </div>
 
           {/* Earth Community Visualization - Desktop */}
-          <div className="hidden lg:block relative w-full max-w-6xl mx-auto overflow-hidden mt-20" style={{ height: '800px' }}>
+          <div className="hidden lg:block relative w-full max-w-7xl mx-auto overflow-hidden mt-20" style={{ height: '800px' }}>
 
             {/* Central container - Has actual dimensions, contains all elements */}
             <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-[30%]">

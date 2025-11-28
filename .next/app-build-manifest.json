@@ -1,43 +1,20 @@
 {
   "pages": {
-    "/_not-found/page": [
-      "static/chunks/webpack-6b9374ed1dbbc978.js",
-      "static/chunks/65853ea0-e77080bd4ed7c8e9.js",
-      "static/chunks/303-2b015e913caf5024.js",
-      "static/chunks/main-app-b88a5145ae48d1e9.js",
-      "static/chunks/app/_not-found/page-dcaa9a8511b0e387.js"
-    ],
     "/layout": [
-      "static/chunks/webpack-6b9374ed1dbbc978.js",
-      "static/chunks/65853ea0-e77080bd4ed7c8e9.js",
-      "static/chunks/303-2b015e913caf5024.js",
-      "static/chunks/main-app-b88a5145ae48d1e9.js",
-      "static/css/dc60bd64bdfebe63.css",
-      "static/chunks/app/layout-18fb37e1b5991fcf.js"
-    ],
-    "/page": [
-      "static/chunks/webpack-6b9374ed1dbbc978.js",
-      "static/chunks/65853ea0-e77080bd4ed7c8e9.js",
-      "static/chunks/303-2b015e913caf5024.js",
-      "static/chunks/main-app-b88a5145ae48d1e9.js",
-      "static/chunks/app/page-8eccfd22036dae09.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
     ],
     "/[lang]/layout": [
-      "static/chunks/webpack-6b9374ed1dbbc978.js",
-      "static/chunks/65853ea0-e77080bd4ed7c8e9.js",
-      "static/chunks/303-2b015e913caf5024.js",
-      "static/chunks/main-app-b88a5145ae48d1e9.js",
-      "static/chunks/app/[lang]/layout-663d66056a9cec8b.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[lang]/layout.js"
     ],
     "/[lang]/page": [
-      "static/chunks/webpack-6b9374ed1dbbc978.js",
-      "static/chunks/65853ea0-e77080bd4ed7c8e9.js",
-      "static/chunks/303-2b015e913caf5024.js",
-      "static/chunks/main-app-b88a5145ae48d1e9.js",
-      "static/chunks/a7c741d1-8182c3a47141c62b.js",
-      "static/chunks/bc175d8c-ca26684df3e1317d.js",
-      "static/chunks/608-84fb112e20ae3da7.js",
-      "static/chunks/app/[lang]/page-a935c54e0292f446.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[lang]/page.js"
     ]
   }
 }

@@ -58,7 +58,7 @@ export default async function FeaturesSection({ lang }: FeaturesSectionProps) {
     <section id="features" className="w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-14 lg:py-16 relative overflow-hidden">
       <Web3SectionAnimator animationType="glitch" className="w-full">
 
-        <div className="max-w-6xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto relative z-10">
           {/* Section Header */}
           <div className="text-center mb-8 sm:mb-10 lg:mb-12 space-y-3 sm:space-y-4">
             {/* Title */}

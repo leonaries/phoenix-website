@@ -36,7 +36,7 @@ export default async function CTASection({ lang }: CTASectionProps) {
             
       {/* Content Container */}
       <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 xs:pb-16 sm:pb-20 lg:pb-24">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           
           {/* Main CTA Section - Orange Card Design */}
           <div className="text-center mb-16 sm:mb-20 lg:mb-24">

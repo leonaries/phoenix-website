@@ -79,7 +79,7 @@ export default async function RoadmapSection({ lang }: RoadmapSectionProps) {
 
         {/* Section Header */}
         <div className="text-center pt-12 sm:pt-14 lg:pt-16 pb-6 sm:pb-8 lg:pb-10 px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-6xl mx-auto space-y-3 sm:space-y-4">
+          <div className="max-w-7xl mx-auto space-y-3 sm:space-y-4">
             {/* Title */}
             <h2 className="[font-family:'Manrope',Helvetica] font-extrabold text-white text-2xl sm:text-3xl lg:text-4xl lg:text-left tracking-tight leading-tight lg:translate-y-12">
               {t('roadmap.title')}
